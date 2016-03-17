@@ -27,7 +27,8 @@ $ git push 어쩌구 저쩌구
 
 ## 실행
 ```bash
-bundle install
-bundle exec rake db:migrate
-rails s
+$ bundle install
+$ bundle exec rake db:migrate
+$ rails s
+(or, rails s -b 0.0.0.0)
 ```
