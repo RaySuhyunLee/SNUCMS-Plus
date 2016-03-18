@@ -5,8 +5,8 @@
 ## 개발환경
 - 개발 언어: Ruby (ver 2.2.3p173)
 - 웹 프레임워크: Ruby On Rails (ver 4.2.4)
-- 프론트엔드 script: CoffeeScript + jQuery
-- 프론트엔드 디자인: Semantic UI
+- frontend script: ES6 + jQuery + Reactjs
+- frontend design: Semantic UI
 
 ## 브랜치 정책
 - 최상위(릴리즈) 브랜치: master
