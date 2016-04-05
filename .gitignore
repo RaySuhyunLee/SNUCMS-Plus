@@ -17,4 +17,7 @@
 
 /tmp/*
 
+*.swp
+/Gemfile.lock
+
 .DS_Store
