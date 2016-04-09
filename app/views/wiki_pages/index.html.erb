@@ -1,0 +1,18 @@
+<div class="ui container">
+  <div class="ui large header">Wiki:Home</div>
+  <div class="ui divider"></div>
+
+  <div class="ui bulleted list">
+    <% @pages.each do |page| %>
+      <div class="item">
+        <b><%= link_to page.title, wiki_page_path(page.title) %></b>
+        ||
+        <%= link_to 'Edit', edit_wiki_page_path(page.title) %>
+        <%= link_to 'Destroy', wiki_page_path(page.title), method: :delete %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="ui divider"></div>
+  <div class="ui button"><%= link_to 'New Page', new_wiki_page_path %></div>
+</div>
