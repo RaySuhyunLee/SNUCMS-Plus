@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # Wiki routing
   get 'wiki' => 'wiki_pages#index', as: :wiki
   get 'wiki/:title/new' => 'wiki_pages#new', as: :new_wiki_page
+  get 'wiki/:title/empty' => 'wiki_pages#empty', as: :empty_wiki_page
   get 'wiki/:title/edit' => 'wiki_pages#edit', as: :edit_wiki_page
   get 'wiki/:title' => 'wiki_pages#show', as: :wiki_page
   patch 'wiki/:title' => 'wiki_pages#update'

@@ -7,20 +7,22 @@ class WikiPagesController < ApplicationController
 
   def show
     if @page.nil?
-      redirect_to new_wiki_page_path
+      redirect_to empty_wiki_page_path(params[:title])
     end
   end
 
-  def new
-    if WikiPage.exists?(title: params[:title])
-      redirect_to wiki_page_path(params[:title])
-    else
-      @page = WikiPage.new
-      @page.title = params[:title]
+  def empty
+    @title = params[:title]
+  end
 
-      if not @page.save
-        redirect_to wiki_path
-      end
+  def new
+    @page = WikiPage.new
+    @page.title = params[:title]
+
+    if not @page.save
+      redirect_to wiki_path
+    else
+      redirect_to edit_wiki_page_path(@page.title)
     end
   end
 
@@ -29,7 +31,7 @@ class WikiPagesController < ApplicationController
 
   def update
     if @page.update(wiki_page_params)
-      redirect_to action: 'show', id: @page
+      redirect_to wiki_page_path(@page.title)
     else
       render 'edit'
     end
