@@ -6,5 +6,5 @@
   <%= link_to '[새 문서 만들기]', edit_wiki_page_path(@page.title) %>
 
   <div class="ui divider"></div>
-  <div class="ui button"><%= link_to 'Back', wiki_path %></div>
+  <div class="ui button"><%= link_to 'Back', wiki_page_path(@page.title), method: :delete %></div>
 </div>

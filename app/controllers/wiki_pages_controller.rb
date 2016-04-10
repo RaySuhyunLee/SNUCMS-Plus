@@ -37,7 +37,7 @@ class WikiPagesController < ApplicationController
 
   def destroy
     @page.destroy
-    redirect_to wiki_page_path(params[:title])
+    redirect_to wiki_path
   end
 
   private
