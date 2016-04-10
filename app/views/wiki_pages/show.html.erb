@@ -4,7 +4,10 @@
 
   <p>
     <% if not @page.contents.nil? %>
-      <%= markdown @page.contents %>
+      <% text = @page.contents.gsub(@regex) do %>
+        <% '[' + $1 + '](' + wiki_page_path($1) + ')'  %>
+      <% end %>
+      <%= markdown text %>
     <% end %>
   </p>
 

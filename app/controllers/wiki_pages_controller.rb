@@ -6,6 +6,8 @@ class WikiPagesController < ApplicationController
   end
 
   def show
+    @regex = /\[\[(.*)\]\]/
+
     if @page.nil?
       redirect_to empty_wiki_page_path(params[:title])
     end
