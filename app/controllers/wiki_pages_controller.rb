@@ -1,15 +1,26 @@
 class WikiPagesController < ApplicationController
   before_action :set_wiki_page, only: [:show, :edit, :update, :destroy]
 
+
   def index
     @pages = WikiPage.all
   end
 
   def show
-    @regex = /\[\[(.*)\]\]/
+    # TODO
+    @regex =
+      {
+        link: /\[\[(.*)\]\]/,
+        redirect: /#redirect \[\[(.*)\]\]/
+      }
 
     if @page.nil?
       redirect_to empty_wiki_page_path(params[:title])
+    else
+      redirect_page = @regex[:redirect].match(@page.contents)
+      unless redirect_page.nil? or params[:title] == $1 # TODO
+        redirect_to wiki_page_path($1)
+      end
     end
   end
 
@@ -21,7 +32,7 @@ class WikiPagesController < ApplicationController
     @page = WikiPage.new
     @page.title = params[:title]
 
-    if not @page.save
+    unless @page.save
       redirect_to wiki_path
     else
       redirect_to edit_wiki_page_path(@page.title)

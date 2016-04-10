@@ -2,17 +2,17 @@
   <div class="ui large header"><%= @page.title %></div>
   <div class="ui divider"></div>
 
-  <p>
-    <% if not @page.contents.nil? %>
-      <% text = @page.contents.gsub(@regex) do %>
-        <% '[' + $1 + '](' + wiki_page_path($1) + ')'  %>
+  <div class="ui text container">
+    <% unless @page.contents.nil? %>
+      <% text = @page.contents.gsub(@regex[:link]) do %>
+        <% '[' + $1 + '](' + wiki_page_path($1) + ')' %>
       <% end %>
-      <%= markdown text %>
+      <p><%= markdown text %></p>
     <% end %>
-  </p>
+  </div>
 
   <div class="ui divider"></div>
-  <div class="ui button"><%= link_to 'Edit', edit_wiki_page_path %></div>
-  <div class="ui button"><%= link_to 'Delete', wiki_page_path(@page.title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } %></div>
-  <div class="ui button"><%= link_to 'Back', wiki_path %></div>
+  <div class="ui button"><%= link_to '수정', edit_wiki_page_path %></div>
+  <div class="ui button"><%= link_to '삭제', wiki_page_path(@page.title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } %></div>
+  <div class="ui button"><%= link_to '돌아가기', wiki_path %></div>
 </div>
