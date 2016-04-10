@@ -2,9 +2,11 @@
   <div class="ui large header"><%= @page.title %></div>
   <div class="ui divider"></div>
 
+  <!-- TODO -->
   <p><%= @page.contents %></p>
 
   <div class="ui divider"></div>
   <div class="ui button"><%= link_to 'Edit', edit_wiki_page_path %></div>
+  <div class="ui button"><%= link_to 'Delete', wiki_page_path(@page.title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } %></div>
   <div class="ui button"><%= link_to 'Back', wiki_path %></div>
 </div>

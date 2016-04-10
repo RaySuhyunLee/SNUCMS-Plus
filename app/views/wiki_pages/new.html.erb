@@ -1,28 +1,9 @@
 <div class="ui container">
-  <div class="ui large header">Wiki:new</div>
+  <div class="ui large header"><%= @page.title %></div>
   <div class="ui divider"></div>
 
-  <div class="ui segment">
-    <%= form_for @page, url: wiki_path do |f| %>
-
-      <div class="ui form">
-        <div class="field">
-          <%= f.label :title %>
-          <%= f.text_field :title, required: true %>
-        </div>
-
-        <div class="field">
-          <%= f.label :contents %>
-          <%= f.text_area :contents, required: true %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit class: 'ui submit button' %>
-        </div>
-      </div>
-
-    <% end %>
-  </div>
+  <p>이 문서는 아직 없습니다.</p>
+  <%= link_to '[새 문서 만들기]', edit_wiki_page_path(@page.title) %>
 
   <div class="ui divider"></div>
   <div class="ui button"><%= link_to 'Back', wiki_path %></div>
