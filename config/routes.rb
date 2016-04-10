@@ -1,12 +1,25 @@
 Rails.application.routes.draw do
+  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  
+  resources :courses
+
+  # Wiki routing
+  get 'wiki' => 'wiki_pages#index', as: :wiki
+  post 'wiki' => 'wiki_pages#create'
+  get 'wiki/new' => 'wiki_pages#new', as: :new_wiki_page
+  get 'wiki/:title/edit' => 'wiki_pages#edit', as: :edit_wiki_page
+  get 'wiki/:title' => 'wiki_pages#show', as: :wiki_page
+  patch 'wiki/:title' => 'wiki_pages#update'
+  put 'wiki/:title' => 'wiki_pages#update'
+  delete 'wiki/:title' => 'wiki_pages#destroy'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

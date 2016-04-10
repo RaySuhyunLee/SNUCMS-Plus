@@ -12,7 +12,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -28,6 +28,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+#
+# User Authentication
+gem 'devise'
+
+# Semantic ui assets
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
