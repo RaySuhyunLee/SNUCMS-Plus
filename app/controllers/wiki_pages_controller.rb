@@ -13,13 +13,16 @@ class WikiPagesController < ApplicationController
         link: /\[\[(.*)\]\]/,
         redirect: /#redirect \[\[(.*)\]\]/
       }
+    @title = params[:title]
+    @from = params[:from]
 
     if @page.nil?
-      redirect_to empty_wiki_page_path(params[:title])
+      redirect_to empty_wiki_page_path(@title)
     else
-      redirect_page = @regex[:redirect].match(@page.contents)
-      unless redirect_page.nil? or params[:title] == $1 # TODO
-        redirect_to wiki_page_path($1)
+      redirect_path = @regex[:redirect].match(@page.contents)
+
+      if not redirect_path.nil? and @title != $1 and @from.nil?
+        redirect_to wiki_page_path(title: $1, from: @title)
       end
     end
   end
