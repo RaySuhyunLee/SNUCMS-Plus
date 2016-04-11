@@ -1,5 +1,13 @@
 <div class="ui container">
-  <div class="ui large header"><%= @title %></div>
+  <div class="ui two column grid container">
+    <div class="column">
+      <div class="ui huge header"><%= @title %></div>
+    </div>
+    <div class="column">
+      <p><br>최근 수정 시각: <%= @page.updated_at %></p>
+    </div>
+  </div>
+
   <% unless @from.nil? %>
     <div class="ui positive message">
       <p><%= @from %>"에서 넘어옴</p>
