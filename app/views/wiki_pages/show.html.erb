@@ -17,6 +17,7 @@
       <% text = text.gsub(@regex[:latex]) do %>
         <% '<img src="http://latex.codecogs.com/svg.latex?' + $1 + '"/>' %>
       <% end %>
+      <% text = text.gsub(/\\\$/) do '$' end %>
 
       <p><%= markdown text %></p>
     <% end %>
