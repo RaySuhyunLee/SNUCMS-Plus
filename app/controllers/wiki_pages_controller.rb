@@ -11,7 +11,8 @@ class WikiPagesController < ApplicationController
     @regex =
       {
         link: /\[\[(.*)\]\]/,
-        redirect: /#redirect \[\[(.*)\]\]/
+        redirect: /#redirect \[\[(.*)\]\]/,
+        latex: /\$(.*)\$/
       }
     @title = params[:title]
     @from = params[:from]
