@@ -19,18 +19,10 @@
 
   <div>
     <% unless @page.contents.nil? %>
-      <!-- easy link: [[page]] -->
-      <% text = @page.contents.gsub(@regex[:link]) do %>
-        <% '[' + $1 + '](' + wiki_page_path($1) + ')' %>
-      <% end %>
-
-      <!-- latex math equation: $equations$ -->
-      <% text = text.gsub(@regex[:latex]) do %>
-        <% '<img src="http://latex.codecogs.com/svg.latex?' + $1 + '">' %>
-      <% end %>
+      <% text = render_easy_link(@page.contents) %>
+      <% text = render_latex_math(text) %>
       <% text = text.gsub(/\\\$/) do '$' end %>
 
-      <!-- table of contents -->
       <% toc = render_toc text %>
       <% if toc.length > 0 %>
         <div class="ui card">
