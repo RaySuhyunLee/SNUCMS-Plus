@@ -1,0 +1,16 @@
+<div class="ui container">
+  <div class="ui huge header"><%= @page.title %></div>
+  <div class="ui divider"></div>
+
+  <div class="ui segment">
+    <%= form_for @page, url: wiki_page_path(@page.title) do |f| %>
+      <div class="ui form">
+        <div class="field"><%= f.text_area :contents, required: true %></div>
+        <div class="actions"><%= f.submit class: 'ui submit button' %></div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="ui divider"></div>
+  <div class="ui button"><%= link_to '돌아가기', wiki_page_path(@page.title) %></div>
+</div>

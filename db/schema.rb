@@ -11,20 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405121920) do
+ActiveRecord::Schema.define(version: 20160409112338) do
 
   create_table "courses", force: :cascade do |t|
+    t.string   "university"
+    t.string   "classification"
+    t.string   "college"
+    t.string   "department"
+    t.string   "level"
+    t.string   "grade"
     t.string   "course_num"
+    t.integer  "lecture_num"
     t.string   "title"
-    t.integer  "school_id"
-    t.integer  "professor_id"
-    t.integer  "past_course"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "credit"
+    t.string   "timetable"
+    t.string   "location"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
-
-  add_index "courses", ["professor_id"], name: "index_courses_on_professor_id"
-  add_index "courses", ["school_id"], name: "index_courses_on_school_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -56,5 +60,12 @@ ActiveRecord::Schema.define(version: 20160405121920) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+
+  create_table "wiki_pages", force: :cascade do |t|
+    t.string   "title"
+    t.text     "contents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

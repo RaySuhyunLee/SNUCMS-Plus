@@ -1,0 +1,15 @@
+<div class="ui container">
+  <div class="ui huge header"><%= @title %></div>
+  <div class="ui divider"></div>
+
+  <div class="ui text container">
+    이 문서는 아직 없습니다.
+  </div>
+
+  <div class="ui text container">
+    [<%= link_to '새 문서 만들기', new_wiki_page_path(@title) %>]
+  </div>
+
+  <div class="ui divider"></div>
+  <div class="ui button"><%= link_to '돌아가기', wiki_path %></div>
+</div>

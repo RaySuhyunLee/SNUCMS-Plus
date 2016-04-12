@@ -1,0 +1,54 @@
+<div class="ui two column grid container">
+  <div class="column">
+    <div class="ui huge header"><%= @title %></div>
+  </div>
+  <div class="column">
+    <p>최근 수정 시각: <%= @page.updated_at %></p>
+  </div>
+</div>
+
+<div class="ui container">
+  <% unless @from.nil? %>
+    <p>
+      <br>
+      <i class="circular inverted teal linkify icon"></i>
+      <%= link_to @from, wiki_page_path(@from) %>에서 넘어옴
+    </p>
+  <% end %>
+  <div class="ui divider"></div>
+
+  <div>
+    <% unless @page.contents.nil? %>
+      <!-- easy link: [[page]] -->
+      <% text = @page.contents.gsub(@regex[:link]) do %>
+        <% '[' + $1 + '](' + wiki_page_path($1) + ')' %>
+      <% end %>
+
+      <!-- latex math equation: $equations$ -->
+      <% text = text.gsub(@regex[:latex]) do %>
+        <% '<img src="http://latex.codecogs.com/svg.latex?' + $1 + '">' %>
+      <% end %>
+      <% text = text.gsub(/\\\$/) do '$' end %>
+
+      <!-- table of contents -->
+      <% toc = render_toc text %>
+      <% if toc.length > 0 %>
+        <div class="ui card">
+          <div class="content">
+            <div class="header">목차</div>
+          </div>
+          <div class="content">
+            <%= toc %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= render_markdown text %>
+    <% end %>
+  </div>
+
+  <div class="ui divider"></div>
+  <div class="ui button"><%= link_to '수정', edit_wiki_page_path(@title) %></div>
+  <div class="ui button"><%= link_to '삭제', wiki_page_path(@title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } %></div>
+  <div class="ui button"><%= link_to '돌아가기', wiki_path %></div>
+</div>
