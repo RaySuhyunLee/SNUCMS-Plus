@@ -1,0 +1,31 @@
+<div class="ui container" >
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name),
+               html: {class: "ui form"}) do |f| %>
+    <div class="field">
+      <%= f.email_field :email, autofocus: true, placeholder: "email" %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password, autocomplete: "off", placeholder: "password" %>
+    </div>
+
+    <div class="actions ui button">
+      <%= f.submit "Go" %>
+    </div>
+
+    <% if devise_mapping.rememberable? -%>
+      <div class="field ui checkbox">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end -%>
+  <% end %>
+
+  <%= link_to "비밀번호를 잊으셨나요?", new_user_password_path %>
+</div>
+
+<div class="ui container">
+  <h1 class="ui header">eTL은 잊으세요!</h1>
+  <h2 class="ui header">SNUCMS+가 책임지겠습니다</h2>
+</div>
