@@ -3,6 +3,15 @@ Rails.application.routes.draw do
     sessions: "accounts/sessions",
     registrations: "accounts/registrations"
   }
+  resources :courses do
+		resources :issues, only: [:index, :new, :create, :show, :update, :destroy]
+	end
+
+  get 'course/index'
+
+  get 'course/new'
+
+  get 'course/create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
