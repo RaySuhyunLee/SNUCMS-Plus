@@ -39,7 +39,7 @@ gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'redcarpet'
 
 # Syntax highlighter
-gem 'pygments.rb'
+gem 'rouge', '~> 1.10', '>= 1.10.1'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

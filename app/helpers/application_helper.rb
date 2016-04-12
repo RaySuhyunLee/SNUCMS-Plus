@@ -1,25 +1,34 @@
 module ApplicationHelper
+  require 'rouge/plugins/redcarpet'
 
-  class HTMLwithPygments < Redcarpet::Render::HTML
-    def block_code(code, language)
-      options = { encoding: 'utf-8', linenos: true }
-      Pygments.highlight(code, lexer: language, options: options)
-    end
-  end
+  FORMATTER_OPTIONS =
+  {
+    line_numbers:         true
+  }
 
   RENDER_OPTIONS =
   {
-    hard_wrap:            true, 
+    hard_wrap:            true
   }
 
   EXTENTIONS =
   {
+    tables:               true,
     autolink:             true,
     fenced_code_blocks:   true,
     lax_spacing:          true,
     no_intra_emphasis:    true,
     strikethrough:        true
   }
+
+  class HTML < Redcarpet::Render::HTML
+    def block_code(code, language)
+      formatter = Rouge::Formatters::HTML.new(FORMATTER_OPTIONS)
+      lexer = Rouge::Lexer.find(language || 'text').new
+
+      formatter.format(lexer.lex(code))
+    end
+  end
 
   def render_markdown(text)
     linked_text = ""
@@ -41,7 +50,7 @@ module ApplicationHelper
       linked_text << "<a id=\"#{href}\" href=\"#\"></a>\n" + line
     end
 
-    renderer = Redcarpet::Render::HTML.new(RENDER_OPTIONS)
+    renderer = HTML.new(RENDER_OPTIONS)
     Redcarpet::Markdown.new(renderer, EXTENTIONS).render(linked_text).html_safe
   end
 
