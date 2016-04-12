@@ -38,6 +38,9 @@ gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 # Markdown plugin
 gem 'redcarpet'
 
+# Syntax highlighter
+gem 'pygments.rb'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

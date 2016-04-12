@@ -1,46 +1,37 @@
 module ApplicationHelper
 
-  def markdown(text)
-    render_options = {
-      # will remove from the output HTML tags inputted by user 
-      # filter_html:     true,
-      # will insert <br /> tags in paragraphs where are newlines 
-      # (ignored by default)
-      hard_wrap:       true, 
-      # hash for extra link options, for example 'nofollow'
-      link_attributes: { rel: 'nofollow' }
-      # will remove <img> tags from output
-      # no_images: true
-      # will remove <a> tags from output
-      # no_links: true
-      # will remove <style> tags from output
-      # no_styles: true
-      # generate links for only safe protocols
-      # safe_links_only: true
-      # and more ... (prettify, with_toc_data, xhtml)
-    }
-    renderer = Redcarpet::Render::HTML.new(render_options)
+  class HTMLwithPygments < Redcarpet::Render::HTML
+    def block_code(code, language)
+      options = { encoding: 'utf-8', linenos: true }
+      Pygments.highlight(code, lexer: language, options: options)
+    end
+  end
 
-    extensions = {
-      #will parse links without need of enclosing them
-      autolink:           true,
-      # blocks delimited with 3 ` or ~ will be considered as code block. 
-      # No need to indent.  You can provide language name too.
-      # ```ruby
-      # block of code
-      # ```
-      fenced_code_blocks: true,
-      # will ignore standard require for empty lines surrounding HTML blocks
-      lax_spacing:        true,
-      # will not generate emphasis inside of words, for example no_emph_no
-      no_intra_emphasis:  true,
-      # will parse strikethrough from ~~, for example: ~~bad~~
-      strikethrough:      true,
-      # will parse superscript after ^, you can wrap superscript in () 
-      superscript:        true
-      # will require a space after # in defining headers
-      # space_after_headers: true
-    }
-    Redcarpet::Markdown.new(renderer, extensions).render(text).html_safe
+  RENDER_OPTIONS =
+  {
+    hard_wrap:            true, 
+    link_attributes:      { rel: 'nofollow' }
+    #with_toc_data:        true
+  }
+
+  EXTENTIONS =
+  {
+    autolink:             true,
+    fenced_code_blocks:   true,
+    lax_spacing:          true,
+    no_intra_emphasis:    true,
+    strikethrough:        true,
+    space_after_headers:  true
+  }
+
+  def render_markdown(text)
+    renderer = Redcarpet::Render::HTML.new(RENDER_OPTIONS)
+    Redcarpet::Markdown.new(renderer, EXTENTIONS).render(text).html_safe
+  end
+
+  def render_toc(text)
+    toc_renderer = Redcarpet::Render::HTML_TOC
+    Redcarpet::Markdown.new(toc_renderer).render(text).html_safe
   end
 end
+

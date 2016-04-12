@@ -1,19 +1,17 @@
 class WikiPagesController < ApplicationController
   before_action :set_wiki_page, only: [:show, :edit, :update, :destroy]
 
-
   def index
     @pages = WikiPage.all
   end
 
   def show
-    # TODO
     @regex =
-      {
-        link: /\[\[(.*)\]\]/,
-        redirect: /^#redirect \[\[(.*)\]\]/,
-        latex: /(?<!\\)\$(.*)\$/
-      }
+    {
+      link: /\[\[(.*)\]\]/,
+      redirect: /^#redirect \[\[(.*)\]\]/,
+      latex: /(?<!\\)\$(.*)\$/
+    }
     @title = params[:title]
     @from = params[:from]
 
