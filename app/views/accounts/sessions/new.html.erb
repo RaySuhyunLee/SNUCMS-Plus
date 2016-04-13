@@ -10,8 +10,8 @@
       <%= f.password_field :password, autocomplete: "off", placeholder: "password" %>
     </div>
 
-    <div class="actions ui button">
-      <%= f.submit "Go" %>
+    <div class="actions">
+      <%= f.submit "Go", class: "ui button" %>
     </div>
 
     <% if devise_mapping.rememberable? -%>
