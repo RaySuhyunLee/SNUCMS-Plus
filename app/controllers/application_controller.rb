@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   # filter devise parameters
+  before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # Prevent CSRF attacks by raising an exception.
