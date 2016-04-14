@@ -1,34 +1,35 @@
 class IssuesController < ApplicationController
+  before_action :set_parent
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
 
-  # GET /issues
-  # GET /issues.json
+  # GET /(parent_type)/:(parent_id)/issues
+  # GET /(parent_type)/:(parent_id)/issues.json
   def index
-    @issues = Issue.all
+    @issues = @parent.issues.all
   end
 
-  # GET /issues/1
-  # GET /issues/1.json
+  # GET /(parent_type)/:(parent_id)/issues/:id
+  # GET /(parent_type)/:(parent_id)/issues/:id.json
   def show
   end
 
-  # GET /issues/new
+  # GET /(parent_type)/:(parent_id)/issues/:id/new
   def new
-    @issue = Issue.new
+  	@issue = @parent.issues.new 
   end
-
-  # GET /issues/1/edit
+  
+  # GET /(parent_type)/:(parent_id)/issues/:id/edit
   def edit
   end
 
-  # POST /issues
-  # POST /issues.json
+  # POST /(parent_type)/:(parent_id)/issues/
+  # POST /(parent_type)/:(parent_id)/issues.json
   def create
-    @issue = Issue.new(issue_params)
+    @issue = @parent.issues.new(issue_params)
 
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to @issue, notice: 'Issue was successfully created.' }
+        format.html { redirect_to @index_path, notice: 'Issue was successfully created.' }
         format.json { render :show, status: :created, location: @issue }
       else
         format.html { render :new }
@@ -37,12 +38,12 @@ class IssuesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /issues/1
-  # PATCH/PUT /issues/1.json
+  # PATCH/PUT /(parent_type)/:(parent_id)/issues/:id
+  # PATCH/PUT /(parent_type)/:(parent_id)/issues/:id.json
   def update
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to @issue, notice: 'Issue was successfully updated.' }
+        format.html { redirect_to @issue_path, notice: 'Issue was successfully updated.' }
         format.json { render :show, status: :ok, location: @issue }
       else
         format.html { render :edit }
@@ -51,20 +52,32 @@ class IssuesController < ApplicationController
     end
   end
 
-  # DELETE /issues/1
-  # DELETE /issues/1.json
+  # DELETE /(parent_type)/:(parent_id)/issues/:id
+  # DELETE /(parent_type)/:(parent_id)/issues/:id.json
   def destroy
     @issue.destroy
     respond_to do |format|
-      format.html { redirect_to issues_url, notice: 'Issue was successfully destroyed.' }
+      format.html { redirect_to @index_path, notice: 'Issue was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_issue
-      @issue = Issue.find(params[:id])
+	def set_parent
+	  parent_type = request.path.split('/')[1]
+	  if parent_type == "courses"
+	    @parent = Course.find(params[:course_id])
+		@parent_name = "Course"
+		@index_path = course_issues_path(params[:course_id])
+		@new_path = new_course_issue_path(params[:course_id])
+	  end
+    end
+	
+	def set_issue
+	  @issue = Issue.find(params[:id])
+	  @edit_path = edit_course_issue_path(params[:course_id], params[:id])	
+	  @issue_path = course_issue_path(params[:course_id], params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

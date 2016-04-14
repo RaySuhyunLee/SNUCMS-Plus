@@ -60,5 +60,6 @@
   <%= @course.location %>
 </p>
 
+<%= link_to 'Issues', course_issues_path(@course.id) %> |
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>
