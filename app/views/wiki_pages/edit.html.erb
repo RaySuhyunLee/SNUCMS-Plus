@@ -1,0 +1,36 @@
+<div class="ui container">
+  <div class="ui huge header"><%= @page.title %></div>
+
+  <div class="ui pointing secondary menu">
+    <div class="active item" data-tab="edit">수정</div>
+    <div class="item" data-tab="preview">미리보기</div>
+  </div>
+
+  <div class="ui active tab segment" data-tab="edit">
+    <%= form_for @page, url: wiki_page_path(@page.title) do |f| %>
+
+      <div class="inline fields">
+        <div class="field">
+          <div class="ui checkbox">
+            <input type="checkbox" checked="checked">
+            <label>Markdown</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui divider"></div>
+
+      <div class="ui form">
+        <div class="field"><%= f.text_area :contents, required: true %></div>
+        <div class="actions"><%= f.submit class: 'ui submit button' %></div>
+      </div>
+
+    <% end %>
+  </div>
+
+  <div class="ui tab segment" data-tab="preview">
+  </div>
+
+  <div class="ui divider"></div>
+  <div class="ui button"><%= link_to '돌아가기', wiki_page_path(@page.title) %></div>
+</div>

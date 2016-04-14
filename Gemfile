@@ -35,6 +35,12 @@ gem 'devise'
 # Semantic ui assets
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
+# Markdown plugin
+gem 'redcarpet'
+
+# Syntax highlighter
+gem 'rouge', '~> 1.10', '>= 1.10.1'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
