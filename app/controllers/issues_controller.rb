@@ -1,6 +1,6 @@
 class IssuesController < ApplicationController
   before_action :set_parent
-  before_action :set_issue, only: [:show, :edit, :update, :destroy]
+  before_action :set_issue, only: [:show, :update, :destroy]
 
   # GET /(parent_type)/:(parent_id)/issues
   # GET /(parent_type)/:(parent_id)/issues.json
@@ -11,16 +11,18 @@ class IssuesController < ApplicationController
   # GET /(parent_type)/:(parent_id)/issues/:id
   # GET /(parent_type)/:(parent_id)/issues/:id.json
   def show
+		@comments = @issue.comments.all
   end
 
   # GET /(parent_type)/:(parent_id)/issues/:id/new
   def new
   	@issue = @parent.issues.new 
   end
-  
+
+	# Freezed
   # GET /(parent_type)/:(parent_id)/issues/:id/edit
-  def edit
-  end
+	#def edit
+	#end
 
   # POST /(parent_type)/:(parent_id)/issues/
   # POST /(parent_type)/:(parent_id)/issues.json
@@ -76,12 +78,12 @@ class IssuesController < ApplicationController
 	
 	def set_issue
 	  @issue = Issue.find(params[:id])
-	  @edit_path = edit_course_issue_path(params[:course_id], params[:id])	
+		# freezed @edit_path = edit_course_issue_path(params[:course_id], params[:id])	
 	  @issue_path = course_issue_path(params[:course_id], params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def issue_params
-      params.require(:issue).permit(:title, :contents)
+      params.require(:issue).permit(:title)
     end
 end

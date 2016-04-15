@@ -3,10 +3,14 @@ Rails.application.routes.draw do
     sessions: "accounts/sessions",
     registrations: "accounts/registrations"
   }
-  # nested routing for courses and issues.
+  
+	resources :comments
+  # nested routing for courses, issues.
   resources :courses do
-		resources :issues, only: [:index, :new, :create, :show, :update, :destroy]
-	end
+    resources :issues, only: [:index, :new, :create, :show, :exit, :update, :destroy]
+  end
+
+  # resources :courses
 
   get 'course/index'
 

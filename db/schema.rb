@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413160104) do
+ActiveRecord::Schema.define(version: 20160415053503) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "contents"
+    t.string   "commenter"
+    t.integer  "issue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["issue_id"], name: "index_comments_on_issue_id"
 
   create_table "courses", force: :cascade do |t|
     t.string   "university"
@@ -32,7 +42,6 @@ ActiveRecord::Schema.define(version: 20160413160104) do
 
   create_table "issues", force: :cascade do |t|
     t.string   "title"
-    t.text     "contents"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "have_issue_id"
