@@ -70,20 +70,21 @@ class IssuesController < ApplicationController
 	  parent_type = request.path.split('/')[1]
 	  if parent_type == "courses"
 	    @parent = Course.find(params[:course_id])
-		@parent_name = "Course"
-		@index_path = course_issues_path(params[:course_id])
-		@new_path = new_course_issue_path(params[:course_id])
+			@parent_name = "Course"
+			@index_path = course_issues_path(params[:course_id])
+			@new_path = new_course_issue_path(params[:course_id])
 	  end
-    end
+  end
 	
 	def set_issue
 	  @issue = Issue.find(params[:id])
 		# freezed @edit_path = edit_course_issue_path(params[:course_id], params[:id])	
-	  @issue_path = course_issue_path(params[:course_id], params[:id])
+	  if parent_type == "courses"
+			@issue_path = course_issue_path(params[:course_id], params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def issue_params
       params.require(:issue).permit(:title)
-    end
+  end
 end

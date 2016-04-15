@@ -5,5 +5,21 @@
   <%= @issue.title %>
 </p>
 
+<h2>Add a comment:</h2>
+<%= form_for([@issue, @issue.comments.build]) do |f| %>
+  <div class="field">
+    <%= f.label :commenter %><br />
+    <%= f.text_field :commenter %>
+  </div>
+  <div class="field">
+    <%= f.label :comments %><br />
+    <%= f.text_area :comments %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
 <!--freezed %= link_to 'Edit', @edit_path %-->
 <%= link_to 'Back', @index_path %>
