@@ -1,7 +1,7 @@
 class IssuesController < ApplicationController
   before_action :set_parent
   before_action :set_issue, only: [:show, :update, :destroy]
-	before_action :set_comments, only: [:show, :new, :update]
+	before_action :set_comments, only: [:show, :update]
 
   # GET /(parent_type)/:(parent_id)/issues
   # GET /(parent_type)/:(parent_id)/issues.json
