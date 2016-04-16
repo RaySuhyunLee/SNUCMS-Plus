@@ -1,6 +1,7 @@
 class IssuesController < ApplicationController
   before_action :set_parent
   before_action :set_issue, only: [:show, :update, :destroy]
+	before_action :set_comments, only: [:show, :new, :update]
 
   # GET /(parent_type)/:(parent_id)/issues
   # GET /(parent_type)/:(parent_id)/issues.json
@@ -79,12 +80,19 @@ class IssuesController < ApplicationController
 	def set_issue
 	  @issue = Issue.find(params[:id])
 		# freezed @edit_path = edit_course_issue_path(params[:course_id], params[:id])	
-	  if parent_type == "courses"
+	  if @parent_name == "Course"
 			@issue_path = course_issue_path(params[:course_id], params[:id])
     end
+	end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def issue_params
-      params.require(:issue).permit(:title)
+	def set_comments
+		if @parent_name == "Course"
+			@comments_path = course_issue_comments_path(params[:course_id], params[:id])
+		end
+	end
+  
+	# Never trust parameters from the scary internet, only allow the white list through.
+  def issue_params
+    params.require(:issue).permit(:title)
   end
 end

@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
   	def set_issue
 			parent_type = request.path.split('/')[1]
 			if parent_type == "courses"
-				@issue_path = course_issue_path(params[:course_id], params[:id])
+				@issue_path = course_issue_path(params[:course_id], params[:issue_id])
 			end
 			@issue = Issue.find(params[:issue_id])
 	  end

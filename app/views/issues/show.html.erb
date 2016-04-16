@@ -1,19 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<h3>
   <strong>Title:</strong>
   <%= @issue.title %>
-</p>
+</h3>
 
-<h2>Add a comment:</h2>
-<%= form_for([@issue, @issue.comments.build]) do |f| %>
+
+<h4>Comments</h4>
+<% @comments.each do |comment| %>
+  <p>
+    <%= comment.commenter + ' commented' %> 
+  </p>
+ 
+  <p>
+    <%= comment.contents %>
+  </p>
+	<% if @parent_name == "Course"
+			 @comment_path = course_issue_comment_path(@parent.id, @issue.id, comment.id)
+		 end %>
+	<%= link_to 'Delete', @comment_path, method: :delete, data: {confirm: 'Are you sure?' } %>
+	<p>---------------------</p>
+<% end %>
+
+<p>Add a comment:</p>
+<%= form_for([@issue, @issue.comments.create], url: @comments_path) do |f| %>
   <div class="field">
     <%= f.label :commenter %><br />
     <%= f.text_field :commenter %>
   </div>
   <div class="field">
     <%= f.label :comments %><br />
-    <%= f.text_area :comments %>
+    <%= f.text_area :contents %>
   </div>
   <div class="actions">
     <%= f.submit %>
