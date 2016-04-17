@@ -1,12 +1,45 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: "accounts/sessions",
+    registrations: "accounts/registrations"
+  }
+  
+  # nested routing for courses, issues and comments.
+  resources :courses do
+    resources :issues, only: [:index, :new, :create, :show, :update, :destroy] do
+			resources :comments, only: [:new, :create, :destroy, :index]
+		end
+  end
+
+  # routing for comments 
+	# resources :comments, only: [:new, :create, :destroy]
+  
+	# resources :courses
+
+  get 'course/index'
+
+  get 'course/new'
+
+  get 'course/create'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+
+  # Wiki routing
+  get 'wiki' => 'wiki_pages#index', as: :wiki
+  get 'wiki/:title/new' => 'wiki_pages#new', as: :new_wiki_page
+  get 'wiki/:title/empty' => 'wiki_pages#empty', as: :empty_wiki_page
+  get 'wiki/:title/edit' => 'wiki_pages#edit', as: :edit_wiki_page
+  get 'wiki/:title' => 'wiki_pages#show', as: :wiki_page
+  patch 'wiki/:title' => 'wiki_pages#update'
+  put 'wiki/:title' => 'wiki_pages#update'
+  delete 'wiki/:title' => 'wiki_pages#destroy'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

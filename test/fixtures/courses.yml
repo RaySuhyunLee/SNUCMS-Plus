@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  university: MyString
+  classification: MyString
+  college: MyString
+  department: MyString
+  level: MyString
+  grade: MyString
+  course_num: MyString
+  lecture_num: 1
+  title: MyString
+  credit: 1
+  timetable: MyString
+  location: MyString
+
+two:
+  university: MyString
+  classification: MyString
+  college: MyString
+  department: MyString
+  level: MyString
+  grade: MyString
+  course_num: MyString
+  lecture_num: 1
+  title: MyString
+  credit: 1
+  timetable: MyString
+  location: MyString
