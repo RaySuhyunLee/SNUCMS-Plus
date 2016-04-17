@@ -1,3 +1,4 @@
+<% @issue.comments.build %>
 <%= form_for([@parent, @issue]) do |f| %>
   <% if @issue.errors.any? %>
     <div id="error_explanation">
@@ -16,7 +17,11 @@
     <%= f.text_field :title %>
   </div>
 
-  <div class="actions">
+  <h3>Comment</h3>
+	<%= render :partial => 'comments/form_create',
+						 :locals => {:form => f} %>
+	
+	<div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
