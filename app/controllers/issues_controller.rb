@@ -15,9 +15,10 @@ class IssuesController < ApplicationController
 		@comments = @issue.comments.all
   end
 
-  # GET /(parent_type)/:(parent_id)/issues/:id/new
+  # GET /(parent_type)/:(parent_id)/issues/new
   def new
-  	@issue = @parent.issues.new 
+  	@issue = @parent.issues.new
+		@comment = @issue.comments.new
   end
 
 	# Freezed
@@ -28,10 +29,11 @@ class IssuesController < ApplicationController
   # POST /(parent_type)/:(parent_id)/issues/
   # POST /(parent_type)/:(parent_id)/issues.json
   def create
-    @issue = @parent.issues.new(issue_params)
+   @issue = @parent.issues.new(issue_params)
+#	 @comment = @issue.comments.new(params.require(:issue).permit(:contents))
 
     respond_to do |format|
-      if @issue.save
+      if @issue.save 
         format.html { redirect_to @index_path, notice: 'Issue was successfully created.' }
         format.json { render :show, status: :created, location: @issue }
       else
@@ -93,6 +95,6 @@ class IssuesController < ApplicationController
   
 	# Never trust parameters from the scary internet, only allow the white list through.
   def issue_params
-    params.require(:issue).permit(:title)
+		params.require(:issue).permit!
   end
 end
