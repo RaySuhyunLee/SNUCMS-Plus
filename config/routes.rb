@@ -3,6 +3,25 @@ Rails.application.routes.draw do
     sessions: "accounts/sessions",
     registrations: "accounts/registrations"
   }
+  
+  # nested routing for courses, issues and comments.
+  resources :courses do
+    resources :issues, only: [:index, :new, :create, :show, :update, :destroy] do
+			resources :comments, only: [:new, :create, :destroy, :index]
+		end
+  end
+
+  # routing for comments 
+	# resources :comments, only: [:new, :create, :destroy]
+  
+	# resources :courses
+
+  get 'course/index'
+
+  get 'course/new'
+
+  get 'course/create'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -11,8 +30,6 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
-  
-  resources :courses
 
   # Wiki routing
   get 'wiki' => 'wiki_pages#index', as: :wiki
