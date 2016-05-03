@@ -21,8 +21,12 @@
       <div class="ui divider"></div>
 
       <div class="ui form">
-        <div class="field"><%= f.text_area :contents, required: true %></div>
-        <div class="actions"><%= f.submit class: 'ui submit button' %></div>
+        <div class="field">
+          <%= f.text_area :contents, required: true %>
+        </div>
+        <div class="actions">
+          <%= f.submit class: 'ui submit button' %>
+        </div>
       </div>
 
     <% end %>

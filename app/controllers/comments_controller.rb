@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
-	before_action :set_issue
-	before_action :set_comment, only: [:update, :destroy]
-  
-	# GET /(parent_type)/:(parent_id)/issues/:issue_id/comments/new
+  before_action :set_issue
+  before_action :set_comment, only: [:update, :destroy]
+
+  # GET /(parent_type)/:(parent_id)/issues/:issue_id/comments/new
   def new
     @comment = @issue.comments.new
   end
@@ -48,21 +48,21 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-  	def set_issue
-			parent_type = request.path.split('/')[1]
-			if parent_type == "courses"
-				@issue_path = course_issue_path(params[:course_id], params[:issue_id])
-			end
-			@issue = Issue.find(params[:issue_id])
-	  end
-
-		def set_comment
-      @comment = Comment.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_issue
+    parent_type = request.path.split('/')[1]
+    if parent_type == "courses"
+      @issue_path = course_issue_path(params[:course_id], params[:issue_id])
     end
+    @issue = Issue.find(params[:issue_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:contents, :commenter, :issue_id)
-    end
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def comment_params
+    params.require(:comment).permit(:contents, :commenter, :issue_id)
+  end
 end
