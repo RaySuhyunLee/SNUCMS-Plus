@@ -71,11 +71,19 @@ module ApplicationHelper
       title = line.gsub('#', '').strip
       href = title.gsub(/(^[!.?:\(\)]+|[!.?:\(\)]+$)/, '').gsub(/[!.,?:; \(\)-]+/, '-').downcase
 
-      bullet = line.count('#') > 1 ? ' *' : "#{i_section += 1}."
+      bullet = spaces(line.count('#')) + "1."
       table_of_contents << '  ' * (line.count('#') - 1) + "#{bullet} [#{title}](\##{href})\n"
     end
 
     render_markdown(table_of_contents)
+  end
+
+  def spaces(num)
+    if (num <= 0)
+      ""
+    else
+      " " + spaces(num - 1)
+    end
   end
 
   def render_easy_link(text)
