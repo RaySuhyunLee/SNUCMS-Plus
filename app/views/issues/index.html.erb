@@ -1,33 +1,23 @@
 <p id="notice"><%= notice %></p>
+<div class="ui container">
+  <div class="ui huge header">이슈 목록</div>
+  <div class="ui divider"></div>
 
-<h1>Listing Issues</h1>
+  <table class="ui table">
+    <tbody>
+      <% @issues.each do |issue| %>
+        <% if @parent_name == "Course" %>
+          <% @issue_path = course_issue_path(@parent.id, issue.id) %>
+        <% end %>
+        <tr>
+          <td><%= link_to issue.title, @issue_path %></td>
+          <td><%= issue.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-<th><!--Contents--></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @issues.each do |issue| %>
-	  <% if @parent_name == "Course"
-				 @issue_path = course_issue_path(@parent.id, issue.id) 
-			 end %>
-		<% #@edit_path = edit_course_issue_path(@parent.id, issue.id) %>
-      <tr>
-        <td><%= issue.title %></td>
-        <td><!--%= issue.contents %--></td>
-        <td><%= link_to 'Show', @issue_path %></td>
-        <td><!-- freezed %= link_to 'Edit', @edit_path %--></td>
-        <td><%= link_to 'Destroy', @issue_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Issue', @new_path %>
+  <div class="ui divider"></div>
+  <div class="ui button"><%= link_to '글쓰기', @new_path %></div>
+  <div class="ui button"><%= link_to '돌아가기', course_path(@parent.id) %></div>
+</div>
