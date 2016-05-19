@@ -8,7 +8,8 @@ module ApplicationHelper
 
   RENDER_OPTIONS =
   {
-    hard_wrap:            true
+    hard_wrap:            true,
+    no_styles:            true
   }
 
   EXTENTIONS =
@@ -18,7 +19,8 @@ module ApplicationHelper
     fenced_code_blocks:   true,
     lax_spacing:          true,
     no_intra_emphasis:    true,
-    strikethrough:        true
+    strikethrough:        true,
+    superscript:          true
   }
 
   class HTML < Redcarpet::Render::HTML
@@ -79,11 +81,9 @@ module ApplicationHelper
   end
 
   def spaces(num)
-    if (num <= 0)
-      ""
-    else
-      " " + spaces(num - 1)
-    end
+    s = ""
+    num.times { s = s + " " }
+    s
   end
 
   def render_easy_link(text)
