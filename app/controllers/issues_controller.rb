@@ -12,7 +12,11 @@ class IssuesController < ApplicationController
   # GET /(parent_type)/:(parent_id)/issues/:id
   # GET /(parent_type)/:(parent_id)/issues/:id.json
   def show
-		@comments = @issue.comments.all
+    @comments = @issue.comments.all
+	@regex = 
+	{
+	  latex: /(?<!\\)$(.*)\$/
+	}
   end
 
   # GET /(parent_type)/:(parent_id)/issues/new
