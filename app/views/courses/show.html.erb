@@ -1,62 +1,23 @@
 <p id="notice"><%= notice %></p>
 <div class="ui container">
   <div class="ui huge header"><%= @course.title %></div>
+  <div class="ui large header"><%= @course.course_num %></div>
   <div class="ui divider"></div>
 
-  <p>
-    <strong>University:</strong>
-    <%= @course.university %>
-  </p>
-
-  <p>
-    <strong>Classification:</strong>
-    <%= @course.classification %>
-  </p>
-
-  <p>
-    <strong>College:</strong>
-    <%= @course.college %>
-  </p>
-
-  <p>
-    <strong>Department:</strong>
-    <%= @course.department %>
-  </p>
-
-  <p>
-    <strong>Level:</strong>
-    <%= @course.level %>
-  </p>
-
-  <p>
-    <strong>Grade:</strong>
-    <%= @course.grade %>
-  </p>
-
-  <p>
-    <strong>Course num:</strong>
-    <%= @course.course_num %>
-  </p>
-
-  <p>
-    <strong>Lecture num:</strong>
-    <%= @course.lecture_num %>
-  </p>
-
-  <p>
-    <strong>Credit:</strong>
-    <%= @course.credit %>
-  </p>
-
-  <p>
-    <strong>Timetable:</strong>
-    <%= @course.timetable %>
-  </p>
-
-  <p>
-    <strong>Location:</strong>
-    <%= @course.location %>
-  </p>
+  <div class="ui two wide column grid">
+    <div class="column">
+      <div class="ui segment">
+        <% prof = Professor.find_by_id(@course.professor_id) %>
+        <%= prof.name if not prof.nil? %>
+      </div>
+    </div>
+    <div class="column">
+      <div class="ui segment">
+        <% prof = Professor.find_by_id(@course.professor_id) %>
+        <%= prof.picture if not prof.nil? %>
+      </div>
+    </div>
+  </div>
 
   <div class="ui divider"></div>
   <div class="ui button"><%= link_to '이슈', course_issues_path(@course.id) %></div>
