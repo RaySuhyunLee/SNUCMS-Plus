@@ -32,3 +32,8 @@ $ bundle exec rake db:migrate
 $ rails s
 (or, rails s -b 0.0.0.0)
 ```
+
+## seed DB apply
+```bash
+$ rake db:seed
+```
