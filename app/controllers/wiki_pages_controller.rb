@@ -60,11 +60,11 @@ class WikiPagesController < ApplicationController
 
   private
 
-    def set_wiki_page
-      @page = WikiPage.find_by(title: params[:title])
-    end
+  def set_wiki_page
+    @page = WikiPage.find_by(title: params[:title])
+  end
 
-    def wiki_page_params
-      params.require(:wiki_page).permit(:title, :contents)
-    end
+  def wiki_page_params
+    params.require(:wiki_page).permit(:title, :contents)
+  end
 end
