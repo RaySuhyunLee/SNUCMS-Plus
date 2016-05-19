@@ -6,18 +6,8 @@
   <table class="ui table">
     <thead>
       <tr>
-        <!-- <th>University</th> -->
-        <!-- <th>Classification</th> -->
-        <th>College&nbsp;</th>
-        <th>Department&nbsp;</th>
-        <!-- <th>Level</th> -->
-        <!-- <th>Grade</th> -->
-        <!-- <th>Course num</th> -->
-        <!-- <th>Lecture num</th> -->
         <th>Title&nbsp;</th>
-        <th>Credit&nbsp;</th>
-        <th>Timetable&nbsp;</th>
-        <th>Location</th>
+        <th>Course num&nbsp;</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -25,18 +15,8 @@
     <tbody>
       <% @courses.each do |course| %>
         <tr>
-          <!-- <td><%#= course.university %></td> -->
-          <!-- <td><%#= course.classification %></td> -->
-          <td><%= course.college %></td>
-          <td><%= course.department %></td>
-          <!-- <td><%#= course.level %></td> -->
-          <!-- <td><%#= course.grade %></td> -->
-          <!-- <td><%#= course.course_num %></td> -->
-          <!-- <td><%#= course.lecture_num %></td> -->
           <td><%= course.title %></td>
-          <td><%= course.credit %></td>
-          <td><%= course.timetable %></td>
-          <td><%= course.location %></td>
+          <td><%= course.course_num %></td>
           <td><%= link_to 'Show', course %></td>
           <td><%= link_to 'Edit', edit_course_path(course) %></td>
           <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
