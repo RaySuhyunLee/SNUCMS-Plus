@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520041312) do
+ActiveRecord::Schema.define(version: 20160519070106) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "contents"
@@ -48,14 +48,6 @@ ActiveRecord::Schema.define(version: 20160520041312) do
     t.integer  "have_issue_id"
     t.string   "have_issue_type"
   end
-
-  create_table "issues_users", force: :cascade do |t|
-    t.integer "issue_id"
-    t.integer "user_id"
-  end
-
-  add_index "issues_users", ["issue_id"], name: "index_issues_users_on_issue_id"
-  add_index "issues_users", ["user_id"], name: "index_issues_users_on_user_id"
 
   create_table "professors", force: :cascade do |t|
     t.string   "name"
