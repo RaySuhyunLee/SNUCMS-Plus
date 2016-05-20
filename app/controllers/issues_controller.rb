@@ -1,6 +1,6 @@
 class IssuesController < ApplicationController
   before_action :set_parent
-  before_action :set_issue, only: [:show, :update, :destroy]
+  before_action :set_issue, only: [:show, :update, :destroy, :subscribe]
 	before_action :set_comments, only: [:show, :update]
 
   # GET /(parent_type)/:(parent_id)/issues
@@ -64,6 +64,22 @@ class IssuesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @index_path, notice: 'Issue was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /(parent_type)/:(parent_id)/issues/:id/subscribe
+  def subscribe
+    user = current_user
+    response = ''
+    if user.issues.exists? @issue.id
+      response = 'already_exists'
+    else
+      response = 'ok'
+      user.issues.append(@issue)
+    end
+
+    respond_to do |format|
+      format.json { render json: { response: response } }
     end
   end
 

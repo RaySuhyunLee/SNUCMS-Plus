@@ -49,7 +49,7 @@ class CoursesController < ApplicationController
     end
   end
 
-  # user subscription
+  # GET /courses/:id/subscribe 
   def subscribe
     user = current_user
     response = ''

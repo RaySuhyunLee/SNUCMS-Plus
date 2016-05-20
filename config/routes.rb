@@ -8,10 +8,11 @@ Rails.application.routes.draw do
   resources :courses do
     resources :issues, only: [:index, :new, :create, :show, :update, :destroy] do
 			resources :comments, only: [:new, :create, :destroy, :index]
+      get 'subscribe', on: :member 
 		end
-  end
 
-  get 'courses/:id/subscribe' => 'courses#subscribe'
+    get 'subscribe', on: :member
+  end
 
   # routing for comments 
 	# resources :comments, only: [:new, :create, :destroy]
