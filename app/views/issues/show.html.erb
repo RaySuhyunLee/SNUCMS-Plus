@@ -8,7 +8,9 @@
   <% @comments.each do |comment| %>
     <p><%= comment.commenter + ' commented' %></p>
 	<% unless comment.contents.nil? %>
-	  <% text = render_latex_math(comment.contents) %>
+	  <% text = render_easy_link(comment.contents) %>
+	  <% text = render_latex_math(text) %>
+	  <% text = text.gsub(/\\\$/) do '$' end %>
 	  <%= render_markdown(text) %>
 	<% end %>
 	<% if @parent_name == "Course" %>
