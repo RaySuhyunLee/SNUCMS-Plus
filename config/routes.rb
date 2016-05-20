@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 		end
   end
 
+  get 'courses/:id/subscribe' => 'courses#subscribe'
+
   # routing for comments 
 	# resources :comments, only: [:new, :create, :destroy]
   
