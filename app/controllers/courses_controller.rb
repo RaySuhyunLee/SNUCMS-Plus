@@ -52,15 +52,17 @@ class CoursesController < ApplicationController
   # user subscription
   def subscribe
     user = current_user
-    response = 0
+    response = ''
     if user.courses.exists?(@course.id)
-      response = 0
+      response = 'already_exists'
     else
-      response = 1
+      response = 'ok'
       user.courses.append(@course)
     end
 
-    render :text => "response: #{response}"
+    respond_to do |format|
+      format.json { render json: { response: response } }
+    end
   end
 
   private
