@@ -7,23 +7,11 @@ Rails.application.routes.draw do
   # nested routing for courses, issues and comments.
   resources :courses do
     resources :issues, only: [:index, :new, :create, :show, :update, :destroy] do
-			resources :comments, only: [:new, :create, :destroy, :index]
+	  resources :comments, only: [:new, :create, :destroy, :index]
       get 'subscribe', on: :member 
 		end
-
     get 'subscribe', on: :member
   end
-
-  # routing for comments 
-	# resources :comments, only: [:new, :create, :destroy]
-  
-	# resources :courses
-
-  get 'course/index'
-
-  get 'course/new'
-
-  get 'course/create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
