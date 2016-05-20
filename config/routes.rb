@@ -13,17 +13,6 @@ Rails.application.routes.draw do
     get 'subscribe', on: :member
   end
 
-  # routing for comments 
-	# resources :comments, only: [:new, :create, :destroy]
-  
-	# resources :courses
-
-  get 'course/index'
-
-  get 'course/new'
-
-  get 'course/create'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
