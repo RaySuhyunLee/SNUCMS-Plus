@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :subscribe]
 
   def index
     @courses = Course.all
@@ -46,6 +46,22 @@ class CoursesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /courses/:id/subscribe.json 
+  def subscribe
+    user = current_user
+    response = ''
+    if user.courses.exists?(@course.id)
+      response = 'already_exists'
+    else
+      response = 'ok'
+      user.courses.append(@course)
+    end
+
+    respond_to do |format|
+      format.json { render json: { response: response } }
     end
   end
 
