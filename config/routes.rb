@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # nested routing for courses, issues and comments.
   resources :courses do
     resources :issues, only: [:index, :new, :create, :show, :update, :destroy] do
-			resources :comments, only: [:new, :create, :destroy, :index]
+      resources :comments, only: [:create, :destroy, :index]
 		end
   end
 

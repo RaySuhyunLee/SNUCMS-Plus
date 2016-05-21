@@ -2,11 +2,6 @@ class CommentsController < ApplicationController
   before_action :set_issue
   before_action :set_comment, only: [:update, :destroy]
 
-  # GET /(parent_type)/:(parent_id)/issues/:issue_id/comments/new
-  def new
-    @comment = @issue.comments.new
-  end
-
   # POST /(parent_type)/:(parent_id)/issues/:issue_id/comments
   # POST /(parent_type)/:(parent_id)/issues/:issue_id/comments.json
   def create
