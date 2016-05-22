@@ -102,9 +102,10 @@ class IssuesController < ApplicationController
   end
 	
   def set_issue
-    @issue = Issue.find(params[:id])
+	# @issue = Issue.find(params[:id])
   	# freezed @edit_path = edit_course_issue_path(params[:course_id], params[:id])	
     if @parent_name == "Course"
+      @issue = Issue.where("have_issue_id = ? AND parent_issue_id = ?", params[:course_id], params[:id]).first
       @issue_path = course_issue_path(params[:course_id], params[:id])
     end
   end
