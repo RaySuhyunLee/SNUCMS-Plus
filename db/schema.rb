@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520041312) do
+ActiveRecord::Schema.define(version: 20160522061655) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "contents"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160520041312) do
     t.integer  "school_id"
     t.integer  "professor_id"
     t.integer  "past_course_id"
+    t.integer  "issue_num"
   end
 
   create_table "courses_users", force: :cascade do |t|
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 20160520041312) do
     t.datetime "updated_at",      null: false
     t.integer  "have_issue_id"
     t.string   "have_issue_type"
+    t.integer  "parent_issue_id"
   end
 
   create_table "issues_users", force: :cascade do |t|

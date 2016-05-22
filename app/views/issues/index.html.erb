@@ -12,7 +12,7 @@
         <tr>
           <td><%= link_to issue.title, @issue_path %></td>
           <td><%= issue.created_at %></td>
-	  <td><%= link_to '이슈 삭제', @issue_path, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } %></td>
+	      <td><%= link_to '이슈 삭제', @issue_path, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } %></td>
         </tr>
       <% end %>
     </tbody>
