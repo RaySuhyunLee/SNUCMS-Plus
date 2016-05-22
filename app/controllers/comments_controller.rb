@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
     parent_type = request.path.split('/')[1]
     if parent_type == "courses"
       @issue_path = course_issue_path(params[:course_id], params[:issue_id])
-	  @issue = Issue.where("have_issue_id = ? AND parent_issue_id = ?", params[:course_id], params[:issue_id]).first
+      @issue = Issue.where("have_issue_id = ? AND parent_issue_id = ?", params[:course_id], params[:issue_id]).first
     end
   end
 

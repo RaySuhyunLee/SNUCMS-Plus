@@ -35,7 +35,7 @@ class IssuesController < ApplicationController
   # POST /(parent_type)/:(parent_id)/issues.json
   def create
     @issue = @parent.issues.new(issue_params)
-	@parent.update_attribute(:issue_num, @parent.issue_num + 1)
+    @parent.update_attribute(:issue_num, @parent.issue_num + 1)
     @issue.parent_issue_id = @parent.issue_num
 
     respond_to do |format|
@@ -95,15 +95,15 @@ class IssuesController < ApplicationController
 	  parent_type = request.path.split('/')[1]
 	  if parent_type == "courses"
 	    @parent = Course.find(params[:course_id])
-		@parent_name = "Course"
-		@index_path = course_issues_path(params[:course_id])
-		@new_path = new_course_issue_path(params[:course_id])
+        @parent_name = "Course"
+        @index_path = course_issues_path(params[:course_id])
+        @new_path = new_course_issue_path(params[:course_id])
 	  end
   end
 	
   def set_issue
-	# @issue = Issue.find(params[:id])
-  	# freezed @edit_path = edit_course_issue_path(params[:course_id], params[:id])	
+    # @issue = Issue.find(params[:id])
+    # freezed @edit_path = edit_course_issue_path(params[:course_id], params[:id])	
     if @parent_name == "Course"
       @issue = Issue.where("have_issue_id = ? AND parent_issue_id = ?", params[:course_id], params[:id]).first
       @issue_path = course_issue_path(params[:course_id], params[:id])
@@ -112,12 +112,12 @@ class IssuesController < ApplicationController
 
   def set_comments
     if @parent_name == "Course"
-	  @comments_path = course_issue_comments_path(params[:course_id], params[:id])
-	end
+      @comments_path = course_issue_comments_path(params[:course_id], params[:id])
+    end
   end
   
   # Never trust parameters from the scary internet, only allow the white list through.
   def issue_params
-	params.require(:issue).permit!
+    params.require(:issue).permit!
   end
 end
