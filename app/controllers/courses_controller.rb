@@ -1,20 +1,25 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy, :subscribe]
 
+  # GET /courses 
   def index
     @courses = Course.all
   end
 
+  # GET /courses/:id
   def show
   end
 
+  # GET /courses/new
   def new
     @course = Course.new
   end
 
+  # GET /courses/:id/edit
   def edit
   end
 
+  # POST /courses
   def create
     @course = Course.new(course_params)
 
@@ -30,6 +35,7 @@ class CoursesController < ApplicationController
     end
   end
 
+  # PATCH/PUT /courses/:id
   def update
     respond_to do |format|
       if @course.update(course_params)
@@ -41,7 +47,8 @@ class CoursesController < ApplicationController
       end
     end
   end
-
+  
+  # DELETE /courses/:id
   def destroy
     @course.destroy
     respond_to do |format|
@@ -67,7 +74,7 @@ class CoursesController < ApplicationController
   end
 
   private
-
+  # Find course with url parameters.
   def set_course
     @course = Course.find(params[:id])
   end
