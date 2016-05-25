@@ -15,6 +15,7 @@ class IssuesController < ApplicationController
     @comments = @issue.comments.all
     @regex = 
     {
+	  issue_link: /#(\d+)/,
       link: /\[\[(.*)\]\]/,
       latex: /(?<!\\)\$(.*)\$/
     }
