@@ -21,7 +21,7 @@ module ApplicationHelper
     no_intra_emphasis:    true,
     strikethrough:        true,
     superscript:          true,
-	space_after_headers:  true
+    space_after_headers:  true
   }
 
   class HTML < Redcarpet::Render::HTML
