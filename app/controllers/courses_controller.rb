@@ -22,10 +22,10 @@ class CoursesController < ApplicationController
   # POST /courses
   def create
     @course = Course.new(course_params)
+    @course.issue_num = 0;
 
     respond_to do |format|
       if @course.save
-        @course.issue_num = 0;
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
