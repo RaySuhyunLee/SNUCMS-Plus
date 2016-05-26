@@ -15,7 +15,7 @@
 	  <%= render_markdown(text) %>
 	<% end %>
 	<% if @parent_name == "Course" %>
-      <% @comment_path = course_issue_comment_path(@parent.id, @issue.id, comment.id) %>
+      <% @comment_path = course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id) %>
     <% end %>
 
     <div class="ui button">
