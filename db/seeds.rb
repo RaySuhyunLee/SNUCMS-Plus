@@ -16,5 +16,6 @@ User.create({
 
 Course.create({
   title: 'Compiler(001)',
-  course_num: '4190.409'
+  course_num: '4190.409',
+  issue_num: '0'
 })
