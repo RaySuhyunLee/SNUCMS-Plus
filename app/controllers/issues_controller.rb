@@ -12,7 +12,9 @@ class IssuesController < ApplicationController
   # GET /(parent_type)/:(parent_id)/issues/:id
   # GET /(parent_type)/:(parent_id)/issues/:id.json
   def show
-    @comments = @issue.comments.all
+    unless @issue.nil?
+      @comments = @issue.comments.all
+	end
     @regex = 
     {
       issue_link: /#(\d+)/,

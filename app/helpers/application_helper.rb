@@ -20,7 +20,8 @@ module ApplicationHelper
     lax_spacing:          true,
     no_intra_emphasis:    true,
     strikethrough:        true,
-    superscript:          true
+    superscript:          true,
+	space_after_headers:  true
   }
 
   class HTML < Redcarpet::Render::HTML
