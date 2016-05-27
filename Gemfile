@@ -42,8 +42,8 @@ gem 'redcarpet'
 gem 'rouge', '~> 1.10', '>= 1.10.1'
 
 # for ES6 transcompilation
-#gem 'sprockets', '>=3.0.0.beta'
-#gem 'sprockets-es6'
+gem 'sprockets', '>=3.0.0.beta'
+gem 'sprockets-es6'
 
 # reactJS
 gem 'react-rails', '~> 1.6.0'
