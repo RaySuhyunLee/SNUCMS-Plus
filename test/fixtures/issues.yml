@@ -1,9 +1,2 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  title: MyString
-  contents: MyText
-
-two:
-  title: MyString
-  contents: MyText
+  title: New Issue

@@ -1,10 +1,13 @@
 require 'test_helper'
 
 class CoursesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
   setup do
+    user = User.find(1)
+    sign_in user
     @course = courses(:one)
   end
-
+  
   test "should get index" do
     get :index
     assert_response :success
@@ -18,7 +21,7 @@ class CoursesControllerTest < ActionController::TestCase
 
   test "should create course" do
     assert_difference('Course.count') do
-      post :create, course: { classification: @course.classification, college: @course.college, course_num: @course.course_num, credit: @course.credit, department: @course.department, grade: @course.grade, lecture_num: @course.lecture_num, level: @course.level, location: @course.location, timetable: @course.timetable, title: @course.title, university: @course.university }
+      post :create, course: { course_num: @course.course_num, title: @course.title }
     end
 
     assert_redirected_to course_path(assigns(:course))
@@ -35,7 +38,7 @@ class CoursesControllerTest < ActionController::TestCase
   end
 
   test "should update course" do
-    patch :update, id: @course, course: { classification: @course.classification, college: @course.college, course_num: @course.course_num, credit: @course.credit, department: @course.department, grade: @course.grade, lecture_num: @course.lecture_num, level: @course.level, location: @course.location, timetable: @course.timetable, title: @course.title, university: @course.university }
+    patch :update, id: @course, course: { course_num: @course.course_num,  title: @course.title }
     assert_redirected_to course_path(assigns(:course))
   end
 
@@ -46,4 +49,5 @@ class CoursesControllerTest < ActionController::TestCase
 
     assert_redirected_to courses_path
   end
+
 end
