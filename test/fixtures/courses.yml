@@ -3,7 +3,9 @@
 one:
   course_num: MyString
   title: MyString
+  issue_num: 0
 
 two:
   course_num: MyString
   title: MyString
+  issue_num: 0
