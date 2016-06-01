@@ -43,6 +43,12 @@ class WikiPagesController < ApplicationController
   end
 
   def edit
+    @regex =
+    {
+      link: /\[\[(.*)\]\]/,
+      redirect: /^redirect \[\[(.*)\]\]/,
+      latex: /(?<!\\)\$(.*)\$/
+    }
   end
 
   def update

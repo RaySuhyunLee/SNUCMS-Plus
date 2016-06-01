@@ -1,9 +1,9 @@
 <div class="ui container">
-  <div class="ui huge header">위키:대문</div>
+  <div class="ui huge header">샤과밭 위키:대문</div>
   <div class="ui divider"></div>
 
-  <p>위키에 오신 것을 환영합니다!</p>
-  <p>오늘도 즐거운 창의적 통합 설계되시길 바랍니다.</p>
+  <p>샤과밭 위키에 오신 것을 환영합니다!</p>
+  <p>오늘도 즐거운 창.의.적.통.합.설.계.되시길 바랍니다.</p>
 
   <div class="ui header">
     <% unless @pages.empty? %>
@@ -15,12 +15,12 @@
     <% @pages.each do |page| %>
       <div class="item">
         <%= link_to page.title, wiki_page_path(page.title) %>
-        .....................................................
-        <%= link_to '삭제', wiki_page_path(page.title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } %>
       </div>
     <% end %>
   </div>
 
   <div class="ui divider"></div>
-  <div class="ui button"><%= link_to '돌아가기', root_path %></div>
+  <%= link_to root_path do %>
+    <div class="ui button">홈으로</div>
+  <% end %>
 </div>

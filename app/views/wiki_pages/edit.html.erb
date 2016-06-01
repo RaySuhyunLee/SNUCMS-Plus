@@ -1,40 +1,39 @@
-<div class="ui container">
-  <div class="ui huge header"><%= @page.title %></div>
-
-  <div class="ui pointing secondary menu">
-    <div class="active item" data-tab="edit">수정</div>
-    <div class="item" data-tab="preview">미리보기</div>
+<div class="ui two column grid container">
+  <div class="column">
+    <div class="ui huge header"><%= @page.title %></div>
   </div>
+  <div class="column">
+    <p>최근 수정 시각: <%= @page.updated_at %></p>
+  </div>
+</div>
 
-  <div class="ui active tab segment" data-tab="edit">
+<div class="ui container">
+  <div class="ui secondary pointing menu">
+    <a class="active item" data-tab="edit-tab">수정</a>
+    <a class="item" data-tab="preview-tab">미리보기</a>
+  </div>
+  <div class="ui active segment tab" data-tab="edit-tab">
     <%= form_for @page, url: wiki_page_path(@page.title) do |f| %>
-
       <div class="inline fields">
-        <div class="field">
-          <div class="ui checkbox">
-            <input type="checkbox" checked="checked">
-            <label>Markdown</label>
-          </div>
-        </div>
+        <div class="field"></div>
       </div>
-
-      <div class="ui divider"></div>
 
       <div class="ui form">
         <div class="field">
-          <%= f.text_area :contents, required: true %>
+          <%= f.text_area :contents, required: true, id: 'wiki_edit_contents' %>
         </div>
         <div class="actions">
-          <%= f.submit class: 'ui submit button' %>
+          <%= f.submit '완료', class: 'ui positive submit button' %>
         </div>
       </div>
-
     <% end %>
   </div>
-
-  <div class="ui tab segment" data-tab="preview">
+  <div class="ui segment tab" data-tab="preview-tab">
+    <div id="wiki_edit_prev_tab">
+    </div>
   </div>
 
-  <div class="ui divider"></div>
-  <div class="ui button"><%= link_to '돌아가기', wiki_page_path(@page.title) %></div>
+  <%= link_to wiki_page_path(@page.title) do %>
+    <div class="ui button">돌아가기</div>
+  <% end %>
 </div>

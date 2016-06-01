@@ -8,7 +8,7 @@
 </div>
 
 <div class="ui container">
-  <% unless @from.nil? %>
+  <% unless @from.nil? %> <!-- redirect -->
     <p>
       <br>
       <i class="circular inverted teal linkify icon"></i>
@@ -17,30 +17,31 @@
   <% end %>
   <div class="ui divider"></div>
 
-  <div>
-    <% unless @page.contents.nil? %>
-      <% text = render_easy_link(@page.contents) %>
-      <% text = render_latex_math(text) %>
-      <% text = text.gsub(/\\\$/) do '$' end %>
+  <% unless @page.contents.nil? %>
+    <% text = render_easy_link(@page.contents) %>
+    <% text = render_latex_math(text) %>
+    <% text = text.gsub(/\\\$/) do '$' end %>
 
-      <% toc = render_toc text %>
-      <% if toc.length > 0 %>
-        <div class="ui card">
-          <div class="content">
-            <div class="header">목차</div>
-          </div>
-          <div class="content">
-            <%= toc %>
-          </div>
+    <% toc = render_toc text %>
+    <% if toc.length > 0 %>
+      <div class="ui card">
+        <div class="content">
+          <div class="header">목차</div>
         </div>
-      <% end %>
-
-      <%= render_markdown text %>
+        <div class="content">
+          <%= toc %>
+        </div>
+      </div>
     <% end %>
-  </div>
+
+    <%= render_markdown text %>
+  <% end %>
 
   <div class="ui divider"></div>
-  <div class="ui button"><%= link_to '수정', edit_wiki_page_path(@title) %></div>
-  <div class="ui button"><%= link_to '삭제', wiki_page_path(@title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } %></div>
-  <div class="ui button"><%= link_to '돌아가기', wiki_path %></div>
+  <%= link_to edit_wiki_page_path(@title) do %>
+    <div class="ui button">수정하기</div>
+  <% end %>
+  <%= link_to wiki_page_path(@title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } do %>
+    <div class="ui button">삭제하기</div>
+  <% end %>
 </div>

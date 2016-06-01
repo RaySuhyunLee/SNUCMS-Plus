@@ -11,5 +11,7 @@
   </div>
 
   <div class="ui divider"></div>
-  <div class="ui button"><%= link_to '돌아가기', wiki_path %></div>
+  <%= link_to wiki_path do %>
+    <div class="ui button">돌아가기</div>
+  <% end %>
 </div>
