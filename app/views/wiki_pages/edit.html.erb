@@ -9,8 +9,8 @@
 
 <div class="ui container">
   <div class="ui secondary pointing menu">
-    <a class="active item" data-tab="edit-tab">수정</a>
-    <a class="item" data-tab="preview-tab">미리보기</a>
+    <a class="active item" data-tab="edit-tab" id="edit-tab">수정</a>
+    <a class="item" data-tab="preview-tab" id="preview-tab">미리보기</a>
   </div>
   <div class="ui active segment tab" data-tab="edit-tab">
     <%= form_for @page, url: wiki_page_path(@page.title) do |f| %>

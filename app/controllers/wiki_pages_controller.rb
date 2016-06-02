@@ -1,18 +1,12 @@
 class WikiPagesController < ApplicationController
   before_action :set_wiki_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_regex, only: [:show, :edit]
 
   def index
     @pages = WikiPage.all
   end
 
   def show
-    @regex =
-    {
-      link: /\[\[(.*)\]\]/,
-      redirect: /^redirect \[\[(.*)\]\]/,
-      latex: /(?<!\\)\$(.*)\$/
-    }
-
     @title = params[:title]
     @from = params[:from]
 
@@ -43,12 +37,6 @@ class WikiPagesController < ApplicationController
   end
 
   def edit
-    @regex =
-    {
-      link: /\[\[(.*)\]\]/,
-      redirect: /^redirect \[\[(.*)\]\]/,
-      latex: /(?<!\\)\$(.*)\$/
-    }
   end
 
   def update
@@ -73,4 +61,14 @@ class WikiPagesController < ApplicationController
   def wiki_page_params
     params.require(:wiki_page).permit(:title, :contents)
   end
+
+  def set_regex
+    @regex =
+    {
+      link: /\[\[(.*)\]\]/,
+      redirect: /^redirect \[\[(.*)\]\]/,
+      latex: /(?<!\\)\$(.*)\$/
+    }
+  end
+
 end
