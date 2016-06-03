@@ -1,6 +1,12 @@
 <div class="ui two column grid container">
   <div class="column">
-    <div class="ui huge header"><%= @title %></div>
+    <div class="ui huge header">
+      <% if @rev.nil? %>
+        <%= @title %>
+      <% else %>
+        <%= @title + ' (' + @rev + ' 판)' %>
+      <% end %>
+    </div>
   </div>
   <div class="column">
     <p>최근 수정 시각: <%= @page.updated_at %></p>
@@ -21,10 +27,14 @@
   <%= render partial: 'render_page', locals: {data: @page.contents} %>
 
   <div class="ui divider"></div>
+
   <%= link_to edit_wiki_page_path(@title) do %>
-    <div class="ui button">수정하기</div>
+    <div class="ui button">수정</div>
+  <% end %>
+  <%= link_to history_wiki_page_path(@title) do %>
+    <div class="ui button">역사</div>
   <% end %>
   <%= link_to wiki_page_path(@title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } do %>
-    <div class="ui button">삭제하기</div>
+    <div class="ui button">삭제</div>
   <% end %>
 </div>
