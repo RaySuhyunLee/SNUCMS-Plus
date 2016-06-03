@@ -4,11 +4,11 @@ class HomeController < ApplicationController
   end
 
   def load_timeline
-    offset = params['count']
-    puts "offset = #{offset}"
+    offset = Integer(params['offset'])
+    how_many = Integer(params['how_many'])
     user = current_user
-    limit = 5
-    @issues = user.issues.offset(offset).take(limit)
+    load_max = 10
+    @issues = user.issues.offset(offset).take([how_many, load_max].min)
 
     respond_to do |format| 
       format.all { render json: {issues: @issues} }

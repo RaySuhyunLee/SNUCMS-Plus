@@ -4,8 +4,9 @@
   <p>eTL과의 비교를 거부한다!<p>
   <div class="ui divider"></div>
 
-  <div class="ui container" id="timeline-container">
+  <div class="ui relaxed divided list" id="timeline-container">
   </div>
+  <div class="ui active inline text loader" id="loader">불러오는 중</div>
 
   <div class="ui divider"></div>
 
@@ -19,25 +20,46 @@
 </div>
 <script>
   var timelineContainer = $('#timeline-container')
-  var listView = new infinity.ListView(timelineContainer);
+  /*var listView = new infinity.ListView(
+    timelineContainer
+  );*/
   var count = 0;
+  var how_many = 5;
+  var updateScheduled = false;
 
   function append() {
+    updateScheduled = true;
     var url = "<%= home_load_timeline_path %>";
-    var data = { count: count }
+    var data = { offset: count * how_many, how_many: how_many }
     $.get(
       url,
       data,
       function(result) {
         var issues = JSON.parse(result).issues;
         for (var i in issues) {
-          var newContent = "<div>" + issues[i].title + "</div>";
-          listView.append(newContent);
+          var newContent = "<div class='item'>" + issues[i].title + "</div>";
+          timelineContainer.append(newContent);
         }
         count += 1;
+        updateScheduled = false;
+
+        if (issues.length < how_many) {
+          $('#loader').removeClass('active');
+        }
       }
     );
   }
+
+  function onscreen($el) {
+    var viewportBottom = $(window).scrollTop() + $(window).height();
+    return $el.offset().top <= viewportBottom;
+  }
+
+  $(window).on('scroll', function() {
+    if(!updateScheduled) {
+      append();
+    }
+  });
 
   append();
 </script>
