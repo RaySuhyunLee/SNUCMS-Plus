@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   put 'wiki/:title' => 'wiki_pages#update'
   delete 'wiki/:title' => 'wiki_pages#destroy'
 
+  # Render routing
+  post 'render_wiki' => 'wiki_pages#render_page'
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

@@ -1,6 +1,6 @@
 class WikiPagesController < ApplicationController
   before_action :set_wiki_page, only: [:show, :edit, :update, :destroy]
-  before_action :set_regex, only: [:show, :edit]
+  before_action :set_regex, only: [:show, :edit, :render_page]
 
   def index
     @pages = WikiPage.all
@@ -50,6 +50,11 @@ class WikiPagesController < ApplicationController
   def destroy
     @page.destroy
     redirect_to wiki_path
+  end
+
+  def render_page
+    data = params[:contents]
+    render partial: 'render_page', locals: {data: data}
   end
 
   private

@@ -6,6 +6,14 @@ $(function() {
 
     if (tab_path === "preview-tab") {
       var contents = $("#wiki_edit_contents").val();
+      alert(contents);
+
+      $.post(
+        "/render_wiki",
+        { contents : contents },
+        function(result) {
+          $("#wiki_edit_prev_tab").html(result);
+        });
     }
   };
 
