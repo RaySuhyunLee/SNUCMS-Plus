@@ -14,7 +14,12 @@ class IssuesController < ApplicationController
   def show
     unless @issue.nil?
       @comments = @issue.comments.all
-	end
+    end
+    if is_subscribing?
+      @subscribe_button_text = "un좋아요"
+    else
+      @subscribe_button_text = "좋아요"
+    end
     @regex = 
     {
       issue_link: /#(\d+)/,
@@ -80,14 +85,16 @@ class IssuesController < ApplicationController
   def subscribe
     user = current_user
     response = ''
-    if user.issues.exists? @issue.id
-      response = 'already_exists'
+    if is_subscribing?
+      user.issues.destroy(@issue)
+      response = 'unsubscribed'
     else
-      response = 'ok'
+      response = 'subscribed'
       user.issues.append(@issue)
     end
 
     respond_to do |format|
+      format.html { redirect_to @issue_path }
       format.json { render json: { response: response } }
     end
   end
@@ -124,5 +131,11 @@ class IssuesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def issue_params
     params.require(:issue).permit!
+  end
+
+  # GET /(parent_type)/:(parent_id)/issues/:id/subscribe
+  def is_subscribing?
+    user = current_user
+    return user.issues.exists? @issue.id
   end
 end

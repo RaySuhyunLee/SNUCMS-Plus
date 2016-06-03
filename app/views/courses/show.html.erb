@@ -6,9 +6,15 @@
       <div class="three wide column">
         <div class="ui large header"><%= @course.course_num %></div>
       </div>
-  </div>
+      <div class="three wide column">
+        <%= link_to subscribe_course_path(@course.id) do %>
+          <button class="ui button" >
+        <%= @subscribe_button_text %></button>
+      </div>
+  <% end %>
 
-  <div class="ui divider"></div>
+  </div>
+    <div class="ui divider"></div>
 
   <div class="ui twenty wide column grid">
     <div class="ten wide column">

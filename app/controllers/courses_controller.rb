@@ -8,6 +8,11 @@ class CoursesController < ApplicationController
 
   # GET /courses/:id
   def show
+    if is_subscribing?
+      @subscribe_button_text = "폭풍드랍!"
+    else
+      @subscribe_button_text = "수강"
+    end
   end
 
   # GET /courses/new
@@ -50,14 +55,16 @@ class CoursesController < ApplicationController
   def subscribe
     user = current_user
     response = ''
-    if user.courses.exists?(@course.id)
-      response = 'already_exists'
+    if is_subscribing?
+      response = 'unsubscribed'
+      user.courses.destroy(@course)
     else
-      response = 'ok'
+      response = 'subscribed'
       user.courses.append(@course)
     end
 
     respond_to do |format|
+      format.html { redirect_to course_path(@course) }
       format.json { render json: { response: response } }
     end
   end
@@ -70,5 +77,10 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(:university, :classification, :college, :department, :level, :grade, :course_num, :lecture_num, :title, :credit, :timetable, :location)
+  end
+
+  def is_subscribing?
+    user = current_user
+    return user.courses.exists? @course.id
   end
 end
