@@ -1,5 +1,5 @@
 class WikiPagesController < ApplicationController
-  before_action :set_wiki_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_wiki_page, only: [:show, :edit, :update, :destroy, :history]
   before_action :set_regex, only: [:show, :edit, :render_page]
 
   def index
@@ -50,6 +50,10 @@ class WikiPagesController < ApplicationController
   def destroy
     @page.destroy
     redirect_to wiki_path
+  end
+
+  def history
+    ver = @page.versions
   end
 
   def render_page

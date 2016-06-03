@@ -10,36 +10,40 @@
 <div class="ui container">
   <div class="ui divider"></div>
 
-  <div class="ui segment">
-    <div id="edit_panel">
-      <%= form_for @page, url: wiki_page_path(@page.title) do |f| %>
-        <div class="inline fields">
-          <div class="field"></div>
-        </div>
-
-        <div class="ui form">
-          <div class="field">
-            <%= f.text_area :contents, required: true, id: 'wiki_edit_contents' %>
-          </div>
-
-          <div class="actions">
-            <%= f.submit '완료', class: 'ui positive submit button' %>
-          </div>
-
-          <div class="ui floated button" id="prev_render_btn">
-            미리보기
-          </div>
-        </div>
-      <% end %>
-    </div>
-
-    <div id="preview_panel">
-      <div id="wiki_prev_contents"></div>
-    </div>
+  <div class="ui secondary pointing menu">
+    <a class="active item" data-tab="edit_tab">수정</a>
+    <a class="item" data-tab="prev_tab">미리보기</a>
   </div>
 
+  <%= form_for @page, url: wiki_page_path(@page.title) do |f| %>
+    <div class="ui active segment tab" data-tab="edit_tab">
+      <div class="inline fields">
+        <div class="field"></div>
+      </div>
+
+      <div class="ui form">
+        <div class="field">
+          <%= f.text_area :contents, required: true, id: 'wiki_edit_contents' %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit '완료', class: 'ui positive submit button' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui segment tab" data-tab="prev_tab">
+      <div id="wiki_prev_contents"></div>
+
+      <div class="actions">
+        <%= f.submit '완료', class: 'ui positive submit button' %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="ui divider"></div>
   <%= link_to wiki_page_path(@page.title) do %>
-    <div class="ui button">돌아가기</div>
+    <div class="ui button">취소</div>
   <% end %>
 
 </div>
