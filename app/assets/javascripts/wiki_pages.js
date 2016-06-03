@@ -1,21 +1,15 @@
 
-// 수정 & 미리보기 탭 전환
-$(function() {
-  function show_tab(tab_path) {
-    alert(tab_path);
-
-    if (tab_path === "preview-tab") {
+$(document).ready(function() {
+  $("#prev_render_btn").on(
+    "click",
+    function() {
       var contents = $("#wiki_edit_contents").val();
-      alert(contents);
 
       $.post(
         "/render_wiki",
         { contents : contents },
         function(result) {
-          $("#wiki_edit_prev_tab").html(result);
+          $("#wiki_prev_contents").html('<div class="ui divider"></div>' + result);
         });
-    }
-  };
-
-  $(".menu .item").tab({ "onLoad" : show_tab });
+    });
 });

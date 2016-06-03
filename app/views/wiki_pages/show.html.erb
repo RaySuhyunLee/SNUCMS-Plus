@@ -15,6 +15,7 @@
       <%= link_to @from, wiki_page_path(@from) %>에서 넘어옴
     </p>
   <% end %>
+
   <div class="ui divider"></div>
 
   <%= render partial: 'render_page', locals: {data: @page.contents} %>
