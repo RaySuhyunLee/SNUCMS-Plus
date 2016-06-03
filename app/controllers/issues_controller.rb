@@ -1,7 +1,7 @@
 class IssuesController < ApplicationController
   before_action :set_parent
-  before_action :set_issue, only: [:show, :update, :destroy, :subscribe]
   before_action :set_regex, only: [:show]
+  before_action :set_issue, only: [:show, :update, :destroy, :subscribe, :update_title]
   before_action :set_comments, only: [:show, :update]
 
   # GET /(parent_type)/:(parent_id)/issues
@@ -27,11 +27,6 @@ class IssuesController < ApplicationController
     @comment = @issue.comments.new
   end
 
-  # Freezed
-  # GET /(parent_type)/:(parent_id)/issues/:id/edit
-  #def edit
-  #end
-
   # POST /(parent_type)/:(parent_id)/issues/
   def create
     @issue = @parent.issues.new(issue_params)
@@ -47,6 +42,12 @@ class IssuesController < ApplicationController
         format.json { render json: @issue.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # POST /(parent_type)/:(parent_id)/issues/:id/update_title
+  def update_title
+    @issue.update_attribute(:title, params[:contents])
+    render plain: @issue.title
   end
 
   # PATCH/PUT /(parent_type)/:(parent_id)/issues/:id
@@ -94,7 +95,7 @@ class IssuesController < ApplicationController
   def set_parent
     parent_type = request.path.split('/')[1]
     if parent_type == "courses"
-      @parent = Course.find(params[:course_id])
+	    @parent = Course.find(params[:course_id])
       @parent_name = "Course"
       @index_path = course_issues_path(params[:course_id])
       @new_path = new_course_issue_path(params[:course_id])
