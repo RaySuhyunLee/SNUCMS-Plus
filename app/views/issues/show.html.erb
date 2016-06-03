@@ -3,6 +3,9 @@
   <div class="ui huge header">
     Issue: <%= @issue.title %>
   </div>
+  <%= link_to subscribe_course_issue_path(@parent.id, @issue.parent_issue_id) do %>
+    <button class="ui button" ><%= @subscribe_button_text %></button>
+  <% end %>
   <div class="ui divider"></div>
 
   <% @comments.each do |comment| %>
