@@ -41,6 +41,9 @@ gem 'redcarpet'
 # Syntax highlighter
 gem 'rouge', '~> 1.10', '>= 1.10.1'
 
+# Revision management
+gem 'paper_trail'
+
 # for ES6 transcompilation
 gem 'sprockets', '>=3.0.0.beta'
 gem 'sprockets-es6'

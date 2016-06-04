@@ -1,6 +1,12 @@
 <div class="ui two column grid container">
   <div class="column">
-    <div class="ui huge header"><%= @title %></div>
+    <div class="ui huge header">
+      <% if @rev.nil? %>
+        <%= @title %>
+      <% else %>
+        <%= @title + ' (' + @rev + ' 판)' %>
+      <% end %>
+    </div>
   </div>
   <div class="column">
     <p>최근 수정 시각: <%= @page.updated_at %></p>
@@ -8,39 +14,27 @@
 </div>
 
 <div class="ui container">
-  <% unless @from.nil? %>
+  <% unless @from.nil? %> <!-- redirect -->
     <p>
       <br>
       <i class="circular inverted teal linkify icon"></i>
       <%= link_to @from, wiki_page_path(@from) %>에서 넘어옴
     </p>
   <% end %>
-  <div class="ui divider"></div>
-
-  <div>
-    <% unless @page.contents.nil? %>
-      <% text = render_easy_link(@page.contents) %>
-      <% text = render_latex_math(text) %>
-      <% text = text.gsub(/\\\$/) do '$' end %>
-
-      <% toc = render_toc text %>
-      <% if toc.length > 0 %>
-        <div class="ui card">
-          <div class="content">
-            <div class="header">목차</div>
-          </div>
-          <div class="content">
-            <%= toc %>
-          </div>
-        </div>
-      <% end %>
-
-      <%= render_markdown text %>
-    <% end %>
-  </div>
 
   <div class="ui divider"></div>
-  <div class="ui button"><%= link_to '수정', edit_wiki_page_path(@title) %></div>
-  <div class="ui button"><%= link_to '삭제', wiki_page_path(@title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } %></div>
-  <div class="ui button"><%= link_to '돌아가기', wiki_path %></div>
+
+  <%= render partial: 'render_page', locals: {data: @page.contents} %>
+
+  <div class="ui divider"></div>
+
+  <%= link_to edit_wiki_page_path(@title) do %>
+    <div class="ui button">수정</div>
+  <% end %>
+  <%= link_to history_wiki_page_path(@title) do %>
+    <div class="ui button">역사</div>
+  <% end %>
+  <%= link_to wiki_page_path(@title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } do %>
+    <div class="ui button">삭제</div>
+  <% end %>
 </div>

@@ -3,13 +3,13 @@ Rails.application.routes.draw do
     sessions: "accounts/sessions",
     registrations: "accounts/registrations"
   }
-  
+
   # nested routing for courses, issues and comments.
   resources :courses do
     resources :issues, only: [:index, :new, :create, :show, :update, :destroy] do
       resources :comments, only: [:create, :destroy, :index]
-      get 'subscribe', on: :member 
-		end
+      get 'subscribe', on: :member
+    end
     get 'subscribe', on: :member
   end
 
@@ -24,9 +24,12 @@ Rails.application.routes.draw do
 
   # Wiki routing
   get 'wiki' => 'wiki_pages#index', as: :wiki
+  post 'render_wiki' => 'wiki_pages#render_page'
   get 'wiki/:title/new' => 'wiki_pages#new', as: :new_wiki_page
   get 'wiki/:title/empty' => 'wiki_pages#empty', as: :empty_wiki_page
   get 'wiki/:title/edit' => 'wiki_pages#edit', as: :edit_wiki_page
+  get 'wiki/:title/history' => 'wiki_pages#history', as: :history_wiki_page
+  get 'wiki/:title/revert' => 'wiki_pages#revert_page', as: :revert_wiki_page
   get 'wiki/:title' => 'wiki_pages#show', as: :wiki_page
   patch 'wiki/:title' => 'wiki_pages#update'
   put 'wiki/:title' => 'wiki_pages#update'

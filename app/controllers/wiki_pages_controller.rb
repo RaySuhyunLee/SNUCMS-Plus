@@ -1,24 +1,25 @@
 class WikiPagesController < ApplicationController
-  before_action :set_wiki_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_wiki_page, only: [:show, :edit, :update, :destroy, :history, :diff, :revert_page]
+  before_action :set_version, only: [:history, :revert_page]
+  before_action :set_regex, only: [:show, :edit, :render_page]
+  before_filter :set_paper_trail_whodunnit
 
   def index
     @pages = WikiPage.all
   end
 
   def show
-    @regex =
-    {
-      link: /\[\[(.*)\]\]/,
-      redirect: /^redirect \[\[(.*)\]\]/,
-      latex: /(?<!\\)\$(.*)\$/
-    }
-
     @title = params[:title]
     @from = params[:from]
+    @rev = params[:rev]
 
     if @page.nil?
       redirect_to empty_wiki_page_path(@title)
     else
+      unless @rev.nil?
+        @page = @page.versions[@rev.to_i].reify
+      end
+
       redirect_path = @regex[:redirect].match(@page.contents)
 
       if not redirect_path.nil? and @title != $1 and @from.nil?
@@ -58,6 +59,21 @@ class WikiPagesController < ApplicationController
     redirect_to wiki_path
   end
 
+  def history
+  end
+
+  def revert_page
+    @rev = params[:rev]
+    @page = @versions[@rev.to_i].reify
+    @page.save
+    redirect_to wiki_page_path(@page.title)
+  end
+
+  def render_page
+    data = params[:contents]
+    render partial: 'render_page', locals: {data: data}
+  end
+
   private
 
   def set_wiki_page
@@ -67,4 +83,22 @@ class WikiPagesController < ApplicationController
   def wiki_page_params
     params.require(:wiki_page).permit(:title, :contents)
   end
+
+  def set_version
+    @versions = @page.versions
+  end
+
+  def user_for_paper_trail
+    current_user.nil? ? '익명' : current_user.name
+  end
+
+  def set_regex
+    @regex =
+    {
+      link: /\[\[(.*)\]\]/,
+      redirect: /^redirect \[\[(.*)\]\]/,
+      latex: /(?<!\\)\$(.*)\$/
+    }
+  end
+
 end

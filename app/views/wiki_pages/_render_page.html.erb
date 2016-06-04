@@ -1,0 +1,19 @@
+<% unless data.nil? %>
+  <% text = render_easy_link(data) %>
+  <% text = render_latex_math(text) %>
+  <% text = text.gsub(/\\\$/) do '$' end %>
+
+  <% toc = render_toc text %>
+  <% if toc.length > 0 %>
+    <div class="ui card">
+      <div class="content">
+        <div class="header">목차</div>
+      </div>
+      <div class="content">
+        <%= toc %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render_markdown text %>
+<% end %>
