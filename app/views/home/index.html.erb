@@ -19,47 +19,5 @@
   </div>
 </div>
 <script>
-  var timelineContainer = $('#timeline-container')
-  /*var listView = new infinity.ListView(
-    timelineContainer
-  );*/
-  var count = 0;
-  var how_many = 5;
-  var updateScheduled = false;
-
-  function append() {
-    updateScheduled = true;
-    var url = "<%= home_load_timeline_path %>";
-    var data = { offset: count * how_many, how_many: how_many }
-    $.get(
-      url,
-      data,
-      function(result) {
-        var issues = JSON.parse(result).issues;
-        for (var i in issues) {
-          var newContent = "<div class='item'>" + issues[i].title + "</div>";
-          timelineContainer.append(newContent);
-        }
-        count += 1;
-        updateScheduled = false;
-
-        if (issues.length < how_many) {
-          $('#loader').removeClass('active');
-        }
-      }
-    );
-  }
-
-  function onscreen($el) {
-    var viewportBottom = $(window).scrollTop() + $(window).height();
-    return $el.offset().top <= viewportBottom;
-  }
-
-  $(window).on('scroll', function() {
-    if(!updateScheduled) {
-      append();
-    }
-  });
-
-  append();
+  initTimeline("<%= home_load_timeline_path %>");
 </script>
