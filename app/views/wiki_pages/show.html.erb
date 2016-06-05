@@ -28,8 +28,10 @@
 
   <div class="ui divider"></div>
 
-  <%= link_to edit_wiki_page_path(@title) do %>
-    <div class="ui button">수정</div>
+  <% if @rev.nil? %>
+    <%= link_to edit_wiki_page_path(@title) do %>
+      <div class="ui button">수정</div>
+    <% end %>
   <% end %>
   <%= link_to history_wiki_page_path(@title) do %>
     <div class="ui button">역사</div>
