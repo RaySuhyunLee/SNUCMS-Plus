@@ -1,5 +1,5 @@
 class WikiPagesController < ApplicationController
-  before_action :set_wiki_page, only: [:show, :edit, :update, :destroy, :history, :diff, :revert_page]
+  before_action :set_wiki_page, only: [:show, :edit, :edit_permission, :update, :destroy, :history, :revert_page]
   before_action :set_version, only: [:history, :revert_page]
   before_action :set_regex, only: [:show, :edit, :render_page]
   before_filter :set_paper_trail_whodunnit
@@ -44,6 +44,16 @@ class WikiPagesController < ApplicationController
   end
 
   def edit
+  end
+
+  def edit_permission
+    time = params[:time]
+
+    if @page.updated_at.to_s == time
+      render json: { recent: @page.updated_at, result: 'available' }
+    else
+      render json: { recent: @page.updated_at, result: 'occupied' }
+    end
   end
 
   def update
