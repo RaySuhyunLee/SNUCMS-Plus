@@ -5,7 +5,7 @@ function show_tab(tab_path) {
     var contents = $("#wiki_edit_contents").val();
 
     $.post(
-      "/render_wiki",
+      "/wikipage/render",
       { contents : contents },
       function(result) {
         $("#wiki_prev_contents").html(result);
@@ -19,7 +19,7 @@ function periodic_worker() {
   var time = $("#edit_time").text();
 
   $.post(
-    "/edit_permission_wiki",
+    "/wikipage/permission",
     {
       title : title,
       time : time
@@ -29,8 +29,7 @@ function periodic_worker() {
         $("#edit_tab_submit").attr("disabled", true);
         $("#prev_tab_submit").attr("disabled", true);
 
-        // TODO: 수정 해야해요
-        alert("서버의 10만볼트! 효과는 뛰어났다!");
+        alert("문서가 이미 수정되었습니다.");
       }
       else
         setTimeout(periodic_worker, 5000);
