@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create({
+$user = User.create({
   name: '엄현상',
   email: 'test@example.com',
   password: 'password',
@@ -14,11 +14,20 @@ User.create({
   confirmed_at: '2016-01-01 00:00:00'
 })
 
-Course.create({
+$course = Course.create({
   title: 'Compiler(001)',
   course_num: '4190.409',
   issue_num: '0'
 })
+
+$i = 0
+while $i < 20 do
+  issue = Issue.create({title: $i.to_s, parent_issue_id: $i}) 
+  $course.issues.append(issue)
+  $user.issues.append(issue)
+  $i+=1
+end
+
 
 Professor.create({
   name:     '버나드 에거',
