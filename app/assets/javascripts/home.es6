@@ -14,10 +14,18 @@ class Timeline {
     );*/
     this.count = 0;
     this.updateScheduled = false;
+    this.issueContainer = $("<div></div>")
+        .addClass("ui relaxed devided list");
+    this.loader = $("<div></div>")
+        .addClass("ui inline text loader")
+        .append('긁어오는 중');
+    this.timelineContainer.append(this.issueContainer);
+    this.timelineContainer.append(this.loader);
     
     $(window).on('scroll', () => {
-      if(!this.updateScheduled) {
-        this.append();
+      if(!this.updateScheduled && this.isLoaderOnScreen()) {
+        this.loader.addClass("active");
+        setTimeout(() => {this.append();}, 1000);
       }
     });
 
@@ -26,7 +34,7 @@ class Timeline {
 
   append() {
     this.updateScheduled = true;
-    var data = { offset: this.count * how_many, how_many: how_many }
+    var data = { offset: this.count, how_many: how_many }
     $.get(
       this.url,
       data,
@@ -34,20 +42,18 @@ class Timeline {
         var issues = JSON.parse(result).issues;
         for (var i in issues) {
           var newContent = "<div class='item'>" + issues[i].title + "</div>";
-          this.timelineContainer.append(newContent);
+          this.issueContainer.append(newContent);
         }
-        this.count += 1;
-        this.updateScheduled = false;
+          this.count += issues.length;
 
-        if (issues.length < how_many) {
-          $('#loader').removeClass('active');
-        }
+        this.updateScheduled = false;
+        this.loader.removeClass('active');
       }
     );
   }
  
-  onscreen($el) {
+  isLoaderOnScreen() {
     var viewportBottom = $(window).scrollTop() + $(window).height();
-    return $el.offset().top <= viewportBottom;
+    return this.loader.offset().top <= viewportBottom;
   }
 }
