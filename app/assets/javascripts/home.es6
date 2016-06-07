@@ -41,8 +41,19 @@ class Timeline {
       (result) => {
         var issues = JSON.parse(result).issues;
         for (var i in issues) {
-          var newContent = "<div class='item'>" + issues[i].title + "</div>";
-          this.issueContainer.append(newContent);
+          var issue = issues[i];
+          var updated_at = new Date(issue.updated_at);
+          var elapsed = Date.now() - updated_at.getTime();
+          var elapsedHour = Math.floor(elapsed / (60 * 60 * 1000));
+          var newItem = $("<div class='item'></div>");
+          var content = $("<div class='content'></div>");
+          var course = $("<a class='header'>" + issue.parent_title + "</a>");
+          course.attr('href', issue.parent_url);
+          content.append(course);
+          content.append(issue.title + "<br>");
+          content.append(elapsedHour + "시간 전");
+          newItem.append(content);
+          this.issueContainer.append(newItem);
         }
           this.count += issues.length;
 
