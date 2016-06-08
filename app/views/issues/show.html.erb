@@ -44,12 +44,14 @@
 	  <%= render_markdown(text) %>
 	<% end %>
 	<% if @parent_name == "Course" %>
-    <% @comment_path = course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id) %>
-  <% end %>
+      <% @comment_path = course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id) %>
+    <% end %>
   
-  <div class="ui button">
-    <%= link_to '삭제', @comment_path, method: :delete, data: {confirm: 'Are you sure?' } %>
-  </div>
+	<div class="ui button" id="comment_edit_button" do>수정</div>
+
+    <div class="ui button">
+      <%= link_to '삭제', @comment_path, method: :delete, data: {confirm: 'Are you sure?' } %>
+    </div>
 
     <div class="ui divider"></div>
   <% end %>
