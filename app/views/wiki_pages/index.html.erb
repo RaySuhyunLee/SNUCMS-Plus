@@ -20,9 +20,10 @@
             <div class="confourteent">
               <div class="transition hidden">
                 <div class="ui bulleted list">
-                  <% @pages.each do |page| %>
+                  <% @recent_pages.each do |page| %>
                     <div class="item">
                       <%= link_to page.title, wiki_page_path(page.title) %>
+                      (<%= neat_time(page.updated_at) %>)
                     </div>
                   <% end %>
                 </div>

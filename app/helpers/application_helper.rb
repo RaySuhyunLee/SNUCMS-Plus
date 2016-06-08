@@ -99,4 +99,10 @@ module ApplicationHelper
     end
   end
 
+  def neat_time(time)
+    # time.to_s == 2016-01-23 12:34:56 UTC
+    stuffs = time.to_s.split(' ')
+    result = stuffs[0] + ' ' + stuffs[1]
+  end
+
 end

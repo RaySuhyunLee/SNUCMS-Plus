@@ -6,6 +6,7 @@ class WikiPagesController < ApplicationController
 
   def index
     @pages = WikiPage.all
+    @recent_pages = WikiPage.limit(5).order('updated_at desc')
   end
 
   def show
