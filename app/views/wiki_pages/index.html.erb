@@ -2,26 +2,116 @@
   <div class="ui huge header">샤과밭 위키:대문</div>
   <div class="ui divider"></div>
 
-  <p>샤과밭 위키에 오신 것을 환영합니다!</p>
-  <p>오늘도 즐거운 창.의.적.통.합.설.계.되시길 바랍니다.</p>
-
-  <div class="ui header">
-    <% unless @pages.empty? %>
-      모든 문서 목록
-    <% end %>
+  <h3 class="ui header">샤과밭 위키에 오신 것을 환영합니다!</h3>
+  <div class="ui bulleted list">
+    <div class="item">샤과밭 위키는 강의와 관련된 정보를 누구나 수정할 수 있는 백과사전입니다.</div>
+    <div class="item">현재 샤과밭 위키에는 <%= @pages.size %>개의 문서가 실려있습니다.</div>
   </div>
 
-  <div class="ui bulleted list">
-    <% @pages.each do |page| %>
-      <div class="item">
-        <%= link_to page.title, wiki_page_path(page.title) %>
+  <div class="ui grid" id="wiki_page_list">
+    <div class="ui fourteen wide column">
+      <div class="ui right close rail">
+        <div class="ui sticky">
+          <div class="ui accordion">
+            <div class="title">
+              <b>최근 변경된 문서</b>
+              <i class="dropdown icon"></i>
+            </div>
+            <div class="confourteent">
+              <div class="transition hidden">
+                <div class="ui bulleted list">
+                  <% @pages.each do |page| %>
+                    <div class="item">
+                      <%= link_to page.title, wiki_page_path(page.title) %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui accordion">
+            <div class="title">
+              <b>모든 문서</b>
+              <i class="dropdown icon"></i>
+            </div>
+            <div class="confourteent">
+              <div class="transition hidden">
+                <div class="ui bulleted list">
+                  <% @pages.each do |page| %>
+                    <div class="item">
+                      <%= link_to page.title, wiki_page_path(page.title) %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    <% end %>
+    </div>
+
+    <div class="ui red header">Lorem ipsum dolor sit amet</div>
+    <div class="ui fourteen wide column">
+      <div class="ui bulleted list">
+        <p class="item">Consectetur adipiscing elit. Nunc magna enim, placerat id nisi eget, ullamcorper euismod dui. Vivamus mi tortor, posuere mollis viverra convallis, finibus sit amet ante.</p>
+        <p class="item">Curabitur viverra nisi ut suscipit dignissim. Sed ut facilisis enim. Vestibulum in nibh aliquam, ultrices neque in, interdum mauris. Pellentesque porttitor aliquam consectetur. Pellentesque molestie, magna interdum vestibulum dictum, velit lectus pulvinar lectus, non fringilla urna enim eu erat.</p>
+      </div>
+    </div>
+
+    <div class="ui brown header">Nam sed lectus ante</div>
+    <div class="ui fourteen wide column">
+      <div class="ui bulleted list">
+        <p class="item">Suspendisse diam lorem, sagittis non tincidunt id, euismod eu massa. Fusce aliquet quam ut cursus cursus. Sed id porttitor ex. Phasellus in tellus quam. Ut vulputate felis non dui suscipit sodales. Fusce in est sollicitudin, malesuada neque vel, elementum purus.</p>
+        <p class="item">In eu tortor id odio faucibus dapibus. Nam semper velit vehicula purus aliquam, in mollis nulla suscipit. Nunc id viverra odio. Etiam ullamcorper luctus cursus.</p>
+      </div>
+    </div>
+
+    <div class="ui red header">Praesent vitae egestas velit</div>
+    <div class="ui fourteen wide column">
+      <div class="ui bulleted list">
+        <p class="item">Mauris in fermentum tortor. Curabitur massa lacus, pretium quis sapien ut, faucibus imperdiet odio. Mauris ornare mollis mattis. Etiam tempor lorem aliquet venenatis eleifend. Donec vitae sagittis urna, in ornare dui. Sed vel eros nunc.</p>
+        <p class="item">Vivamus porta, sem et ullamcorper hendrerit, nulla tellus interdum lacus, eget accumsan elit sem nec urna. Maecenas auctor ex a placerat rutrum.</p>
+        <p class="item">Curabitur sit amet nisi sem. Donec id tincidunt lectus, at hendrerit orci. Nullam pretium orci sit amet augue imperdiet, nec congue mi commodo. Maecenas id interdum neque.</p>
+        <p class="item">Pellentesque eget mi pretium, ultrices erat sit amet, commodo erat. Vestibulum commodo nisi ut dapibus accumsan.</p>
+      </div>
+    </div>
+
+    <div class="ui brown header">Nam est justo</div>
+    <div class="ui fourteen wide column">
+      <div class="ui bulleted list">
+        <p class="item">Molestie quis arcu at, tincidunt sagittis augue. Vivamus pulvinar tincidunt massa et egestas.</p>
+        <p class="item">Proin vel lorem purus. In lacinia fringilla ipsum, quis dictum dolor. Mauris sollicitudin tincidunt consequat. Nulla at est vitae tellus vestibulum efficitur eu eget mauris. Mauris tempus ullamcorper metus eu rutrum. Vivamus mauris libero, lobortis sit amet mauris ut, volutpat lobortis nisl.</p>
+      </div>
+    </div>
+
+    <div class="ui red header">Quisque vitae tortor tortor</div>
+    <div class="ui fourteen wide column">
+      <div class="ui bulleted list">
+        <p class="item">Praesent suscipit libero arcu, mollis elementum leo porta et. Suspendisse placerat euismod justo vel auctor. Quisque feugiat eu turpis a mollis. Curabitur eget rhoncus arcu, id consectetur magna. Aliquam vitae quam lacus. In urna arcu, lobortis at molestie in, venenatis vel tortor.</p>
+        <p class="item">Sed ante risus, porta nec elementum eu, blandit et mi.</p>
+      </div>
+    </div>
+
+    <div class="ui brown header">Ut rutrum lorem tortor</div>
+    <div class="ui fourteen wide column">
+      <div class="ui bulleted list">
+        <p class="item">Class apfourteent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus aliquam tincidunt ante eget convallis.</p>
+        <p class="item">Pellentesque tincidunt, arcu a congue pellentesque, mauris leo ornare libero, et blandit quam velit vitae erat. Integer sed elit purus.</p>
+        <p class="item">Maecenas metus nulla, vestibulum a malesuada vel, porta molestie ante. Suspendisse pharetra dapibus orci in tristique. Phasellus sit amet rhoncus metus, ultrices commodo risus. Integer volutpat, odio ut vehicula tincidunt, dolor lacus convallis metus, non eleifend libero turpis sed diam.</p>
+        <p class="item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec hendrerit est. Maecenas viverra, tortor eget feugiat facilisis, tellus sem scelerisque turpis, a venenatis velit libero nec nibh.</p>
+        <p class="item">Vivamus dictum sed neque at pulvinar. Donec magna erat, sodales a molestie eu, consequat in dolor. Morbi pellentesque facilisis mauris, vitae luctus tellus condimentum eu. Nullam eu ex felis.</p>
+        <p class="item">Donec vestibulum leo eget leo posuere, vel vulputate mauris gravida.</p>
+      </div>
+    </div>
   </div>
 
   <div class="ui divider"></div>
-
-  <%= link_to root_path do %>
-    <div class="ui button">홈으로</div>
-  <% end %>
+  <div class="ui center aligned text container">
+    <a href="#">신고/제안</a> | <a href="#">이용 수칙</a> | <a href="http://www.snucse.org/">SNUCSE</a>
+  </div>
 </div>
+
+<script>
+  $(".ui.sticky").sticky({ context: "#wiki_page_list" });
+  $(".ui.accordion").accordion("refresh");
+</script>
