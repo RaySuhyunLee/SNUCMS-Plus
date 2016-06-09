@@ -14,6 +14,8 @@ module ApplicationHelper
 
   EXTENTIONS =
   {
+    footnotes:            true,
+    highlight:            true,
     tables:               true,
     autolink:             true,
     fenced_code_blocks:   true,
