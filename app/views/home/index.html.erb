@@ -1,5 +1,11 @@
 <div class="ui container">
   <div class="ui huge header">샤과밭</div>
+  <p>eTL과의 비교를 거부한다!</p>
+  <div class="ui divider"></div>
+
+  <div class="ui container" id="timeline-container">
+  </div>
+
   <div class="ui divider"></div>
 
   <%= link_to courses_path do %><button class="ui button">강좌</button><% end %>
@@ -10,3 +16,6 @@
     <a href="#">신고/제안</a> | <a href="#">이용 수칙</a> | <a href="http://www.snucse.org/">SNUCSE</a>
   </div>
 </div>
+<script>
+  var timeline = new Timeline("#timeline-container", "<%= home_load_recent_timeline_path %>");
+</script>

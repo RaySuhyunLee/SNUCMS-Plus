@@ -18,6 +18,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+  
+  # Home routing
+  get 'home/load_recent_timeline'
+  get 'home/load_subscription_timeline'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
