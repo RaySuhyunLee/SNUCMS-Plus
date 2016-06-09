@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20160613152410) do
     t.integer  "professor_id"
     t.integer  "past_course_id"
     t.integer  "issue_num"
+    t.text     "description"
   end
 
   create_table "courses_users", force: :cascade do |t|
