@@ -42,16 +42,12 @@ class Timeline {
         var issues = JSON.parse(result).issues;
         for (var i in issues) {
           var issue = issues[i];
-          var created_at = new Date(issue.created_at);
-          var elapsed = Date.now() - created_at.getTime();
-          var elapsedHour = Math.floor(elapsed / (60 * 60 * 1000));
           var newItem = $("<div class='item'></div>");
           var content = $("<div class='content'></div>");
           var course = $("<a class='header'>" + issue.parent_title + "</a>");
           course.attr('href', issue.parent_url);
           content.append(course);
-          content.append(issue.title + "<br>");
-          content.append(elapsedHour + "시간 전");
+          content.append(issue.title + "<br>" + issue.created_at);
           newItem.append(content);
           this.issueContainer.append(newItem);
         }

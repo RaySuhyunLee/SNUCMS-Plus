@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  include ApplicationHelper 
+
   def index
     @resource
   end
@@ -30,7 +32,7 @@ class HomeController < ApplicationController
     how_many = Integer(params['how_many'])
     user = current_user
     load_max = 10
-    issues = user.issues.
+    issues = user.issues
       .order(created_at: :desc)
       .offset(offset)
       .take([how_many, load_max].min)
@@ -63,7 +65,7 @@ private
         issue_url: issue_url,
         parent_title: parent,
         parent_url: parent_url,
-        created_at: issue.created_at
+        created_at: prettify_time(issue.created_at)
       })
     end
 
