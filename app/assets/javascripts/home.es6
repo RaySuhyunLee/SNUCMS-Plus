@@ -42,8 +42,8 @@ class Timeline {
         var issues = JSON.parse(result).issues;
         for (var i in issues) {
           var issue = issues[i];
-          var updated_at = new Date(issue.updated_at);
-          var elapsed = Date.now() - updated_at.getTime();
+          var created_at = new Date(issue.created_at);
+          var elapsed = Date.now() - created_at.getTime();
           var elapsedHour = Math.floor(elapsed / (60 * 60 * 1000));
           var newItem = $("<div class='item'></div>");
           var content = $("<div class='content'></div>");

@@ -20,7 +20,8 @@ Rails.application.routes.draw do
   root 'home#index'
   
   # Home routing
-  get 'home/load_timeline'
+  get 'home/load_recent_timeline'
+  get 'home/load_subscription_timeline'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
