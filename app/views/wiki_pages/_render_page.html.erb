@@ -1,6 +1,7 @@
 <% unless data.nil? %>
   <% text = render_easy_link(data) %>
   <% text = render_latex_math(text) %>
+  <% text = escape_script_tag(text) %>
   <% text = text.gsub(/\\\$/) do '$' end %>
 
   <% toc = render_toc text %>
