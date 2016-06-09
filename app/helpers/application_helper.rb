@@ -99,4 +99,26 @@ module ApplicationHelper
     end
   end
 
+  def prettify_time(time)
+    # time.to_s == 2016-01-23 12:34:56 UTC
+    stuffs = time.to_s.split(' ')
+    result = stuffs[0] + ' ' + stuffs[1]
+
+    current_time = Time.now.utc
+
+    if time.year < current_time.year
+      (current_time.year - time.year).to_s + "년 전"
+    elsif time.month < current_time.month
+      (current_time.month - time.month).to_s + "달 전"
+    elsif time.day < current_time.day
+      (current_time.day - time.day).to_s + "일 전"
+    elsif time.hour < current_time.hour
+      (current_time.hour - time.hour).to_s + "시간 전"
+    elsif time.min < current_time.min
+      (current_time.min - time.min).to_s + "분 전"
+    else
+      (current_time.sec - time.sec).to_s + "초 전"
+    end
+  end
+
 end

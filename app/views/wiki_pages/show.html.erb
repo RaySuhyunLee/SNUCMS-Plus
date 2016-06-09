@@ -1,7 +1,7 @@
 <div class="ui two column grid container">
   <div class="column">
     <div class="ui huge header">
-      <% if @rev.nil? %>
+      <% if @rev.nil? %> <!-- version control -->
         <%= @title %>
       <% else %>
         <%= @title + ' (' + @rev + ' 판)' %>
@@ -24,19 +24,41 @@
 
   <div class="ui divider"></div>
 
-  <%= render partial: 'render_page', locals: {data: @page.contents} %>
+  <div class="ui grid" id="wiki_page_rail">
+    <div class="ui fourteen wide column">
+      <div class="ui right rail">
+        <div class="ui sticky">
+          <div class="ui vertical basic buttons">
+            <% if @rev.nil? %>
+              <%= link_to edit_wiki_page_path(@title) do %>
+                <div class="ui button">편집</div>
+              <% end %>
+            <% end %>
+            <%= link_to history_wiki_page_path(@title) do %>
+              <div class="ui button">역사</div>
+            <% end %>
+            <%= link_to wiki_page_path(@title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } do %>
+              <div class="ui button">삭제</div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui fourteen wide column">
+      <%= render partial: 'render_page', locals: {data: @page.contents} %>
+    </div>
+  </div>
 
   <div class="ui divider"></div>
-
-  <% if @rev.nil? %>
-    <%= link_to edit_wiki_page_path(@title) do %>
-      <div class="ui button">수정</div>
-    <% end %>
-  <% end %>
-  <%= link_to history_wiki_page_path(@title) do %>
-    <div class="ui button">역사</div>
-  <% end %>
-  <%= link_to wiki_page_path(@title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } do %>
-    <div class="ui button">삭제</div>
-  <% end %>
+  <div class="ui center aligned text container">
+    <a href="http://www.warning.or.kr">신고/제안</a> | <a href="#">이용 수칙</a> | <a href="http://www.snucse.org/">SNUCSE</a>
+  </div>
 </div>
+
+<script>
+  $(".ui.sticky").sticky({
+    context: "#wiki_page_rail",
+    offset: 100
+  });
+</script>
