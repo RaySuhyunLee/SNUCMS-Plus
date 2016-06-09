@@ -60,7 +60,6 @@ module ApplicationHelper
   def render_toc(text)
     table_of_contents = ""
     inside_code_section = false
-    i_section = 0
 
     text.each_line do |line|
       if line.start_with?('```')
@@ -99,11 +98,13 @@ module ApplicationHelper
     end
   end
 
-  def prettify_time(time)
-    # time.to_s == 2016-01-23 12:34:56 UTC
-    stuffs = time.to_s.split(' ')
-    result = stuffs[0] + ' ' + stuffs[1]
+  def escape_script_tag(text)
+    result = text.gsub(@regex[:script]) do
+      '&lt;script&gt;' + $1 + '&lt;/script&gt;'
+    end
+  end
 
+  def prettify_time(time)
     current_time = Time.now.utc
 
     if time.year < current_time.year
