@@ -23,7 +23,7 @@
                   <% @recent_pages.each do |page| %>
                     <div class="item">
                       <%= link_to page.title, wiki_page_path(page.title) %>
-                      (<%= neat_time(page.updated_at) %>)
+                      (<%= prettify_time(page.updated_at) %>)
                     </div>
                   <% end %>
                 </div>
