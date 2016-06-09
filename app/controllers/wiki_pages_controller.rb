@@ -106,7 +106,7 @@ class WikiPagesController < ApplicationController
   def set_regex
     @regex =
     {
-      link: /\[\[(.*)\]\]/,
+      link: /\[\[([^\]]*)\]\]/,
       redirect: /^redirect \[\[(.*)\]\]/,
       latex: /(?<!\\)\$(.*)\$/
     }
