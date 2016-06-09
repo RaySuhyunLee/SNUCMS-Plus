@@ -33,6 +33,10 @@ module ApplicationHelper
 
       formatter.format(lexer.lex(code))
     end
+
+    def table(header, body)
+      "<table class=\"ui celled table\"><thead>#{header}</thead><tbody>#{body}</tbody></table>"
+    end
   end
 
   def render_markdown(text)
@@ -90,19 +94,19 @@ module ApplicationHelper
 
   def render_easy_link(text)
     result = text.gsub(@regex[:link]) do
-      '[' + $1 + '](' + wiki_page_path($1) + ')'
+      "[#{$1}](#{wiki_page_path($1)})"
     end
   end
 
   def render_latex_math(text)
     result = text.gsub(@regex[:latex]) do
-      '<img src="http://latex.codecogs.com/svg.latex?' + $1 + '">'
+      "<img src=\"http://latex.codecogs.com/svg.latex?#{$1}\">"
     end
   end
 
   def escape_script_tag(text)
     result = text.gsub(@regex[:script]) do
-      '&lt;script&gt;' + $1 + '&lt;/script&gt;'
+      "&lt;script&gt;#{$1}&lt;&#x2F;script&gt;"
     end
   end
 

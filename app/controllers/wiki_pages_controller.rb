@@ -109,7 +109,7 @@ class WikiPagesController < ApplicationController
       link:       /\[\[([^\]]*)\]\]/,
       redirect:   /^redirect \[\[(.*)\]\]/,
       latex:      /(?<!\\)\$(.*)\$/,
-      script:     /<script>(.*)<\/script>/m
+      script:     /<script>(.*)?<\/script>/m
     }
   end
 
