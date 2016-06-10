@@ -14,6 +14,8 @@ module ApplicationHelper
 
   EXTENTIONS =
   {
+    footnotes:            true,
+    highlight:            true,
     tables:               true,
     autolink:             true,
     fenced_code_blocks:   true,
@@ -30,6 +32,10 @@ module ApplicationHelper
       lexer = Rouge::Lexer.find(language || 'text').new
 
       formatter.format(lexer.lex(code))
+    end
+
+    def table(header, body)
+      "<table class=\"ui celled table\"><thead>#{header}</thead><tbody>#{body}</tbody></table>"
     end
   end
 
@@ -60,7 +66,6 @@ module ApplicationHelper
   def render_toc(text)
     table_of_contents = ""
     inside_code_section = false
-    i_section = 0
 
     text.each_line do |line|
       if line.start_with?('```')
@@ -89,21 +94,23 @@ module ApplicationHelper
 
   def render_easy_link(text)
     result = text.gsub(@regex[:link]) do
-      '[' + $1 + '](' + wiki_page_path($1) + ')'
+      "[#{$1}](#{wiki_page_path($1)})"
     end
   end
 
   def render_latex_math(text)
     result = text.gsub(@regex[:latex]) do
-      '<img src="http://latex.codecogs.com/svg.latex?' + $1 + '">'
+      "<img src=\"http://latex.codecogs.com/svg.latex?#{$1}\">"
+    end
+  end
+
+  def escape_script_tag(text)
+    result = text.gsub(@regex[:script]) do
+      "&lt;script&gt;#{$1}&lt;&#x2F;script&gt;"
     end
   end
 
   def prettify_time(time)
-    # time.to_s == 2016-01-23 12:34:56 UTC
-    stuffs = time.to_s.split(' ')
-    result = stuffs[0] + ' ' + stuffs[1]
-
     current_time = Time.now.utc
 
     if time.year < current_time.year
