@@ -18,10 +18,9 @@
   </div>
 
   <h3>Comment</h3>
-	<%= render :partial => 'comments/form_create',
-						 :locals => {:form => f} %>
-	
-	<div class="actions">
-    <%= f.submit %>
+  <%= render :partial => 'comments/form_create', :locals => {:form => f} %>
+
+  <div class="actions">
+      <%= f.submit %>
   </div>
 <% end %>
