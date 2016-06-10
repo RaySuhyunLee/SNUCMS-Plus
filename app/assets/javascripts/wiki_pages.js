@@ -35,6 +35,3 @@ function periodic_worker() {
         setTimeout(periodic_worker, 5000);
     });
 };
-
-$(document).on("ready page:load", function() {
-});
