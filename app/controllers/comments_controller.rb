@@ -1,6 +1,11 @@
 class CommentsController < ApplicationController
   before_action :set_issue
-  before_action :set_comment, only: [:update, :destroy]
+  before_action :set_comment, only: [:update, :destroy, :get_contents, :update_contents]
+
+  # GET /(parent_type)/:(parent_id)/issues/:issue_id/comments/:id/get_contents
+  def get_contents
+   render plain: @comment.contents 
+  end
 
   # POST /(parent_type)/:(parent_id)/issues/:issue_id/comments
   # POST /(parent_type)/:(parent_id)/issues/:issue_id/comments.json
@@ -15,6 +20,15 @@ class CommentsController < ApplicationController
         format.html { render :new }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # POST /(parent_type)/:(parent_id)/issues/:issue_id/comments/:id/update_contents
+  def update_contents
+    if @comment.update_attribute(:contents, params[:contents])
+      render :text => "Contents is updated!"
+    else
+      render :text => "Contents is not updated!"
     end
   end
 

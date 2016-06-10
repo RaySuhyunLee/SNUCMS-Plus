@@ -20,7 +20,7 @@ $course = Course.create({
   issue_num: '0'
 })
 
-$i = 0
+$i = 1
 while $i < 20 do
   issue = Issue.create({title: $i.to_s, parent_issue_id: $i}) 
   $course.issues.append(issue)

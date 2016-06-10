@@ -16,24 +16,22 @@
       #<%= @issue.parent_issue_id %>
     </div>
     <input type="string" placeholder="<%= @issue.title %>" id="issue_title_string">
-    <div class="ui button" id="issue_title_save_button">저장</div>
+    <div class="ui button title_save_button" id="<%= @issue_path %>">저장</div>
     <div class="ui button" id="issue_title_cancle_button">취소</div>
-    <div class="ui header" id="issue_path_var"><%= @issue_path %>/update_title</div>
   </div>
 
   <div class="ui divider"></div>
   <div class="ui button" id="issue_edit_button">제목 수정</div>
-  <%= link_to @issue_path, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } do %>
-    <div class="ui button" id="issue_delete_button">이슈 삭제</div>
-  <% end %>
   <%= link_to subscribe_course_issue_path(@parent.id, @issue.parent_issue_id) do %>
     <button class="ui button" ><%= @subscribe_button_text %></button>
   <% end %>
 
-  <div class="ui divider" id="edit_divider"></div>
-  
+  <div class="ui divider"></div>
   <div class="ui comments">
     <% @comments.each_with_index do |comment, index| %>
+      <% if @parent_name == "Course" %>
+        <% @comment_path = course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id) %>
+      <% end %>
       <div class="comment" id="comment_<%= index %>">
         <div class="content">
           <a class="author"><%= comment.commenter %></a>
@@ -45,13 +43,10 @@
               <% text = text.gsub(/\\\$/) do '$' end %>
               <% text = escape_script_tag(text) %>
               <%= render_markdown(text) %>
-	          <% end %>
+            <% end %>
           </div>
-	        <% if @parent_name == "Course" %>
-            <% @comment_path = course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id) %>
-          <% end %>
-	        <div class="actions">
-            <a class="edit_button" id="comment_edit_button_<%= index %>" do>수정</a>
+	      <div class="actions">
+            <a class="edit_button" id="comment_edit_button_<%= index %>#<%= @comment_path %>" do>수정</a>
             <a class="delete">
               <%= link_to '삭제', @comment_path, method: :delete, data: {confirm: 'Are you sure?' } %>
             </a>
@@ -62,7 +57,7 @@
         <div class="field">
           <textarea id="edit_text_<%= index %>"></textarea>
         </div>
-        <div class="ui button edit_save_button" id="edit_save_<%= index %>">저장</div>
+        <div class="ui button edit_save_button" id="edit_save_<%= index %>#<%= @comment_path %>">저장</div>
         <div class="ui button edit_cancle_button" id="edit_cancle_<%= index %>">취소</div>
       </div>
       <div class="ui divider"></div>
@@ -85,7 +80,21 @@
     </div>
   <% end %>
 
-
   <div class="ui divider"></div>
-  <div class="ui button"><%= link_to '돌아가기', @index_path %></div>
+  <%= link_to @index_path do %>
+    <div class="ui button">돌아가기</div>
+  <% end %>
+  <%= link_to @issue_path, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } do %>
+    <div class="ui button">이슈 삭제</div>
+  <% end %>
 </div>
+
+<script>
+  $(document).on('ready page:load', documentLoad());
+  $("#issue_edit_button").click(issueTitleEdit);
+  $("#issue_title_cancle_button").click(issueTitleCancle);
+  $(".title_save_button").click(issueTitleSave);
+  $(".edit_button").click(commentEdit);
+  $(".edit_save_button").click(commentSave);
+  $(".edit_cancle_button").click(commentCancle);
+</script>

@@ -1,63 +1,78 @@
-// issue edition
-$(document).on('ready page:load', function() {
+// issue edition js
+
+// Function called when document is loaded
+function documentLoad() {
   $("#issue_title_input").hide();
   $(".comment_edit").hide();
+}
 
-  $("#issue_edit_button").click(function(){
-    $("#issue_path_var").hide();
-    $("#issue_delete_button").hide();
-    $("#issue_edit_button").hide()
-    $("#issue_title").hide();
-    $("#issue_title_input").show();
-    $("#edit_divider").hide();
-  });
+// Issue title edit
+function issueTitleEdit() {
+  $("#issue_edit_button").hide();
+  $("#issue_title").hide();
+  $("#issue_title_input").show();
+}
 
-  $("#issue_title_cancle_button").click(function(){
-    $("#issue_delete_button").show();
-    $("#issue_edit_button").show()
-    $("#issue_title").show();
-    $("#issue_title_input").hide();
-    $("#edit_divider").show();
-  });
+// Issue title edition cancle
+function issueTitleCancle() {
+  $("#issue_edit_button").show();
+  $("#issue_title").show();
+  $("#issue_title_input").hide();
+}
 
-  $("#issue_title_save_button").click(function(){
-    var contents = $("#issue_title_string").val();
-    var path = $("#issue_path_var").text();
-    $.post(
-      path,
-      { contents : contents },
-      function(result) {
-        $("#issue_title_text").text(result);
-      });
-    $("#issue_delete_button").show();
-    $("#issue_edit_button").show()
-    $("#issue_title").show();
-    $("#issue_title_input").hide();
-    $("#edit_divider").show();
-  });
+// Issue title save
+function issueTitleSave() {
+  var contents = $("#issue_title_string").val();
+  var path = this.id + "/update_title";
 
-  $(".edit_button").click(function(){
-    id = this.id;
-    id_split = id.split("_");
-    idx = id_split[3];
-    $("#comment_"+idx).hide();
-    $("#comment_edit_"+idx).show();
-    var content = $("#comment_text_"+idx).text();
-    $("#edit_text_"+idx).text(content);
-  });
+  $.post(
+    path,
+    { contents : contents },
+    function(result) {
+      $("#issue_title_text").text(result);
+    });
+  $("#issue_edit_button").show()
+  $("#issue_title").show();
+  $("#issue_title_input").hide();
+}
 
-  $(".edit_save_button").click(function(){
-    id = this.id;
-    id_split = id.split("_");
-    idx = id_split[2];
-  });
+// Comment edit 
+function commentEdit() {
+  id = this.id;
+  id_split1 = id.split("#");
+  comment_path = id_split1[1] + "/get_contents";
+  id_split2 = (id_split1[0]).split("_");
+  idx = id_split2[3];
 
-  $(".edit_cancle_button").click(function(){
-    id = this.id;
-    id_split = id.split("_");
-    idx = id_split[2];
-    $("#comment_"+idx).show();
-    $("#comment_edit_"+idx).hide();
-  });
+  $.get(
+    comment_path,
+    function(result) {
+      $("#edit_text_"+idx).text(result); 
+    });
+  $("#comment_"+idx).hide();
+  $("#comment_edit_"+idx).show();
+}
 
-});
+// Comment edit save
+function commentSave() {
+  id = this.id;
+  id_split1 = id.split("#");
+  comment_path = id_split1[1] + "/update_contents";
+  id_split2 = (id_split1[0]).split("_");
+  idx = id_split2[2];
+  edited_text = $("#edit_text_"+idx).val();
+
+  $.post(comment_path, { contents : edited_text });
+  $("#comment_"+idx).show();  
+  $("#comment_text_"+idx).load(location.href + " #comment_text_" + idx + ">*","");
+  $("#comment_edit_"+idx).hide();
+}
+
+// Comment edit cancle
+function commentCancle() {
+  id = this.id;
+  id_split = id.split("_");
+  idx = id_split[2];
+  $("#comment_"+idx).show();  
+  $("#comment_edit_"+idx).hide();
+}
