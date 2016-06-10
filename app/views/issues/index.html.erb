@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+<div class="ui container">
+  <div class="ui huge header">이슈 목록</div>
+  <div class="ui divider"></div>
+
+  <table class="ui table">
+    <tbody>
+      <% @issues.each do |issue| %>
+        <% if @parent_name == "Course" %>
+          <% @issue_path = course_issue_path(@parent.id, issue.parent_issue_id) %>
+        <% end %>
+        <tr>
+          <td><%= link_to issue.title, @issue_path %></td>
+          <td><%= issue.created_at %></td>
+          <td><%= link_to '이슈 삭제', @issue_path, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="ui divider"></div>
+  <div class="ui button"><%= link_to '글쓰기', @new_path %></div>
+  <div class="ui button"><%= link_to '돌아가기', course_path(@parent.id) %></div>
+</div>

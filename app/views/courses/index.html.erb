@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+<div class="ui container">
+  <div class="ui huge header">강좌 목록</div>
+  <div class="ui divider"></div>
+
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th>Title&nbsp;</th>
+        <th>Course num&nbsp;</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @courses.each do |course| %>
+        <tr>
+          <td><%= link_to course.title, course %></td>
+          <td><%= course.course_num %></td>
+          <td><%= link_to 'Edit', edit_course_path(course) %></td>
+          <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="ui divider"></div>
+  <div class="ui button"><%= link_to '새 강좌', new_course_path %></div>
+</div>

@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+@import "semantic-ui";
+
+a:hover {
+  background: rgba(0,0,0,0);
+}
+
+a:visited {
+  color: #4183c4;
+}

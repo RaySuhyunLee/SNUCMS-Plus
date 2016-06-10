@@ -1,0 +1,11 @@
+<%= form.fields_for :comments do |ff| %>
+  <div class="field">
+    <%= ff.label :commenter %><br />
+    <%= ff.text_field :commenter %>
+  </div>
+  <div class="field">
+    <%= ff.label :comment %><br />
+    <%= ff.text_area :contents %>
+  </div>
+<% end %>
+

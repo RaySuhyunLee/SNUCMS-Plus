@@ -1,0 +1,36 @@
+<div class="ui container">
+  <div class="ui ten wide grid">
+      <div class="five wide column">
+        <div class="ui huge header"><%= @course.title %></div>
+      </div>
+      <div class="three wide column">
+        <div class="ui large header"><%= @course.course_num %></div>
+      </div>
+      <div class="three wide column">
+        <%= link_to subscribe_course_path(@course.id) do %>
+          <button class="ui button" >
+        <%= @subscribe_button_text %></button>
+      </div>
+  <% end %>
+
+  </div>
+    <div class="ui divider"></div>
+
+  <div class="ui twenty wide column grid">
+    <div class="ten wide column">
+      <% prof = Professor.find_by_id(@course.professor_id) %>
+      <%= prof.name if not prof.nil? %>
+    </div>
+    <div class="ten wide column">
+      <% prof = Professor.find_by_id(@course.professor_id) %>
+      <%= prof.picture if not prof.nil? %>
+    </div>
+  </div>
+
+  <div class="ui button"><%= link_to '이슈', course_issues_path(@course.id) %></div>
+  <div class="ui button"><%= link_to '위키', wiki_page_path(@course.title) %></div>
+  <div class="ui button"><%= link_to '반달', edit_course_path(@course) %></div>
+
+  <div class="ui divider"></div>
+
+</div>

@@ -12,12 +12,12 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+#gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -28,6 +28,28 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+#
+# User Authentication
+gem 'devise'
+
+# Semantic ui assets
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+
+# Markdown plugin
+gem 'redcarpet'
+
+# Syntax highlighter
+gem 'rouge', '~> 1.10', '>= 1.10.1'
+
+# Revision management
+gem 'paper_trail'
+
+# for ES6 transcompilation
+gem 'sprockets', '>=3.0.0.beta'
+gem 'sprockets-es6'
+
+# reactJS
+gem 'react-rails', '~> 1.6.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

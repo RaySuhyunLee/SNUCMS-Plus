@@ -22,6 +22,7 @@
 $ git checkout [base로 merge시킬 브랜치(ex: iss3)]
 $ git rebase [merge할 base 브랜치(ex: development)]
 $ git push 어쩌구 저쩌구
+(or, git push -f blah blah)
 ```
 자세한 정보는 wiki 참고.
 
@@ -31,4 +32,9 @@ $ bundle install
 $ bundle exec rake db:migrate
 $ rails s
 (or, rails s -b 0.0.0.0)
+```
+
+## seed DB apply
+```bash
+$ rake db:seed
 ```

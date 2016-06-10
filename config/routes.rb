@@ -1,12 +1,44 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: "accounts/sessions",
+    registrations: "accounts/registrations"
+  }
+
+  # nested routing for courses, issues and comments.
+  resources :courses do
+    resources :issues, only: [:index, :new, :create, :show, :update, :destroy] do
+      resources :comments, only: [:create, :destroy, :index]
+      get 'subscribe', on: :member
+    end
+    get 'subscribe', on: :member
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'home#index'
+  
+  # Home routing
+  get 'home/load_recent_timeline'
+  get 'home/load_subscription_timeline'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+
+  # Wiki routing
+  get 'wiki' => 'wiki_pages#index', as: :wiki
+  post 'wikipage/render' => 'wiki_pages#render_page'
+  post 'wikipage/permission' => 'wiki_pages#edit_permission'
+  get 'wiki/:title/new' => 'wiki_pages#new', as: :new_wiki_page
+  get 'wiki/:title/empty' => 'wiki_pages#empty', as: :empty_wiki_page
+  get 'wiki/:title/edit' => 'wiki_pages#edit', as: :edit_wiki_page
+  get 'wiki/:title/history' => 'wiki_pages#history', as: :history_wiki_page
+  get 'wiki/:title/revert' => 'wiki_pages#revert_page', as: :revert_wiki_page
+  get 'wiki/:title' => 'wiki_pages#show', as: :wiki_page
+  patch 'wiki/:title' => 'wiki_pages#update'
+  put 'wiki/:title' => 'wiki_pages#update'
+  delete 'wiki/:title' => 'wiki_pages#destroy'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

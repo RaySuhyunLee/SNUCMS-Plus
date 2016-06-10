@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+<div class="ui container">
+  <div class="ui huge header">
+    Issue: <%= @issue.title %>
+  </div>
+  <%= link_to subscribe_course_issue_path(@parent.id, @issue.parent_issue_id) do %>
+    <button class="ui button" ><%= @subscribe_button_text %></button>
+  <% end %>
+  <div class="ui divider"></div>
+
+  <% @comments.each do |comment| %>
+    <p><%= comment.commenter + ' commented' %></p>
+	<% unless comment.contents.nil? %>
+	  <% text = render_issue_link(comment.contents) %>
+	  <% text = render_easy_link(text) %>
+	  <% text = render_latex_math(text) %>
+	  <% text = text.gsub(/\\\$/) do '$' end %>
+	  <%= render_markdown(text) %>
+	<% end %>
+	<% if @parent_name == "Course" %>
+      <% @comment_path = course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id) %>
+    <% end %>
+
+    <div class="ui button">
+      <%= link_to '삭제', @comment_path, method: :delete, data: {confirm: 'Are you sure?' } %>
+    </div>
+
+    <div class="ui divider"></div>
+  <% end %>
+
+  <%= form_for([@issue, @issue.comments.create], url: @comments_path) do |f| %>
+    <div class="ui form">
+      <div class="field">
+        <%= f.label :commenter %><br />
+        <%= f.text_field :commenter, required: true %>
+      </div>
+      <div class="field">
+        <%= f.label :comments %><br />
+        <%= f.text_area :contents, required: true %>
+      </div>
+      <div class="actions">
+        <%= f.submit '작성하기', class: 'ui submit button' %>
+      </div>
+    </div>
+  <% end %>
+
+
+  <div class="ui divider"></div>
+  <div class="ui button"><%= link_to '돌아가기', @index_path %></div>
+</div>
