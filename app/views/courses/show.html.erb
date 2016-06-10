@@ -1,20 +1,23 @@
 <div class="ui container">
   <div class="ui ten wide grid">
-      <div class="five wide column">
-        <div class="ui huge header"><%= @course.title %></div>
-      </div>
-      <div class="three wide column">
-        <div class="ui large header"><%= @course.course_num %></div>
-      </div>
-      <div class="three wide column">
-        <%= link_to subscribe_course_path(@course.id) do %>
-          <button class="ui button" >
-        <%= @subscribe_button_text %></button>
-      </div>
-  <% end %>
-
+    <div class="five wide column">
+      <div class="ui huge header"><%= @course.title %></div>
+    </div>
+    <div class="three wide column">
+      <div class="ui large header"><%= @course.course_num %></div>
+    </div>
+    <div class="three wide column">
+      <%= link_to subscribe_course_path(@course.id) do %>
+        <button class="ui button" ><%= @subscribe_button_text %></button>
+      <% end %>
+    </div>
   </div>
-    <div class="ui divider"></div>
+
+  <div class="ui divider"></div>
+
+  <div class="ui segment">
+    <%= @course.description %>
+  </div>
 
   <div class="ui twenty wide column grid">
     <div class="ten wide column">
@@ -27,9 +30,9 @@
     </div>
   </div>
 
-  <div class="ui button"><%= link_to '이슈', course_issues_path(@course.id) %></div>
-  <div class="ui button"><%= link_to '위키', wiki_page_path(@course.title) %></div>
-  <div class="ui button"><%= link_to '반달', edit_course_path(@course) %></div>
+  <%= link_to '이슈', course_issues_path(@course.id), class: "ui button" %>
+  <%= link_to '위키', wiki_page_path(@course.title), class: "ui button" %>
+  <%= link_to '반달', edit_course_path(@course), class: "ui button" %>
 
   <div class="ui divider"></div>
 

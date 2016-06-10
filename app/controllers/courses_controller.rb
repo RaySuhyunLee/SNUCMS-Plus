@@ -76,7 +76,7 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:university, :classification, :college, :department, :level, :grade, :course_num, :lecture_num, :title, :credit, :timetable, :location)
+    params.require(:course).permit(:course_num, :title, :description)
   end
 
   def is_subscribing?
