@@ -26,6 +26,3 @@ Professor.create({
   picture:  'http://cse.snu.ac.kr/sites/default/files/styles/scale-width-220/public/node--professor/%EB%B2%84%EB%82%98%EB%93%9C%EC%97%90%EA%B1%B0_0.jpg'
 })
 
-School.create({
-  name: 'SNU'
-})

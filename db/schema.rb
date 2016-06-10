@@ -26,14 +26,14 @@ ActiveRecord::Schema.define(version: 20160613152410) do
   create_table "courses", force: :cascade do |t|
     t.string   "course_num"
     t.string   "title"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "school_id"
-    t.integer  "professor_id"
-    t.integer  "past_course_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "issue_num"
     t.text     "description"
+    t.integer  "professor_id"
   end
+
+  add_index "courses", ["professor_id"], name: "index_courses_on_professor_id"
 
   create_table "courses_users", force: :cascade do |t|
     t.integer "user_id"
@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(version: 20160613152410) do
 
   add_index "courses_users", ["course_id"], name: "index_courses_users_on_course_id"
   add_index "courses_users", ["user_id"], name: "index_courses_users_on_user_id"
+
+  create_table "crawl_logs", force: :cascade do |t|
+    t.string   "url"
+    t.text     "contents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "issues", force: :cascade do |t|
     t.string   "title"
@@ -64,12 +71,6 @@ ActiveRecord::Schema.define(version: 20160613152410) do
   create_table "professors", force: :cascade do |t|
     t.string   "name"
     t.text     "picture"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "schools", force: :cascade do |t|
-    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
