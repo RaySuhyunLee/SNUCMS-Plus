@@ -34,27 +34,30 @@
   <% end %>
 
   <div class="ui divider" id="edit_divider"></div>
-  <% @comments.each do |comment| %>
-    <p><%= comment.commenter + ' commented' %></p>
-	<% unless comment.contents.nil? %>
-	  <% text = render_issue_link(comment.contents) %>
-	  <% text = render_easy_link(text) %>
-	  <% text = render_latex_math(text) %>
-	  <% text = text.gsub(/\\\$/) do '$' end %>
-	  <%= render_markdown(text) %>
-	<% end %>
-	<% if @parent_name == "Course" %>
-      <% @comment_path = course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id) %>
+  <div class="ui comments">
+    <% @comments.each_with_index do |comment, index| %>
+      <div class="comment" id="comment_<%= index %>">
+        <a class="author"><%= comment.commenter %></a>
+        <% unless comment.contents.nil? %>
+	        <% text = render_issue_link(comment.contents) %>
+	        <% text = render_easy_link(text) %>
+	        <% text = render_latex_math(text) %>
+	        <% text = text.gsub(/\\\$/) do '$' end %>
+	        <%= render_markdown(text) %>
+	      <% end %>
+	      <% if @parent_name == "Course" %>
+          <% @comment_path = course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id) %>
+        <% end %>
+	      <div class="actions">
+          <a class="edit" id="comment_edit_<%= index %>" do>수정</a>
+          <a class="delete">
+            <%= link_to '삭제', @comment_path, method: :delete, data: {confirm: 'Are you sure?' } %>
+          </a>
+        </div>
+        <div class="ui divider"></div>
+      </div>
     <% end %>
-  
-	<div class="ui button" id="comment_edit_button" do>수정</div>
-
-    <div class="ui button">
-      <%= link_to '삭제', @comment_path, method: :delete, data: {confirm: 'Are you sure?' } %>
-    </div>
-
-    <div class="ui divider"></div>
-  <% end %>
+  </div>
 
   <%= form_for([@issue, @issue.comments.create], url: @comments_path) do |f| %>
     <div class="ui form">
