@@ -132,8 +132,8 @@ class IssuesController < ApplicationController
   def set_regex
     @regex =
     {
+      issue_link: /#(\d+)/,
       link: /\[\[([^\]]*)\]\]/,
-      redirect: /^redirect \[\[(.*)\]\]/,
       latex: /(?<!\\)\$(.*)\$/
     }
   end
