@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
-  
+
   # Home routing
   get 'home/load_recent_timeline'
   get 'home/load_subscription_timeline'
@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get 'wiki' => 'wiki_pages#index', as: :wiki
   post 'wikipage/render' => 'wiki_pages#render_page'
   post 'wikipage/permission' => 'wiki_pages#edit_permission'
+  post 'wikipage/link' => 'wiki_pages#link_page'
   get 'wiki/:title/new' => 'wiki_pages#new', as: :new_wiki_page
   get 'wiki/:title/empty' => 'wiki_pages#empty', as: :empty_wiki_page
   get 'wiki/:title/edit' => 'wiki_pages#edit', as: :edit_wiki_page

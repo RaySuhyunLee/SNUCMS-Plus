@@ -36,6 +36,7 @@ class WikiPagesController < ApplicationController
   def new
     @page = WikiPage.new
     @page.title = params[:title]
+    @page.type = 'General'
 
     unless @page.save
       redirect_to wiki_path
@@ -83,6 +84,32 @@ class WikiPagesController < ApplicationController
   def render_page
     data = params[:contents]
     render partial: 'render_page', locals: {data: data}
+  end
+
+  def link_page
+    course_prof = params[:prof]
+
+    if course_prof.nil?
+      course_prof = ''
+    else
+      course_prof = '|' + course_prof
+    end
+
+    wiki_title = params[:title] + course_prof
+    @page = WikiPage.find_by(wiki_title)
+
+    if @page.nil?
+      @page = WikiPage.new
+      @page.title = wiki_title
+      @page.type = 'Course'
+
+      unless @page.save
+        render json: { result: 'faild' }
+        return
+      end
+    end
+
+    render json: { result: wiki_page_path(@page.title) }
   end
 
   private
