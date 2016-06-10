@@ -135,7 +135,8 @@ class IssuesController < ApplicationController
     {
       issue_link: /#(\d+)/,
       link: /\[\[([^\]]*)\]\]/,
-      latex: /(?<!\\)\$(.*)\$/
+      latex: /(?<!\\)\$(.*)\$/,
+      script: /<script>(.*)?<\/script>/m
     }
   end
 

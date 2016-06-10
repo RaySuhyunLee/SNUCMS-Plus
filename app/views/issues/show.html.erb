@@ -35,25 +35,37 @@
   <div class="ui comments">
     <% @comments.each_with_index do |comment, index| %>
       <div class="comment" id="comment_<%= index %>">
-        <a class="author"><%= comment.commenter %></a>
-        <% unless comment.contents.nil? %>
-	        <% text = render_issue_link(comment.contents) %>
-	        <% text = render_easy_link(text) %>
-	        <% text = render_latex_math(text) %>
-	        <% text = text.gsub(/\\\$/) do '$' end %>
-	        <%= render_markdown(text) %>
-	      <% end %>
-	      <% if @parent_name == "Course" %>
-          <% @comment_path = course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id) %>
-        <% end %>
-	      <div class="actions">
-          <a class="edit" id="comment_edit_<%= index %>" do>수정</a>
-          <a class="delete">
-            <%= link_to '삭제', @comment_path, method: :delete, data: {confirm: 'Are you sure?' } %>
-          </a>
+        <div class="content">
+          <a class="author"><%= comment.commenter %></a>
+          <div class="text" id="comment_text_<%= index %>">
+            <% unless comment.contents.nil? %>
+              <% text = render_issue_link(comment.contents) %>
+              <% text = render_easy_link(text) %>
+              <% text = render_latex_math(text) %>
+              <% text = text.gsub(/\\\$/) do '$' end %>
+              <% text = escape_script_tag(text) %>
+              <%= render_markdown(text) %>
+	          <% end %>
+          </div>
+	        <% if @parent_name == "Course" %>
+            <% @comment_path = course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id) %>
+          <% end %>
+	        <div class="actions">
+            <a class="edit_button" id="comment_edit_button_<%= index %>" do>수정</a>
+            <a class="delete">
+              <%= link_to '삭제', @comment_path, method: :delete, data: {confirm: 'Are you sure?' } %>
+            </a>
+          </div>
         </div>
-        <div class="ui divider"></div>
       </div>
+      <div class="ui form comment_edit" id="comment_edit_<%= index %>">
+        <div class="field">
+          <textarea id="edit_text_<%= index %>"></textarea>
+        </div>
+        <div class="ui button edit_save_button" id="edit_save_<%= index %>">저장</div>
+        <div class="ui button edit_cancle_button" id="edit_cancle_<%= index %>">취소</div>
+      </div>
+      <div class="ui divider"></div>
     <% end %>
   </div>
 
