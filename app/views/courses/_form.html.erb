@@ -20,8 +20,12 @@
     <%= f.text_field :course_num %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.label :professor %><br>
+    <div class="ui icon input">
+      <input type="text" placeholder="검색" id="search-box" autocomplete="off"/>
+      <i class="search icon"></i>
+    </div>
+    <div class="ui fluid popup" id="popup"></div>
   </div>
   <div class="actions">
     <%= f.submit class: "ui button" %>
@@ -30,3 +34,6 @@
   <%= link_to "취소", @course, class: "ui button" %>
 <% end %>
 
+<script>
+  var pf = ProfessorFinder($("#search-box"), "<%= find_professor_path %>");
+</script>

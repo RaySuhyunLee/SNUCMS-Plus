@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   put 'wiki/:title' => 'wiki_pages#update'
   delete 'wiki/:title' => 'wiki_pages#destroy'
 
+  # Professor routing
+  get 'professors/find', as: :find_professor
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

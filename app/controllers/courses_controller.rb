@@ -51,7 +51,7 @@ class CoursesController < ApplicationController
     redirect_to courses_url, notice: 'Course was successfully destroyed.'
   end
 
-  # GET /courses/:id/subscribe.json 
+  # GET /courses/:id/subscribe 
   def subscribe
     user = current_user
     response = ''
