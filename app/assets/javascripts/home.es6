@@ -52,8 +52,8 @@ var IssueContainer = React.createClass({
 });
 
 var Timeline = React.createClass({
+  updateEnabled: false,
   updateScheduled: false,
-  noMoreUpdate: false,
   isLoaderOnScreen: function() {
     var viewportBottom = $(window).scrollTop() + $(window).height();
     return $("#loader").offset().top <= viewportBottom;
@@ -61,8 +61,14 @@ var Timeline = React.createClass({
   getInitialState: function() {
     return {noMoreUpdate: false};
   },
+  enableUpdate: function() {
+    updateEnabled: true;
+    $("#more-button").hide();
+    this.scheduleUpdate();
+    window.addEventListener('scroll', this.scheduleUpdate);
+  },
   scheduleUpdate: function() {
-    if(!this.noMoreUpdate && !this.updateScheduled && this.isLoaderOnScreen()) {
+    if(!this.updateScheduled && this.isLoaderOnScreen()) {
       this.updateScheduled = true;
       $("#loader").addClass("active");
       setTimeout(() => { this.refs.issueContainer.loadIssues(); }, 1000);
@@ -77,13 +83,13 @@ var Timeline = React.createClass({
     }
   },
   componentDidMount: function() {
-    window.addEventListener('scroll', this.scheduleUpdate);
   },
   render: function() {
     return (
       <div>
         <IssueContainer id="issue-container" url={this.props.url}
-          how_many={5} update_done={this.updateDone} ref="issueContainer" /> 
+          how_many={5} update_done={this.updateDone} ref="issueContainer" />
+        <div className="ui button" onClick={this.enableUpdate} id="more-button">더 보기</div>
         <div className="ui inline text loader" id="loader" ref="loader" >긁어오는 중</div>
       </div>
     );
