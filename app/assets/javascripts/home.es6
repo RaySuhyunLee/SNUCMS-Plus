@@ -3,19 +3,23 @@ var IssueList = React.createClass({
   render: function() {
     var issueFeeds = this.props.data.map( function(issue) {
       return (
-        <div className="item" key={issue.id}>
-          <a className="header" href={issue.parent_url} >
-            {issue.parent_title}
-          </a>
+        <div className="event" key={issue.id}>
           <div className="content">
-            {issue.title} <br/>
-            {issue.created_at}
+            <div className="summary" >
+              <a href={issue.parent_url}> {issue.parent_title} </a>
+              <div className="date">
+                {issue.created_at}
+              </div>
+            </div>
+            <div className="extra text">
+              <a href={issue.issue_url}> {issue.title} </a>
+            </div>
           </div>
         </div>
       );
     });
     return (
-      <div className="ui relaxed devided list">
+      <div className="ui feed">
         {issueFeeds}
       </div>
     );
