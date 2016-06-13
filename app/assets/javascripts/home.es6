@@ -3,7 +3,7 @@ var IssueList = React.createClass({
   render: function() {
     var issueFeeds = this.props.data.map( function(issue) {
       return (
-        <div className="item">
+        <div className="item" key={issue.id}>
           <a className="header" href={issue.parent_url} >
             {issue.parent_title}
           </a>

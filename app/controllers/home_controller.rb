@@ -51,7 +51,6 @@ private
       parent = ""
       parent_url = ""
       issue_url = ""
-      puts "id: #{issue.id}, have_issue_type: #{issue.have_issue_type}"
       if issue.have_issue_type.eql? 'Course'
         parent = Course.find(issue.have_issue_id).title
         issue_url = course_issue_path(issue.have_issue_id, issue.parent_issue_id)
@@ -61,7 +60,9 @@ private
       end
 
       data.append({
+        id: issue.id,
         title: issue.title,
+        issue_id: issue.parent_issue_id,
         issue_url: issue_url,
         parent_title: parent,
         parent_url: parent_url,
