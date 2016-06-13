@@ -34,7 +34,7 @@ var IssueContainer = React.createClass({
         this.issueList = this.issueList.concat(issues);
         this.count += issues.length;
         this.setState({data: this.issueList});
-        this.props.update_done();
+        this.props.update_done(issues.length);
       }
     });
   },
@@ -52,25 +52,32 @@ var IssueContainer = React.createClass({
 });
 
 var Timeline = React.createClass({
+  updateScheduled: false,
+  noMoreUpdate: false,
   isLoaderOnScreen: function() {
     var viewportBottom = $(window).scrollTop() + $(window).height();
     return $("#loader").offset().top <= viewportBottom;
   },
   getInitialState: function() {
-    return {updateScheduled: false};
+    return {noMoreUpdate: false};
   },
-  updateDone: function() {
-    this.setState({updateScheduled: false});
+  scheduleUpdate: function() {
+    if(!this.noMoreUpdate && !this.updateScheduled && this.isLoaderOnScreen()) {
+      this.updateScheduled = true;
+      $("#loader").addClass("active");
+      setTimeout(() => { this.refs.issueContainer.loadIssues(); }, 1000);
+    }
+  },
+  updateDone: function(length) {
+    this.updateScheduled = false;
     $("#loader").removeClass("active");
+
+    if (length < 5) {
+      window.removeEventListener('scroll', this.scheduleUpdate);
+    }
   },
   componentDidMount: function() {
-    window.addEventListener('scroll', () => {
-      if(!this.state.updateScheduled && this.isLoaderOnScreen()) {
-        this.setState({updateScheduled: true});
-        $("#loader").addClass("active");
-        setTimeout(() => { this.refs.issueContainer.loadIssues(); }, 1000);
-      }
-    });
+    window.addEventListener('scroll', this.scheduleUpdate);
   },
   render: function() {
     return (
