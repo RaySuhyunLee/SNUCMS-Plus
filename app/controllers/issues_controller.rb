@@ -25,6 +25,7 @@ class IssuesController < ApplicationController
   def new
     @issue = @parent.issues.new
     @comment = @issue.comments.new
+    @user_id = current_user.id
   end
 
   # POST /(parent_type)/:(parent_id)/issues/

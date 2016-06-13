@@ -34,7 +34,10 @@
       <% end %>
       <div class="comment" id="comment_<%= index %>">
         <div class="content">
-          <a class="author"><%= comment.commenter %></a>
+          <a class="author">
+            <% user = User.find(comment.commenter) %>
+            <%= user.name %>
+          </a>
           <div class="text" id="comment_text_<%= index %>">
             <% unless comment.contents.nil? %>
               <% text = render_issue_link(comment.contents) %>
@@ -67,8 +70,7 @@
   <%= form_for([@issue, @issue.comments.create], url: @comments_path) do |f| %>
     <div class="ui form">
       <div class="field">
-        <%= f.label :commenter %><br />
-        <%= f.text_field :commenter, required: true %>
+        <%= f.hidden_field :commenter, :value => current_user.id %>
       </div>
       <div class="field">
         <%= f.label :comments %><br />
