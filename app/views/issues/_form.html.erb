@@ -16,6 +16,10 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+  <div class="field">
+    <%= f.label :due %><br> 
+    <%= f.datetime_select :due, {:include_blank => true, :default => nil} %>
+  </div>
 
   <%= render :partial => 'comments/form_create', :locals => {:form => f} %>
 

@@ -10,6 +10,12 @@
     <div class="ui huge header" id="issue_title_text">
       <%= @issue.title %>
     </div>
+    <p>
+      <% unless @issue.due == nil %>
+        <%= "Issue due: " %>
+        <%= @issue.due %>
+      <% end %>
+    </p>
   </div>
   <div class="ui labeled action huge input" id="issue_title_input">
     <div class="ui label">
@@ -35,8 +41,10 @@
       <div class="comment" id="comment_<%= index %>">
         <div class="content">
           <a class="author">
-            <% user = User.find(comment.commenter) %>
-            <%= user.name %>
+            <% if comment.commenter.match(/d+/).nil? %>
+              <% user = User.find_by_id(comment.commenter) %>
+              <%= user.name %>
+            <% end %>
           </a>
           <div class="text" id="comment_text_<%= index %>">
             <% unless comment.contents.nil? %>
