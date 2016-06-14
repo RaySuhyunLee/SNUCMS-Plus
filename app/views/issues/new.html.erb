@@ -1,8 +1,10 @@
-<h1>New Issue</h1>
+<div class="ui container">
+  <h1>New Issue</h1>
+  
+  <%= render 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', @index_path %>
+  <%= link_to 'Back', @index_path %>
+</div>
 
 <script>
   jQuery('#datetimepicker').datetimepicker({defaultTime:'00:00'});

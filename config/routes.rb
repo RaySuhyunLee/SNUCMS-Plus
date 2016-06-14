@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :issuetags
   devise_for :users, controllers: {
     sessions: "accounts/sessions",
     registrations: "accounts/registrations"

@@ -12,6 +12,7 @@ function issueTitleEdit() {
   $("#issue_edit_button").hide();
   $("#issue_title").hide();
   $("#issue_title_input").show();
+  $("#due_edit_button").hide();
 }
 
 // Issue title edition cancle
@@ -19,6 +20,7 @@ function issueTitleCancle() {
   $("#issue_edit_button").show();
   $("#issue_title").show();
   $("#issue_title_input").hide();
+  $("#due_edit_button").show();
 }
 
 // Issue title save
@@ -35,6 +37,7 @@ function issueTitleSave() {
   $("#issue_edit_button").show()
   $("#issue_title").show();
   $("#issue_title_input").hide();
+  $("#due_edit_button").show();
 }
 
 // Issue due edit
