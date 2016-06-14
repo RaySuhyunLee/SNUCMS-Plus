@@ -67,6 +67,10 @@ group :development do
   gem 'spring'
 end
 
+# datepicker plugtin
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
 end
+
+# pagination plugin
+gem 'will_paginate'
