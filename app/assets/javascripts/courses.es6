@@ -16,88 +16,54 @@ var ProfessorInfo = React.createClass({
 });
 
 var ProfessorList = React.createClass({
-  render: function() {
-    var list = this.props.data.map(function(professor) {
-      return (
-        <ProfessorInfo data={professor} key={professor.id} />
-      )
-    });
-
-    return (
-      <div className="ui items">
-        {list}
-      </div>
-    );
-  }
-});
-
-var ProfessorPopup = React.createClass({
+  dropdown: null,
   searchSchedule: null,
   getProfessor: function(name) {
     $.get({
       url: this.props.url,
       data: { name: name },
       success: (data) => {
+        this.dropdown.removeClass("loading");
         this.setState({isLoading: false, data: JSON.parse(data).professors });
       }
+    });
+  },
+  componentDidMount: function() {
+    this.dropdown = $(this.props.dropdown);
+    this.dropdown.dropdown();
+    var input = this.dropdown.find(".search");
+    input.change(() => {
+      if (!this.state.isLoading) {
+        this.setState({isLoading: true});
+        this.dropdown.addClass("loading");
+      }
+      clearTimeout(this.searchSchedule);
+      this.searchSchedule = setTimeout(() => {
+        this.getProfessor(input.val());
+      }, 600);
     });
   },
   getInitialState: function() {
     return { data: [], isLoading: false };
   },
-  componentDidMount: function() {
-    var searchBox = $(this.props.search_box);
-    searchBox.on('input', () => {
-      if (searchBox.val().length == 0) {
-        searchBox.popup('hide');
-      } else {
-        if (searchBox.popup('is hidden')) {
-          searchBox.popup('show');
-        }
-        if (!this.state.isLoading) {
-          this.setState({isLoading: true});
-        }
-        clearTimeout(this.searchSchedule);
-        this.searchSchedule = setTimeout(() => {
-          this.getProfessor(searchBox.val());
-        }, 600);
-      }
-    });
-  },
   render: function() {
-    var contents;
-    if (this.state.isLoading) {
-      contents = <div className='ui active inline centered loader'></div>;
-    } else if (this.state.data.length > 0) {
-        contents = <ProfessorList data={this.state.data} />;
-    } else {
-      contents = <p>음슴</p>;
-    }
+    var list = this.state.data.map(function(professor) {
+      return (
+        <ProfessorInfo data={professor} key={professor.id} />
+      )
+    });
 
     return (
-      <div className="ui">
-        {contents}
+      <div>
+        {list}
       </div>
     );
   }
 });
 
-function initProfessorFinder(searchBox, popup, searchUrl) {
-  var $searchBox = $(searchBox);
-  $searchBox.popup({
-    popup: popup,
-    position: 'bottom left',
-    on: 'manual',
-    contents: "<div id='popup' ></div>",
-    hideOnScroll: false
-  });
-
-  $searchBox.popup('show');
-
-  var popup = $searchBox.popup('get popup')[0];
-
+function initProfessorFinder(dropdown, container, searchUrl) {
   ReactDOM.render(
-    <ProfessorPopup url={searchUrl} search_box={searchBox}/>,
-    popup
+    <ProfessorList dropdown={dropdown} url={searchUrl} />,
+    $(container)[0]
   );
 }

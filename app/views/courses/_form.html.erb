@@ -21,11 +21,14 @@
   </div>
   <div class="field">
     <%= f.label :professor %><br>
-    <div class="ui icon input">
-      <input type="text" placeholder="검색" id="search-box" autocomplete="off"/>
+    <div class="ui search selection dropdown" id="dropdown">
+      <input type="hidden" name="professor" />
       <i class="search icon"></i>
+      <div class="default text">검색</div>
+      <div class="menu" id="dropdown-menu">
+        <div class="item">blabla</div>
+      </div>
     </div>
-    <div id="popup-container" class="ui fluid popup"></div>
   </div>
   <div class="actions">
     <%= f.submit class: "ui button" %>
@@ -35,5 +38,17 @@
 <% end %>
 
 <script>
-  initProfessorFinder("#search-box", "#popup-container", "<%= find_professor_path %>");
+  $.fn.api.settings.api = {
+    'get professors' : '<%= find_professor_path %>/?name={query}'
+  };
+  $("#dropdown").dropdown({
+    apiSettings: {
+      action: 'get professors',
+    },
+    fields: {
+      results: 'results',
+      name: 'name'
+    }
+  });
+  //initProfessorFinder("#dropdown", "#dropdown-menu", "<%= find_professor_path %>");
 </script>
