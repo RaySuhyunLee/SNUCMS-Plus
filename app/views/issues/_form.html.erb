@@ -18,7 +18,7 @@
   </div>
   <div class="field">
     <%= f.label :due %><br> 
-    <%= f.datetime_select :due, {:include_blank => true, :default => nil} %>
+    <%= f.text_field :due, :id => "datetimepicker" %>
   </div>
 
   <%= render :partial => 'comments/form_create', :locals => {:form => f} %>
