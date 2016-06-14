@@ -1,66 +1,110 @@
-var how_many = 5;
 
-class Timeline {
-  constructor (containerId, loadUrl) {
-    this.timelineContainer = $(containerId);
-    this.url = loadUrl;
-
-    this.init();
-  }
- 
-  init() {
-    /*var listView = new infinity.ListView(
-      timelineContainer
-    );*/
-    this.count = 0;
-    this.updateScheduled = false;
-    this.issueContainer = $("<div></div>")
-        .addClass("ui relaxed devided list");
-    this.loader = $("<div></div>")
-        .addClass("ui inline text loader")
-        .append('긁어오는 중');
-    this.timelineContainer.append(this.issueContainer);
-    this.timelineContainer.append(this.loader);
-    
-    $(window).on('scroll', () => {
-      if(!this.updateScheduled && this.isLoaderOnScreen()) {
-        this.loader.addClass("active");
-        setTimeout(() => {this.append();}, 1000);
-      }
+var IssueList = React.createClass({
+  render: function() {
+    var issueFeeds = this.props.data.map( function(issue) {
+      return (
+        <div className="event" key={issue.id}>
+          <div className="content">
+            <div className="summary" >
+              <a href={issue.parent_url}> {issue.parent_title} </a>
+              <div className="date">
+                {issue.created_at}
+              </div>
+            </div>
+            <div className="extra text">
+              <a href={issue.issue_url}> {issue.title} </a>
+            </div>
+          </div>
+        </div>
+      );
     });
-
-    this.append();
-  }
-
-  append() {
-    this.updateScheduled = true;
-    var data = { offset: this.count, how_many: how_many }
-    $.get(
-      this.url,
-      data,
-      (result) => {
-        var issues = JSON.parse(result).issues;
-        for (var i in issues) {
-          var issue = issues[i];
-          var newItem = $("<div class='item'></div>");
-          var content = $("<div class='content'></div>");
-          var course = $("<a class='header'>" + issue.parent_title + "</a>");
-          course.attr('href', issue.parent_url);
-          content.append(course);
-          content.append(issue.title + "<br>" + issue.created_at);
-          newItem.append(content);
-          this.issueContainer.append(newItem);
-        }
-          this.count += issues.length;
-
-        this.updateScheduled = false;
-        this.loader.removeClass('active');
-      }
+    return (
+      <div className="ui feed">
+        {issueFeeds}
+      </div>
     );
   }
- 
-  isLoaderOnScreen() {
-    var viewportBottom = $(window).scrollTop() + $(window).height();
-    return this.loader.offset().top <= viewportBottom;
+}); 
+
+var IssueContainer = React.createClass({
+  count: 0,
+  issueList: [],
+  loadIssues: function() {
+    $.get({
+      url: this.props.url,
+      data: { offset: this.count, how_many: this.props.how_many },
+      success: (result) => {
+        var issues = JSON.parse(result).issues;
+        this.issueList = this.issueList.concat(issues);
+        this.count += issues.length;
+        this.setState({data: this.issueList});
+        this.props.update_done(issues.length);
+      }
+    });
+  },
+  getInitialState: function() {
+    return {data: this.issueList}
+  },
+  componentDidMount: function() {
+    this.loadIssues();
+  },
+  render: function() {
+    return (
+      <IssueList data={this.state.data} />
+    );
   }
+});
+
+var Timeline = React.createClass({
+  updateEnabled: false,
+  updateScheduled: false,
+  isLoaderOnScreen: function() {
+    var viewportBottom = $(window).scrollTop() + $(window).height();
+    return $("#loader").offset().top <= viewportBottom;
+  },
+  getInitialState: function() {
+    return {noMoreUpdate: false};
+  },
+  enableUpdate: function() {
+    updateEnabled: true;
+    $("#more-button").hide();
+    this.scheduleUpdate();
+    window.addEventListener('scroll', this.scheduleUpdate);
+  },
+  scheduleUpdate: function() {
+    if(!this.updateScheduled && this.isLoaderOnScreen()) {
+      this.updateScheduled = true;
+      $("#loader").addClass("active");
+      setTimeout(() => { this.refs.issueContainer.loadIssues(); }, 1000);
+    }
+  },
+  updateDone: function(length) {
+    this.updateScheduled = false;
+    $("#loader").removeClass("active");
+
+    if (length < 5) {
+      window.removeEventListener('scroll', this.scheduleUpdate);
+    }
+  },
+  componentDidMount: function() {
+  },
+  render: function() {
+    return (
+      <div>
+        <IssueContainer id="issue-container" url={this.props.url}
+          how_many={5} update_done={this.updateDone} ref="issueContainer" />
+        <div className="ui button" onClick={this.enableUpdate} id="more-button">더 보기</div>
+        <div className="ui inline text loader" id="loader" ref="loader" >긁어오는 중</div>
+      </div>
+    );
+  }
+});
+
+function setTimeline(container, url) {
+  var timeline = ReactDOM.render(
+    <Timeline url={url} />,
+    $(container).get(0)
+  );
+
+  return timeline;
 }
