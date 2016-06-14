@@ -51,7 +51,9 @@
           <a class="author">
             <% if comment.commenter.match(/d+/).nil? %>
               <% user = User.find_by_id(comment.commenter) %>
-              <%= user.name %>
+              <% unless user == nil %>
+                <%= user.name %>
+              <% end %>
             <% end %>
           </a>
           <div class="text" id="comment_text_<%= index %>">
