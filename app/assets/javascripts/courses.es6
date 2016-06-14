@@ -2,11 +2,13 @@ var ProfessorInfo = React.createClass({
   render: function() {
     return (
       <div className="item">
-        <div className="image">
-          <img src={this.props.picture} />
+        <div className="ui tiny image">
+          <img src={this.props.data.picture} />
         </div>
         <div className="content">
-          <p className="header">{this.props.name}</p>
+          <p className="header">{this.props.data.name}</p>
+          <div className="meta">
+          </div>
         </div>
       </div>
     );
@@ -22,7 +24,7 @@ var ProfessorList = React.createClass({
     });
 
     return (
-      <div>
+      <div className="ui items">
         {list}
       </div>
     );
@@ -36,7 +38,7 @@ var ProfessorPopup = React.createClass({
       url: this.props.url,
       data: { name: name },
       success: (data) => {
-        this.setState({isLoading: false, data: JSON.parse(data)});
+        this.setState({isLoading: false, data: JSON.parse(data).professors });
       }
     });
   },
@@ -73,20 +75,24 @@ var ProfessorPopup = React.createClass({
     }
 
     return (
-      <div>
+      <div className="ui">
         {contents}
       </div>
     );
   }
 });
 
-function initProfessorFinder(searchBox, searchUrl) {
+function initProfessorFinder(searchBox, popup, searchUrl) {
   var $searchBox = $(searchBox);
   $searchBox.popup({
+    popup: popup,
     position: 'bottom left',
     on: 'manual',
+    contents: "<div id='popup' ></div>",
     hideOnScroll: false
   });
+
+  $searchBox.popup('show');
 
   var popup = $searchBox.popup('get popup')[0];
 

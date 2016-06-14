@@ -25,7 +25,7 @@
       <input type="text" placeholder="검색" id="search-box" autocomplete="off"/>
       <i class="search icon"></i>
     </div>
-    <div id="popup-container"></div>
+    <div id="popup-container" class="ui fluid popup"></div>
   </div>
   <div class="actions">
     <%= f.submit class: "ui button" %>
@@ -35,5 +35,5 @@
 <% end %>
 
 <script>
-  initProfessorFinder("#search-box", "<%= find_professor_path %>");
+  initProfessorFinder("#search-box", "#popup-container", "<%= find_professor_path %>");
 </script>
