@@ -76,3 +76,8 @@ function commentCancle() {
   $("#comment_"+idx).show();  
   $("#comment_edit_"+idx).hide();
 }
+
+// Datetime clear
+function datetimeClear() {
+  $("#datetime_div").datetimepicker('reset')
+}

@@ -18,6 +18,10 @@
   </table>
 
   <div class="ui divider"></div>
-  <div class="ui button"><%= link_to '글쓰기', @new_path %></div>
-  <div class="ui button"><%= link_to '돌아가기', course_path(@parent.id) %></div>
+  <%= link_to @new_path do %>
+    <div class="ui button">글쓰기</div>
+  <% end %>
+  <%= link_to course_path(@parent.id) do %>
+    <div class="ui button">돌아가기</div>
+  <% end %>
 </div>
