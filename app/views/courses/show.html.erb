@@ -1,6 +1,10 @@
 <div class="ui container">
   <div class="ui grid">
-    <div class="thirteen wide column">
+    <% if @course.professor_id.nil? %>
+      <div class="sixteen wide column">
+    <% else %>
+      <div class="thirteen wide column">
+    <% end %>
       <div class="ui grid">
         <div class="thirteen wide column">
           <div class="ui huge header"><%= @course.title %></div>
@@ -19,19 +23,21 @@
         <%= @course.description %>
       </div>
     </div>
-
-    <div class="three wide column">
-      <div class="ui fluid card">
-        <div class="image">
-          <% prof = Professor.find_by_id(@course.professor_id) %>
-          <img src="<%= prof.picture if not prof.nil? %>" />
-        </div>
-        <div class="content">
-          <% prof = Professor.find_by_id(@course.professor_id) %>
-          <a class="header"><%= prof.name if not prof.nil? %></a>
+    
+    <% unless @course.professor_id.nil? %>
+      <div class="three wide column">
+        <div class="ui fluid card">
+          <div class="image">
+            <% prof = Professor.find_by_id(@course.professor_id) %>
+            <img src="<%= prof.picture if not prof.nil? %>" />
+          </div>
+          <div class="content">
+            <% prof = Professor.find_by_id(@course.professor_id) %>
+            <a class="header"><%= prof.name if not prof.nil? %></a>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
 
   <%= link_to '이슈', course_issues_path(@course.id), class: "ui button" %>

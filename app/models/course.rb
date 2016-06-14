@@ -1,4 +1,7 @@
 class Course < ActiveRecord::Base
+  validates :title, presence: true
+  validates :course_num, presence: true
+
   has_many :issues, :as => :have_issue, dependent: :destroy 
   belongs_to :professor
 

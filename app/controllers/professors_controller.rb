@@ -7,7 +7,7 @@ class ProfessorsController < ApplicationController
     data = []
     professors.each do |professor|
       data.append({
-        name: "<img src='#{professor.picture}' />#{professor.name}",
+        name: "<img src='#{professor.picture}' /><span class='name'>#{professor.name}</span>",
         value: professor.id
       });
     end
