@@ -4,6 +4,7 @@
 function documentLoad() {
   $("#issue_title_input").hide();
   $(".comment_edit").hide();
+  $("#due_input").hide();
 }
 
 // Issue title edit
@@ -34,6 +35,34 @@ function issueTitleSave() {
   $("#issue_edit_button").show()
   $("#issue_title").show();
   $("#issue_title_input").hide();
+}
+
+// Issue due edit
+function dueEdit() {
+  $("#due_input").show();
+}
+
+// Issue due edtion cancle
+function dueEditCancle() {
+  $("#due_input").hide();
+}
+
+// Issue due save
+function dueSave() {
+  var due = $("#datetimepicker").val();
+  var path = this.id + "/update_due";
+
+  $.post(
+    path,
+    { due : due },
+    function(result) {
+      if (result == "") {
+        $("#issue_due").text("Issue due: none");
+      } else {
+        $("#issue_due").text("Issue due: " + result);
+      }
+    });
+  $("#due_input").hide()
 }
 
 // Comment edit 
@@ -75,4 +104,9 @@ function commentCancle() {
   idx = id_split[2];
   $("#comment_"+idx).show();  
   $("#comment_edit_"+idx).hide();
+}
+
+// Datetime clear
+function datetimeClear() {
+  $("#datetime_div").datetimepicker('reset')
 }

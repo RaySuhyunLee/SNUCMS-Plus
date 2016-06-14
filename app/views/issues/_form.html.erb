@@ -1,5 +1,5 @@
 <!--% @issue.comments.build %-->
-<%= form_for([@parent, @issue]) do |f| %>
+<%= form_for([@parent, @issue], html: {class: "ui form"}) do |f| %>
   <% if @issue.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
@@ -16,11 +16,14 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+  <div class="field", id="datetime_div">
+    <%= f.label :due %><br> 
+    <%= f.text_field :due, :id => "datetimepicker" %>
+  </div>
 
-  <h3>Comment</h3>
   <%= render :partial => 'comments/form_create', :locals => {:form => f} %>
 
   <div class="actions">
-      <%= f.submit %>
+      <%= f.submit class: "ui button" %>
   </div>
 <% end %>

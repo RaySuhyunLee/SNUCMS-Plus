@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         post 'update_contents' => 'comments#update_contents', on: :member
       end
       post 'update_title' => 'issues#update_title', on: :member
+      post 'update_due' => 'issues#update_due', on: :member
       get 'subscribe', on: :member 
     end
     get 'subscribe', on: :member

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160603054916) do
+ActiveRecord::Schema.define(version: 20160613152410) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "contents"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20160603054916) do
     t.integer  "have_issue_id"
     t.string   "have_issue_type"
     t.integer  "parent_issue_id"
+    t.datetime "due"
   end
 
   create_table "issues_users", force: :cascade do |t|

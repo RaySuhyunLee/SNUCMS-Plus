@@ -10,6 +10,19 @@
     <div class="ui huge header" id="issue_title_text">
       <%= @issue.title %>
     </div>
+    <p id="issue_due">
+      <%= "Issue due: " %>
+      <% if @issue.due == nil %>
+        <%= "none" %>
+      <% else %>
+        <%= @issue.due %>
+      <% end %>
+    </p>
+    <div class="ui input", id="due_input">
+      <input id="datetimepicker" type="text">
+      <div class="ui button due_save", id="<%= @issue_path %>">저장</div>
+      <div class="ui button due_cancle">취소</div>
+    </div>
   </div>
   <div class="ui labeled action huge input" id="issue_title_input">
     <div class="ui label">
@@ -22,6 +35,7 @@
 
   <div class="ui divider"></div>
   <div class="ui button" id="issue_edit_button">제목 수정</div>
+  <div class="ui button" id="due_edit_button">기한 수정</div>
   <%= link_to subscribe_course_issue_path(@parent.id, @issue.parent_issue_id) do %>
     <button class="ui button" ><%= @subscribe_button_text %></button>
   <% end %>
@@ -34,7 +48,12 @@
       <% end %>
       <div class="comment" id="comment_<%= index %>">
         <div class="content">
-          <a class="author"><%= comment.commenter %></a>
+          <a class="author">
+            <% if comment.commenter.match(/d+/).nil? %>
+              <% user = User.find_by_id(comment.commenter) %>
+              <%= user.name %>
+            <% end %>
+          </a>
           <div class="text" id="comment_text_<%= index %>">
             <% unless comment.contents.nil? %>
               <% text = render_issue_link(comment.contents) %>
@@ -67,8 +86,7 @@
   <%= form_for([@issue, @issue.comments.create], url: @comments_path) do |f| %>
     <div class="ui form">
       <div class="field">
-        <%= f.label :commenter %><br />
-        <%= f.text_field :commenter, required: true %>
+        <%= f.hidden_field :commenter, :value => current_user.id %>
       </div>
       <div class="field">
         <%= f.label :comments %><br />
@@ -97,4 +115,8 @@
   $(".edit_button").click(commentEdit);
   $(".edit_save_button").click(commentSave);
   $(".edit_cancle_button").click(commentCancle);
+  jQuery('#datetimepicker').datetimepicker({defaultTime:'00:00'});
+  $("#due_edit_button").click(dueEdit);
+  $(".due_cancle").click(dueEditCancle);
+  $(".due_save").click(dueSave);
 </script>

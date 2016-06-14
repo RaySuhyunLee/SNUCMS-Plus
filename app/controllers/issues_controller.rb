@@ -1,7 +1,7 @@
 class IssuesController < ApplicationController
   before_action :set_parent
   before_action :set_regex, only: [:show]
-  before_action :set_issue, only: [:show, :update, :destroy, :subscribe, :update_title]
+  before_action :set_issue, only: [:show, :update, :destroy, :subscribe, :update_title, :update_due]
   before_action :set_comments, only: [:show, :update]
 
   # GET /(parent_type)/:(parent_id)/issues
@@ -25,6 +25,7 @@ class IssuesController < ApplicationController
   def new
     @issue = @parent.issues.new
     @comment = @issue.comments.new
+    @user_id = current_user.id
   end
 
   # POST /(parent_type)/:(parent_id)/issues/
@@ -48,6 +49,12 @@ class IssuesController < ApplicationController
   def update_title
     @issue.update_attribute(:title, params[:contents])
     render plain: @issue.title
+  end
+
+  # POST /(parent_type)/:(parent_id)/issues/:id/update_due
+  def update_due
+    @issue.update_attribute(:due, params[:due])
+    render plain: @issue.due
   end
 
   # PATCH/PUT /(parent_type)/:(parent_id)/issues/:id
