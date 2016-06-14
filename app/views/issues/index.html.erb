@@ -5,7 +5,7 @@
 
   <table class="ui table">
     <tbody>
-      <% @issues.each do |issue| %>
+      <% @issues_page.each do |issue| %>
         <% if @parent_name == "Course" %>
           <% @issue_path = course_issue_path(@parent.id, issue.parent_issue_id) %>
         <% end %>
@@ -16,6 +16,7 @@
       <% end %>
     </tbody>
   </table>
+  <%= will_paginate @issues_page %>
 
   <div class="ui divider"></div>
   <%= link_to @new_path do %>
@@ -25,3 +26,4 @@
     <div class="ui button">돌아가기</div>
   <% end %>
 </div>
+

@@ -7,6 +7,7 @@ class IssuesController < ApplicationController
   # GET /(parent_type)/:(parent_id)/issues
   def index
     @issues = @parent.issues.all
+    @issues_page = @issues.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /(parent_type)/:(parent_id)/issues/:id
