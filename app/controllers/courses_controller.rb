@@ -27,6 +27,7 @@ class CoursesController < ApplicationController
   # POST /courses
   def create
     @course = Course.new(course_params)
+    #@course.professor = Professor.find(params[:professor_id])
     @course.issue_num = 0;
 
     if @course.save
@@ -39,6 +40,7 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/:id
   def update
     if @course.update(course_params)
+      #@course.professor = Professor.find(params[:professor_id])
       redirect_to @course, notice: 'Course was successfully updated.'
     else
       render :edit
@@ -76,7 +78,7 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:course_num, :title, :description)
+    params.require(:course).permit(:course_num, :title, :description, :professor_id)
   end
 
   def is_subscribing?

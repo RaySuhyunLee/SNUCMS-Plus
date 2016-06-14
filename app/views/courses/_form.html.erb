@@ -20,9 +20,9 @@
     <%= f.text_field :course_num %>
   </div>
   <div class="field">
-    <%= f.label :professor %><br>
+    <%= f.label :professor_id %><br>
     <div class="ui search selection dropdown" id="dropdown">
-      <input type="hidden" name="professor" />
+      <%= f.hidden_field :professor_id %>
       <i class="search icon"></i>
       <div class="default text">검색</div>
       <div class="menu" id="dropdown-menu">
@@ -48,7 +48,6 @@
     fields: {
       results: 'results',
       name: 'name'
-    }
+    },
   });
-  //initProfessorFinder("#dropdown", "#dropdown-menu", "<%= find_professor_path %>");
 </script>
