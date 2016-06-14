@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20160615170438) do
     t.text     "contents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "type"
   end
 
 end
