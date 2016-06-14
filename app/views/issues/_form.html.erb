@@ -21,6 +21,31 @@
     <%= f.text_field :due, :id => "datetimepicker" %>
   </div>
 
+  <div class="ui multiple dropdown">
+    <input type="hidden" name="issuetags">
+    <i class="filter icon"></i>
+    <span  class="text">Issue Tags</span>
+    <div class="menu">
+      <div class="ui icon search input">
+        <i class="search icon"></i>
+        <input type="text" placeholder="Search tags...">
+      </div>
+      <div class="divider"></div>
+      <div class="header">
+        <i class="tags icon"></i>
+        Tag Label
+      </div>
+      <div class="scrolling menu">
+        <% Issuetag.all.each do |it| %>
+          <div class="item" data-value="<% it.name %>">
+            <% it.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
   <%= render :partial => 'comments/form_create', :locals => {:form => f} %>
 
   <div class="actions">
