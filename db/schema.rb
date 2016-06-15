@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613152410) do
+ActiveRecord::Schema.define(version: 20160614164440) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "contents"
@@ -60,6 +60,14 @@ ActiveRecord::Schema.define(version: 20160613152410) do
     t.datetime "due"
   end
 
+  create_table "issues_issuetags", force: :cascade do |t|
+    t.integer "issuetag_id"
+    t.integer "issue_id"
+  end
+
+  add_index "issues_issuetags", ["issue_id"], name: "index_issues_issuetags_on_issue_id"
+  add_index "issues_issuetags", ["issuetag_id"], name: "index_issues_issuetags_on_issuetag_id"
+
   create_table "issues_users", force: :cascade do |t|
     t.integer "issue_id"
     t.integer "user_id"
@@ -67,6 +75,12 @@ ActiveRecord::Schema.define(version: 20160613152410) do
 
   add_index "issues_users", ["issue_id"], name: "index_issues_users_on_issue_id"
   add_index "issues_users", ["user_id"], name: "index_issues_users_on_user_id"
+
+  create_table "issuetags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "professors", force: :cascade do |t|
     t.string   "name"

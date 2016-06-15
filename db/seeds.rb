@@ -20,6 +20,17 @@ $course = Course.create({
   issue_num: '0'
 })
 
+if Issuetag.first.nil?
+  Issuetag.create({name: "Project"})
+  Issuetag.create({name: "Assignment"})
+  Issuetag.create({name: "Quiz"})
+  Issuetag.create({name: "Exam"})
+  Issuetag.create({name: "Lab"})
+  Issuetag.create({name: "Report"})
+  Issuetag.create({name: "Question"})
+  Issuetag.create({name: "Debate"})
+end
+
 
 Professor.create({
   name:     '버나드 에거',

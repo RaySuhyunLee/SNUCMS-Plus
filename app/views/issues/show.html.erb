@@ -10,6 +10,16 @@
     <div class="ui huge header" id="issue_title_text">
       <%= @issue.title %>
     </div>
+  </div>
+  <div class="ui labeled action huge input" id="issue_title_input">
+    <div class="ui label">
+      #<%= @issue.parent_issue_id %>
+    </div>
+    <input type="string" placeholder="<%= @issue.title %>" id="issue_title_string">
+    <div class="ui button title_save_button" id="<%= @issue_path %>">저장</div>
+    <div class="ui button" id="issue_title_cancle_button">취소</div>
+  </div>
+  <div id="issue_due_div">
     <p id="issue_due">
       <%= "Issue due: " %>
       <% if @issue.due == nil %>
@@ -23,14 +33,11 @@
       <div class="ui button due_save", id="<%= @issue_path %>">저장</div>
       <div class="ui button due_cancle">취소</div>
     </div>
-  </div>
-  <div class="ui labeled action huge input" id="issue_title_input">
-    <div class="ui label">
-      #<%= @issue.parent_issue_id %>
-    </div>
-    <input type="string" placeholder="<%= @issue.title %>" id="issue_title_string">
-    <div class="ui button title_save_button" id="<%= @issue_path %>">저장</div>
-    <div class="ui button" id="issue_title_cancle_button">취소</div>
+  </div><br>
+  <div id="tags_div">
+    <% @issue.issuetags.each do |it| %>
+      <a class="ui tag label", href="<%= @label_path + "/" + it.name %>"><%= it.name %></a>
+    <% end %>
   </div>
 
   <div class="ui divider"></div>

@@ -10,6 +10,21 @@ class IssuesController < ApplicationController
     @issues_page = @issues.paginate(:page => params[:page], :per_page => 10)
   end
 
+  # GET /(parent_type)/:(parent_id)/labels/:label
+  def index_labels
+    @label = params[:label]
+    @tag = Issuetag.find_by name: @label
+    @issues = []
+
+    unless @label == nil
+      @parent.issues.each do |i|
+        if i.issuetags.include?(@tag)
+          @issues.append(i)
+        end
+      end
+    end
+  end
+
   # GET /(parent_type)/:(parent_id)/issues/:id
   def show
     unless @issue.nil?
@@ -34,10 +49,19 @@ class IssuesController < ApplicationController
     @issue = @parent.issues.new(issue_params)
     @parent.update_attribute(:issue_num, @parent.issue_num + 1)
     @issue.parent_issue_id = @parent.issue_num
+    @issuetags_string = params[:issuetags]
+    @issuetags_id = @issuetags_string.split(',')
+
+    @issuetags_id.each do |it|
+      @issuetag = Issuetag.find_by_id(it)
+      unless @issuetag.nil?
+        @issue.issuetags.append(@issuetag)
+      end
+    end
 
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to @index_path, notice: 'Issue was successfully created.' }
+        format.html { redirect_to @index_path }
         format.json { render :show, status: :created, location: @issue }
       else
         format.html { render :new }
@@ -62,7 +86,7 @@ class IssuesController < ApplicationController
   def update
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to @issue_path, notice: 'Issue was successfully updated.' }
+        format.html { redirect_to @issue_path }
         format.json { render :show, status: :ok, location: @issue }
       else
         format.html { render :edit }
@@ -75,7 +99,7 @@ class IssuesController < ApplicationController
   def destroy
     @issue.destroy
     respond_to do |format|
-      format.html { redirect_to @index_path, notice: 'Issue was successfully destroyed.' }
+      format.html { redirect_to @index_path }
       format.json { head :no_content }
     end
   end
@@ -103,10 +127,11 @@ class IssuesController < ApplicationController
   def set_parent
     parent_type = request.path.split('/')[1]
     if parent_type == "courses"
-	    @parent = Course.find(params[:course_id])
+      @parent = Course.find(params[:course_id])
       @parent_name = "Course"
       @index_path = course_issues_path(params[:course_id])
       @new_path = new_course_issue_path(params[:course_id])
+      @label_path = "/courses/" + @parent.id.to_s + "/labels" 
     end
   end
 
