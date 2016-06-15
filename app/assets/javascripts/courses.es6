@@ -24,7 +24,11 @@ class DescriptionHandler {
       data: { description: this.$form.find("textarea").val() },
       success: (data) => {
         data = JSON.parse(data);
-        this.$description.find("p").text(data.description);
+        if (data.description == null || data.description.length == 0) {
+          this.$description.find("p").text(this.$form.find("textarea").attr('placeholder'));
+        } else {
+          this.$description.find("p").text(data.description);
+        }
         this.closeEditForm();
       }
     });
