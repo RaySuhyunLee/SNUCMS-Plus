@@ -8,8 +8,9 @@ class CoursesController < ApplicationController
 
   # GET /courses/:id
   def show
+    @is_subscribing = is_subscribing?
     if is_subscribing?
-      @subscribe_button_text = "폭풍드랍!"
+      @subscribe_button_text = "드랍!"
     else
       @subscribe_button_text = "수강"
     end
@@ -55,19 +56,18 @@ class CoursesController < ApplicationController
 
   # GET /courses/:id/subscribe 
   def subscribe
+    subscribe = false
     user = current_user
-    response = ''
-    if is_subscribing?
-      response = 'unsubscribed'
-      user.courses.destroy(@course)
-    else
-      response = 'subscribed'
+    if params[:subscribe] == "true"
+      subscribe = true 
       user.courses.append(@course)
+    else
+      subscribe = false
+      user.courses.destroy(@course)
     end
 
     respond_to do |format|
-      format.html { redirect_to course_path(@course) }
-      format.json { render json: { response: response } }
+      format.all { render json: { subscribe: subscribe } }
     end
   end
   

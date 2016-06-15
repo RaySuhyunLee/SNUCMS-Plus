@@ -11,9 +11,7 @@
           <div class="ui large header"><%= @course.course_num %></div>
         </div>
         <div class="three wide column">
-          <%= link_to subscribe_course_path(@course.id) do %>
-            <button class="ui button" ><%= @subscribe_button_text %></button>
-          <% end %>
+          <div class="ui button" id="subscribe-button" data-subscribe="<%= @is_subscribing %>" ><%= @subscribe_button_text %></div>
         </div>
       </div>
 
@@ -77,4 +75,19 @@
   $("#description-cancel-button").on('click', function() {
     descriptionHandler.closeEditForm();
   });
+
+  $("#subscribe-button").on('click', function() {
+    var subscribe = !($(this).attr('subscribe') == "true")
+    $.get({
+      url: '<%= subscribe_course_path %>',
+      data: { subscribe : subscribe },
+      success: (data) => {
+        data = JSON.parse(data);
+        text = data.subscribe ? '드랍!' : '수강';
+        $(this).text(text);
+        $(this).attr('subscribe', data.subscribe)
+      }
+    });
+  });
+
 </script>
