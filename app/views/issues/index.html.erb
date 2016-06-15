@@ -3,15 +3,27 @@
   <div class="ui huge header">이슈 목록</div>
   <div class="ui divider"></div>
 
-  <div class="ui tag labels">
-    <a class="ui red label", href="<%= @index_path %>">All</a>
-    <% Issuetag.all.each do |it| %>
-      <% if it.name.eql? @label %>
-        <a class="ui red label", href="<%= @label_path + "/" + it.name %>"><%= it.name %></a>
-      <% else %>
-        <a class="ui label", href="<%= @label_path + "/" + it.name %>"><%= it.name %></a>
-      <% end %>
-    <% end %>
+  <div class="ui floating dropdown labeld icon button">
+    <i class="filter icon"></i>
+    <span class="text">Tags</span>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <div class="ui icon search input">
+        <i class="search icon"></i>
+        <input type="text" placeholder="Search tags...">
+      </div>
+      <div class="divider"></div>
+      <div class="header">
+        <i class="tags icon"></i>
+        Tag Label
+      </div>
+      <div class="scrolling menu">
+        <a class="item ui red label", href="<%= @index_path %>">All</a>
+        <% Issuetag.all.each do |it| %>
+          <a class="item ui label", href="<%= @label_path + "/" + it.name %>"><%= it.name %></a>
+        <% end %>
+      </div>   
+    </div>
   </div>
 
   <table class="ui table">
@@ -41,3 +53,6 @@
   <% end %>
 </div>
 
+<script>
+  $(".dropdown").dropdown();
+</script>
