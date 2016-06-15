@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get 'subscribe', on: :member 
     end
     get 'subscribe', on: :member
+    patch 'description' => 'courses#update_description', on: :member, as: :update_description
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
