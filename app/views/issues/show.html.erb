@@ -33,10 +33,10 @@
       <div class="ui button due_save", id="<%= @issue_path %>">저장</div>
       <div class="ui button due_cancle">취소</div>
     </div>
-  </div>
+  </div><br>
   <div id="tags_div">
     <% @issue.issuetags.each do |it| %>
-      <a class="ui tag label"><%= it.name %></a>
+      <a class="ui tag label", href="<%= @label_path + "/" + it.name %>"><%= it.name %></a>
     <% end %>
   </div>
 

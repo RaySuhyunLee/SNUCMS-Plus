@@ -10,6 +10,21 @@ class IssuesController < ApplicationController
     @issues_page = @issues.paginate(:page => params[:page], :per_page => 10)
   end
 
+  # GET /(parent_type)/:(parent_id)/labels/:label
+  def index_labels
+    @label = params[:label]
+    @tag = Issuetag.find_by name: @label
+    @issues = []
+
+    unless @label == nil
+      @parent.issues.each do |i|
+        if i.issuetags.include?(@tag)
+          @issues.append(i)
+        end
+      end
+    end
+  end
+
   # GET /(parent_type)/:(parent_id)/issues/:id
   def show
     unless @issue.nil?
@@ -112,10 +127,11 @@ class IssuesController < ApplicationController
   def set_parent
     parent_type = request.path.split('/')[1]
     if parent_type == "courses"
-	    @parent = Course.find(params[:course_id])
+      @parent = Course.find(params[:course_id])
       @parent_name = "Course"
       @index_path = course_issues_path(params[:course_id])
       @new_path = new_course_issue_path(params[:course_id])
+      @label_path = "/courses/" + @parent.id.to_s + "/labels" 
     end
   end
 

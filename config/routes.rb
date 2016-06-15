@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     patch 'description' => 'courses#update_description', on: :member, as: :update_description
   end
 
+  get 'courses/:course_id/labels/:label' => 'issues#index_labels'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
