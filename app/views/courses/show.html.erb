@@ -1,9 +1,9 @@
 <div class="ui container">
   <div class="ui grid">
     <% if @course.professor_id.nil? %>
-      <div class="sixteen wide column">
+    <div class="sixteen wide column">
     <% else %>
-      <div class="thirteen wide column">
+    <div class="thirteen wide column">
     <% end %>
       <div class="ui grid">
         <div class="thirteen wide column">
@@ -19,8 +19,24 @@
 
       <div class="ui divider"></div>
 
-      <div class="ui segment">
-        <%= @course.description %>
+      <div class="ui clearing segment">
+        <div id="description">
+          <p>
+            <% if @course.description.nil? or @course.description.length == 0 %>
+              강의 설명을 작성해주세요.
+            <% else %>
+              <%= @course.description %>
+            <% end %>
+          </p>
+          <div class="ui right floated icon button" id="description-edit-button"><i class="edit icon"></i></div>
+        </div>
+        <div hidden class="ui form" id="description-edit-form">
+          <div class="field">
+            <textarea placeholder="강의 설명을 작성해주세요."></textarea>
+          </div>
+          <div class="ui button" id="description-save-button">저장</div>
+          <div class="ui button" id="description-cancel-button">취소</div>
+        </div>
       </div>
     </div>
     
@@ -40,6 +56,8 @@
     <% end %>
   </div>
 
+  <div class="ui divider"></div>
+
   <%= link_to '이슈', course_issues_path(@course.id), class: "ui button" %>
   <%= link_to '위키', wiki_page_path(@course.title), class: "ui button" %>
   <%= link_to '반달', edit_course_path(@course), class: "ui button" %>
@@ -47,3 +65,16 @@
   <div class="ui divider"></div>
 
 </div>
+
+<script>
+  var descriptionHandler = new DescriptionHandler('#description', '#description-edit-form', '<%= update_description_course_path %>');
+  $("#description-edit-button").on('click', function() {
+    descriptionHandler.showEditForm();
+  });
+  $("#description-save-button").on('click', function() {
+    descriptionHandler.updateDescription();
+  });
+  $("#description-cancel-button").on('click', function() {
+    descriptionHandler.closeEditForm();
+  });
+</script>

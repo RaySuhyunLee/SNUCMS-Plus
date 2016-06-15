@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :subscribe]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :subscribe, :update_description]
 
   # GET /courses 
   def index
@@ -68,6 +68,17 @@ class CoursesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to course_path(@course) }
       format.json { render json: { response: response } }
+    end
+  end
+  
+  # PATCH /courses/:id/description
+  def update_description
+    description = params[:description]
+
+    success = @course.update({description: description})
+
+    respond_to do |format|
+      format.all { render json: {success: success, description: description} }
     end
   end
 
