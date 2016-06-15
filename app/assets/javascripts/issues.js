@@ -7,6 +7,11 @@ function documentLoad() {
   $("#due_input").hide();
 }
 
+// Function called when new issue view is loaded
+function newLoad() {
+  $("#select").dropdown();
+}
+
 // Issue title edit
 function issueTitleEdit() {
   $("#issue_edit_button").hide();
