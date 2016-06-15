@@ -1,8 +1,6 @@
-<%= form_for(@course) do |f| %>
+<%= form_for(@course, html: {class: "ui form"}) do |f| %>
   <% if @course.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
-
       <ul>
       <% @course.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,15 +9,55 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="required field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
-  <div class="field">
-    <%= f.label :course_num %><br>
+  <div class="required field">
+    <%= f.label "강좌 번호" %><br>
     <%= f.text_field :course_num %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="field">
+    <%= f.label :professor_id %><br>
+    <div class="ui fluid search selection dropdown" id="dropdown">
+      <%= f.hidden_field :professor_id %>
+      <i class="search icon"></i>
+      <div class="default text">검색</div>
+      <div class="menu" id="dropdown-menu">
+      </div>
+    </div>
   </div>
+  <div class="actions">
+    <%= f.submit class: "ui button" %>
+    <%= link_to "취소", @course, class: "ui button" %>
+  </div>
+
 <% end %>
+
+<script>
+  $.fn.api.settings.api = {
+    'get professors' : '<%= find_professor_path %>/?name={query}'
+  };
+  var $dropdown = $("#dropdown");
+  $dropdown.dropdown({
+    apiSettings: {
+      action: 'get professors',
+    },
+    fields: {
+      results: 'results',
+      name: 'name'
+    },
+    action: function(text, value) {
+      $dropdown.dropdown('set selected', value);
+      setText(value); 
+      //"<button class='ui icon button'><i class='remove icon'></i></button>"
+    },
+  });
+
+  function setText(value) {
+    var item = $dropdown.dropdown('get item', value);
+    var name = item.find('.name').text();
+    $dropdown.dropdown('set text', name);
+  }
+
+</script>
