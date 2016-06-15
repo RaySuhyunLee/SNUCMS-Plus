@@ -7,8 +7,8 @@ class CreateIssuetags < ActiveRecord::Migration
     end
 
     create_table :issues_issuetags do |t|
-      t.belongs_to :issuetags, index:true
-      t.belongs_to :issues, index:true
+      t.belongs_to :issuetag, index:true
+      t.belongs_to :issue, index:true
     end
   end
 end

@@ -61,12 +61,12 @@ ActiveRecord::Schema.define(version: 20160614164440) do
   end
 
   create_table "issues_issuetags", force: :cascade do |t|
-    t.integer "issuetags_id"
-    t.integer "issues_id"
+    t.integer "issuetag_id"
+    t.integer "issue_id"
   end
 
-  add_index "issues_issuetags", ["issues_id"], name: "index_issues_issuetags_on_issues_id"
-  add_index "issues_issuetags", ["issuetags_id"], name: "index_issues_issuetags_on_issuetags_id"
+  add_index "issues_issuetags", ["issue_id"], name: "index_issues_issuetags_on_issue_id"
+  add_index "issues_issuetags", ["issuetag_id"], name: "index_issues_issuetags_on_issuetag_id"
 
   create_table "issues_users", force: :cascade do |t|
     t.integer "issue_id"

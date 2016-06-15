@@ -34,6 +34,15 @@ class IssuesController < ApplicationController
     @issue = @parent.issues.new(issue_params)
     @parent.update_attribute(:issue_num, @parent.issue_num + 1)
     @issue.parent_issue_id = @parent.issue_num
+    @issuetags_string = params[:issuetags]
+    @issuetags_id = @issuetags_string.split(',')
+
+    @issuetags_id.each do |it|
+      @issuetag = Issuetag.find_by_id(it)
+      unless @issuetag.nil?
+        @issue.issuetags.append(@issuetag)
+      end
+    end
 
     respond_to do |format|
       if @issue.save
