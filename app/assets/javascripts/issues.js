@@ -1,5 +1,3 @@
-// issue edition js
-
 // Function called when document is loaded
 function documentLoad() {
   $("#issue_title_input").hide();

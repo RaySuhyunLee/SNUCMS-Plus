@@ -17,4 +17,6 @@
 //= require components
 //= require semantic-ui
 //= require datetimepicker
+//= require moment.min
+//= require fullcalendar
 //= require_tree .
