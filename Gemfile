@@ -45,7 +45,7 @@ gem 'rouge', '~> 1.10', '>= 1.10.1'
 gem 'paper_trail'
 
 # for ES6 transcompilation
-gem 'sprockets', '>=3.0.0.beta'
+gem 'sprockets', '3.6.0'
 gem 'sprockets-es6'
 
 # reactJS
