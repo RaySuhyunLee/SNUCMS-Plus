@@ -8,9 +8,11 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  #def create
-  #  super
-  #end
+  def create
+    super do |resource|
+      resource.update_attribute(:issue_num, 0);
+    end
+  end
 
   def success
   end

@@ -14,15 +14,9 @@ class IssuesController < ApplicationController
   def index_labels
     @label = params[:label]
     @tag = Issuetag.find_by name: @label
-    @issues = []
-
-    unless @label == nil
-      @parent.issues.each do |i|
-        if i.issuetags.include?(@tag)
-          @issues.append(i)
-        end
-      end
-    end
+    @issues = @tag.issues
+       .where("have_issue_type = ? AND have_issue_id = ?", @parent_name, @parent.id) 
+    @issues_page = @issues.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /(parent_type)/:(parent_id)/issues/:id
@@ -59,14 +53,10 @@ class IssuesController < ApplicationController
       end
     end
 
-    respond_to do |format|
-      if @issue.save
-        format.html { redirect_to @index_path + "/" + @issue.parent_issue_id.to_s}
-        format.json { render :show, status: :created, location: @issue }
-      else
-        format.html { render :new }
-        format.json { render json: @issue.errors, status: :unprocessable_entity }
-      end
+    if @issue.save
+      redirect_to @index_path + "/" + @issue.parent_issue_id.to_s, notice: 'Issue was succesfully created.'
+    else
+      render :new
     end
   end
 
@@ -86,7 +76,7 @@ class IssuesController < ApplicationController
   def update
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to @issue_path }
+        format.html { redirect_to @issue_path, notice: 'Issue was succesfully updated.' }
         format.json { render :show, status: :ok, location: @issue }
       else
         format.html { render :edit }
@@ -99,7 +89,7 @@ class IssuesController < ApplicationController
   def destroy
     @issue.destroy
     respond_to do |format|
-      format.html { redirect_to @index_path }
+      format.html { redirect_to @index_path, notice: 'Isuse was succesfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -131,17 +121,27 @@ class IssuesController < ApplicationController
       @parent_name = "Course"
       @index_path = course_issues_path(params[:course_id])
       @new_path = new_course_issue_path(params[:course_id])
-      @label_path = "/courses/" + @parent.id.to_s + "/labels" 
+      @label_path = "/courses/" + @parent.id.to_s + "/labels"
+      @parent_path = course_path(@parent.id)
+    elsif parent_type == "profile"
+      @parent = current_user
+      @parent_name = "User"
+      @index_path = profile_issues_path
+      @new_path = new_profile_issue_path
+      @label_path = "/profile/labels"
+      @parent_path = profile_path
     end
   end
 
   # Find issue with url parameters.
   # The parameter :id not means issue_id, but parent_issue_id.
   def set_issue
-    # freezed @edit_path = edit_course_issue_path(params[:course_id], params[:id])
     if @parent_name == "Course"
       @issue = Issue.where("have_issue_id = ? AND have_issue_type = ? AND parent_issue_id = ?", params[:course_id], "Course", params[:id]).first
       @issue_path = course_issue_path(@issue.have_issue_id, @issue.parent_issue_id)
+    elsif @parent_name == "User"
+      @issue = Issue.where("have_issue_id = ? AND have_issue_type = ? AND parent_issue_id = ?", current_user.id, "User", params[:id]).first
+      @issue_path = profile_issue_path(@issue.parent_issue_id)
     end
   end
 
@@ -149,6 +149,8 @@ class IssuesController < ApplicationController
   def set_comments
     if @parent_name == "Course"
       @comments_path = course_issue_comments_path(params[:course_id], params[:id])
+    elsif @parent_name == "User"
+      @comments_path = profile_issue_comments_path(params[:id])
     end
   end
 
@@ -172,5 +174,4 @@ class IssuesController < ApplicationController
       script: /<script>(.*)?<\/script>/m
     }
   end
-
 end
