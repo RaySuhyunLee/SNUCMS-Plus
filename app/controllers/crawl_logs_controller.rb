@@ -1,9 +1,9 @@
 class CrawlLogsController < ApplicationController
-  before_action :get_course, only: [create, update, destroy]
+  before_action :get_course, only: [:create, :update, :destroy]
   
   # POST /courses/:course_id/crawl_logs/
   def create
-    @crawl_log = @course.crawl_logs.new(course_params)
+    @crawl_log = @course.crawl_logs.new(crawl_log_params)
     @crawl_log.save
   
     redirect_to @course

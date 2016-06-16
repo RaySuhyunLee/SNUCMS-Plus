@@ -18,9 +18,9 @@
 
       <div class="ui relaxed list">
         <% @course.crawl_logs.all.each do |crawl_log| %>
-          <div class="item">
-            <i class="linkify icon"></i>
-            <div class="content">
+          <div class="item" id="url-<%= crawl_log.id %>">
+            <i class="linkify icon"></i> 
+            <div class="content" >
               <a class="" href=<%= crawl_log.url %> >
                 <% text = crawl_log.url
                 if text.length > 40
@@ -28,11 +28,33 @@
                 end %>
                 <%= text %>
               </a>
-              <i class="edit icon"></i>
+              <i class="edit icon" onclick='swapVisibility("#url-<%= crawl_log.id %>", "#url-form-<%= crawl_log.id %>")'></i>
+              <%= link_to course_crawl_log_path(@course, crawl_log), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: "ui red" do %>
+                <i class="delete icon"></i>
+              <% end %>
             </div>
           </div>
+          <%= form_for(crawl_log, { url: course_crawl_log_path(@course, crawl_log), html: {hidden: true, class: "ui form", id: "url-form-#{crawl_log.id}"}} ) do |f| %>
+            <div class="field actions ui fluid action input">
+              <%= f.text_field :url %>
+              <button class="ui submit button">저장</button>
+            </div>
+          <% end %>
         <% end %>
       </div>
+      <div class="ui icon labeled blue button" id="add-link-button">
+        <i class="plus icon"></i>
+        링크 추가하기
+      </div>
+      <%= form_for @crawl_log, {url: course_crawl_logs_path(@course), html: {hidden: true, class: "ui form", id: "add-link-form"}} do |f| %>
+        <div class="actions field ui fluid action input" >
+          <%= f.text_field :url %>
+          <button class="ui icon labeled blue button" type="submit">
+            <i class="plus icon"></i>
+            링크 추가하기
+          </button>
+        </div>
+      <% end %>
       
       <div class="ui divider"></div>
 
@@ -105,6 +127,10 @@
         $(this).attr('subscribe', data.subscribe)
       }
     });
+  });
+
+  $("#add-link-button").on('click', function() {
+    swapVisibility('#add-link-button', '#add-link-form');
   });
 
 </script>
