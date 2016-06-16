@@ -1,0 +1,20 @@
+<style>
+  .ui.container {
+    margin-top: 3em;
+  }
+</style>
+
+<div class="ui center aligned text container">
+  <div class="ui huge header" >샤과밭에 오신 것을 환영합니다!</div>
+  <div>
+    eTL보다 나은 서비스를 제공하기 위해 노력하겠습니다!
+  </div>
+  
+  <% unless flash[:notice].nil? %>
+    <div class="ui segment" >
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <%= link_to "메인으로 가기", root_path  %>
+</div>
