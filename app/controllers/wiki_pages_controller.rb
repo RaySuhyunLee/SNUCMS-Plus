@@ -36,6 +36,7 @@ class WikiPagesController < ApplicationController
   def new
     @page = WikiPage.new
     @page.title = params[:title]
+    @page.page_type = 'General'
 
     unless @page.save
       redirect_to wiki_path

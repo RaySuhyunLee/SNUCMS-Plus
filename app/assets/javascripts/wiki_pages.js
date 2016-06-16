@@ -32,6 +32,6 @@ function periodic_worker() {
         alert("문서가 이미 수정되었습니다.");
       }
       else
-        setTimeout(periodic_worker, 5000);
+        setTimeout(periodic_worker, 4000);
     });
 };

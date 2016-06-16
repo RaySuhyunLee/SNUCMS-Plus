@@ -56,7 +56,7 @@
         </div>
       </div>
     </div>
-    
+
     <% unless @course.professor_id.nil? %>
       <div class="three wide column">
         <div class="ui fluid card">
@@ -76,10 +76,8 @@
   <div class="ui divider"></div>
 
   <%= link_to '이슈', course_issues_path(@course.id), class: "ui button" %>
-  <%= link_to '위키', wiki_page_path(@course.title), class: "ui button" %>
+  <%= link_to '위키', wiki_page_path(@course.course_wiki_page), class: "ui button" %>
   <%= link_to '반달', edit_course_path(@course), class: "ui button" %>
-
-  <div class="ui divider"></div>
 
 </div>
 

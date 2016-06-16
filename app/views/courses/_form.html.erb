@@ -38,6 +38,7 @@
   $.fn.api.settings.api = {
     'get professors' : '<%= find_professor_path %>/?name={query}'
   };
+
   var $dropdown = $("#dropdown");
   $dropdown.dropdown({
     apiSettings: {
@@ -49,7 +50,7 @@
     },
     action: function(text, value) {
       $dropdown.dropdown('set selected', value);
-      setText(value); 
+      setText(value);
       //"<button class='ui icon button'><i class='remove icon'></i></button>"
     },
   });
@@ -59,5 +60,4 @@
     var name = item.find('.name').text();
     $dropdown.dropdown('set text', name);
   }
-
 </script>

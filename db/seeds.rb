@@ -17,6 +17,8 @@ $user = User.create({
 $course = Course.create({
   title: 'Compiler(001)',
   course_num: '4190.409',
+  professor_id: 1,
+  course_wiki_page: 'Compiler(강의)',
   issue_num: '0'
 })
 
@@ -27,6 +29,7 @@ if Issuetag.first.nil?
   Issuetag.create({name: "Exam"})
   Issuetag.create({name: "Lab"})
   Issuetag.create({name: "Report"})
+  Issuetag.create({name: "Notice"})
   Issuetag.create({name: "Question"})
   Issuetag.create({name: "Debate"})
 end

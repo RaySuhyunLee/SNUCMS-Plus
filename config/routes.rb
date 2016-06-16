@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       end
       post 'update_title' => 'issues#update_title', on: :member
       post 'update_due' => 'issues#update_due', on: :member
-      get 'subscribe', on: :member 
+      get 'subscribe', on: :member
     end
     get 'subscribe', on: :member
     patch 'description' => 'courses#update_description', on: :member, as: :update_description
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
-  
+
   # Home routing
   get 'home/load_recent_timeline'
   get 'home/load_subscription_timeline'

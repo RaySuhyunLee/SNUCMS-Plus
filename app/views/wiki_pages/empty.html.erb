@@ -2,13 +2,12 @@
   <div class="ui huge header"><%= @title %></div>
   <div class="ui divider"></div>
 
-  <div class="ui text container">
-    이 문서는 아직 없습니다.
-  </div>
-
-  <div class="ui text container">
-    [<%= link_to '새 문서 만들기', new_wiki_page_path(@title) %>]
-  </div>
+  <% if /^.*(\(강의\)|\(강의\|(.*)\))$/.match(@title).nil? %>
+    <p>이 문서는 아직 없습니다.</p>
+    <p>[<%= link_to '새 문서 만들기', new_wiki_page_path(@title) %>]</p>
+  <% else %>
+    <p><b><%= @title %></b> 문서를 생성할 수 없습니다.</p>
+  <% end %>
 
   <div class="ui divider"></div>
   <%= link_to wiki_path do %>
