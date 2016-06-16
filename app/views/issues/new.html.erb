@@ -1,3 +1,4 @@
+<%= render partial: '/layouts/header' %>
 <div class="ui container">
   <h1>New Issue</h1>
   
@@ -5,6 +6,7 @@
 
   <%= link_to 'Back', @index_path %>
 </div>
+<%= render partial: '/layouts/footer' %>
 
 <script>
   jQuery('#datetimepicker').datetimepicker({defaultTime:'00:00'});

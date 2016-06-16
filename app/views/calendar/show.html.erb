@@ -1,8 +1,10 @@
+<%= render partial: '/layouts/header' %>
 <div class="ui container">
   <div class="ui huge header">Calendar</div>
   <div class="ui divider"></div>
   <div id='calendar'></div>
 </div>
+<%= render partial: '/layouts/footer' %>
 
 <script>
   $(document).on('ready page:load', calendarLoad());

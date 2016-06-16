@@ -1,3 +1,4 @@
+<%= render partial: '/layouts/header' %>
 <p id="notice"><%= notice %></p>
 <div class="ui container">
   <% if @parent_name == "Course" %>
@@ -115,6 +116,7 @@
     <div class="ui button">이슈 삭제</div>
   <% end %>
 </div>
+<%= render partial: '/layouts/footer' %>
 
 <script>
   $(document).on('ready page:load', documentLoad());
