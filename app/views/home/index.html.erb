@@ -1,5 +1,3 @@
-<%= render partial: '/layouts/header' %>
-
 <div class="ui container">
   <div class="ui huge header">샤과밭</div>
 
@@ -14,8 +12,6 @@
   <%= link_to wiki_path do %><button class="ui button">위키</button><% end %>
 
 </div>
-
-<%= render partial: '/layouts/footer' %>
 
 <script>
   var timeline = setTimeline("#timeline-container", "<%= home_load_recent_timeline_path %>");
