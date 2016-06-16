@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615170438) do
+ActiveRecord::Schema.define(version: 20160616060347) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "contents"
@@ -26,11 +26,12 @@ ActiveRecord::Schema.define(version: 20160615170438) do
   create_table "courses", force: :cascade do |t|
     t.string   "course_num"
     t.string   "title"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "issue_num"
     t.text     "description"
     t.integer  "professor_id"
+    t.string   "course_wiki_page"
   end
 
   add_index "courses", ["professor_id"], name: "index_courses_on_professor_id"
@@ -139,7 +140,7 @@ ActiveRecord::Schema.define(version: 20160615170438) do
     t.text     "contents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "type"
+    t.string   "page_type"
   end
 
 end

@@ -36,7 +36,7 @@ class WikiPagesController < ApplicationController
   def new
     @page = WikiPage.new
     @page.title = params[:title]
-    @page.type = 'General'
+    @page.page_type = 'General'
 
     unless @page.save
       redirect_to wiki_path
@@ -101,7 +101,7 @@ class WikiPagesController < ApplicationController
     if @page.nil?
       @page = WikiPage.new
       @page.title = wiki_title
-      @page.type = 'Course'
+      @page.page_type = 'Course'
 
       unless @page.save
         render json: { result: 'faild' }
