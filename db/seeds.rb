@@ -14,6 +14,14 @@ $user = User.create({
   confirmed_at: '2016-01-01 00:00:00'
 })
 
+$user = User.create({
+  name: '이산하',
+  email: 'test2@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  confirmed_at: '2016-01-01 00:00:00'
+})
+
 $course = Course.create({
   title: 'Compiler(001)',
   course_num: '4190.409',

@@ -1,5 +1,5 @@
-<p id="notice"><%= notice %></p>
 <div class="ui container">
+  <p id="notice"><%= notice %></p>
   <% if @parent_name == "Course" %>
     <% @issue_path = course_issue_path(@parent.id, @issue.parent_issue_id) %>
   <% end %>
@@ -75,8 +75,10 @@
           </div>
 	      <div class="actions">
             <a class="edit_button" id="comment_edit_button_<%= index %>#<%= @comment_path %>" do>수정</a>
-            <a class="delete">
-              <%= link_to '삭제', @comment_path, method: :delete, data: {confirm: 'Are you sure?' } %>
+            <a class="comment_destroy_button">
+              <% if @parent_name == "Course" %>
+                <%= link_to '삭제', course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id, :commenter => comment.commenter), method: :delete, data: {confirm: 'Are you sure?' } %>
+              <% end %>
             </a>
           </div>
         </div>

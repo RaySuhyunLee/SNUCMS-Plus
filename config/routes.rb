@@ -28,6 +28,15 @@ Rails.application.routes.draw do
   get 'calendar' => 'calendar#show'
 
   # routing for user profile
+  resource :profile, only: [] do
+    resources :issues, only: [:index, :new, :create, :show, :update, :destroy] do
+      resources :comments, only: [:create, :destroy, :index] do
+        get 'get_contents' => 'comments#get_contents', on: :member
+        post 'update_contents' => 'comments#update_contents', on: :member
+      end
+    end
+  end
+
   get 'profile' => 'profile#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
