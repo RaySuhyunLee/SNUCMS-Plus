@@ -45,7 +45,11 @@ gem 'rouge', '~> 1.10', '>= 1.10.1'
 gem 'paper_trail'
 
 # ActiveJob adapter
-gem 'resque'
+gem 'sidekiq'
+
+# HTML parsing helpers
+gem 'nokogiri'
+gem 'wombat'
 
 # for ES6 transcompilation
 gem 'sprockets', '3.6.0'

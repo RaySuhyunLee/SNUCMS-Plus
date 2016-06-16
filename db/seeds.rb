@@ -23,7 +23,7 @@ $user = User.create({
 })
 
 $course = Course.create({
-  title: 'Compiler(001)',
+  title: 'Compiler(002)',
   course_num: '4190.409',
   professor_id: 1,
   course_wiki_page: 'Compiler(강의)',
@@ -49,8 +49,9 @@ Professor.create({
 })
 
 $crawl_logs = []
-$crawl_logs.append CrawlLog.create({url: 'https://github.com'})
-$crawl_logs.append CrawlLog.create({url: 'http://this.url.is.literally.uselessly.long.com'})
+$crawl_logs.append CrawlLog.create({url: 'https://github.com/RaySuhyunLee/SNUCMS-Plus/wiki'})
+$crawl_logs.append CrawlLog.create({url: 'http://soar.snu.ac.kr/course/board/ds2016'})
+$crawl_logs.append CrawlLog.create({url: 'http://mccl.snu.ac.kr/xe/index.php?mid=DataCommunications2016Spring'})
 
 $crawl_logs.each do |crawl_log|
   $course.crawl_logs.append(crawl_log)

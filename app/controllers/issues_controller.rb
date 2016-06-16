@@ -3,7 +3,7 @@ class IssuesController < ApplicationController
   before_action :set_regex, only: [:show]
   before_action :set_issue, only: [:show, :update, :destroy, :subscribe, :update_title, :update_due]
   before_action :set_comments, only: [:show, :update]
-  
+
   # GET /(parent_type)/:(parent_id)/issues
   def index
     @issues = @parent.issues.all
@@ -15,7 +15,7 @@ class IssuesController < ApplicationController
     @label = params[:label]
     @tag = Issuetag.find_by name: @label
     @issues = @tag.issues
-       .where("have_issue_type = ? AND have_issue_id = ?", @parent_name, @parent.id) 
+       .where("have_issue_type = ? AND have_issue_id = ?", @parent_name, @parent.id)
     @issues_page = @issues.paginate(:page => params[:page], :per_page => 10)
   end
 

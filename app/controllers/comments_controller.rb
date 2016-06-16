@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
   # GET /(parent_type)/:(parent_id)/issues/:issue_id/comments/:id/get_contents
   def get_contents
-   render plain: @comment.contents 
+   render plain: @comment.contents
   end
 
   # POST /(parent_type)/:(parent_id)/issues/:issue_id/comments
