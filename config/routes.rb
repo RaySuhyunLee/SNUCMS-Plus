@@ -6,6 +6,11 @@ Rails.application.routes.draw do
     registrations: "accounts/registrations"
   }
 
+  devise_scope :user do 
+    get 'welcome', to: "accounts/registrations#success", as: :welcome
+  end
+
+
   # nested routing for courses, issues and comments.
   resources :courses do
     resources :issues, only: [:index, :new, :create, :show, :update, :destroy] do
