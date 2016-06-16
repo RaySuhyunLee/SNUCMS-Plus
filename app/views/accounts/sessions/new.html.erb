@@ -5,6 +5,9 @@
 </style>
 
 <div class="ui text container" >
+  <% unless alert == nil %>
+    <div class="ui segment", id="alert"><%= alert %></div>
+  <% end %>
   <div class="ui segment">
     <div class="ui two column middle aligned very relaxed stackable grid">
       <div class="column"> 
