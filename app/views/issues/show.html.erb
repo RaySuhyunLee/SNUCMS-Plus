@@ -1,5 +1,7 @@
 <div class="ui container">
-  <p id="notice"><%= notice %></p>
+  <% unless notice == nil %>
+    <div class="ui segment", id="notice"><%= notice %></div>
+  <% end %>
   <div id="issue_title">
     <div class="ui huge label">
       #<%= @issue.parent_issue_id %>

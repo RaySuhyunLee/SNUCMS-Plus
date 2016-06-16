@@ -1,4 +1,8 @@
 <div class="ui container">
+  <% unless notice == nil %>
+    <div class="ui segment", id="notice"><%= notice %></div>
+  <% end %>
+
   <div class="ui huge header">이슈 목록</div>
   <div class="ui divider"></div>
 

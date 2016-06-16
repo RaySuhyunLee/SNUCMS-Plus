@@ -11,9 +11,7 @@ class CalendarController < ApplicationController
           @issues.append(i)
         end
       elsif i.have_issue_type.eql? "User"
-        if @user.subscribing_issues.include? i
-          @issues.append(i)
-        end
+        @issues.append(i)
       end
     end
   end

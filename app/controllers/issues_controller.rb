@@ -53,11 +53,11 @@ class IssuesController < ApplicationController
       end
     end
 
-      if @issue.save
-        redirect_to @index_path + "/" + @issue.parent_issue_id.to_s
-      else
-        render :new
-      end
+    if @issue.save
+      redirect_to @index_path + "/" + @issue.parent_issue_id.to_s, notice: 'Issue was succesfully created.'
+    else
+      render :new
+    end
   end
 
   # POST /(parent_type)/:(parent_id)/issues/:id/update_title
@@ -76,7 +76,7 @@ class IssuesController < ApplicationController
   def update
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to @issue_path }
+        format.html { redirect_to @issue_path, notice: 'Issue was succesfully updated.' }
         format.json { render :show, status: :ok, location: @issue }
       else
         format.html { render :edit }
@@ -89,7 +89,7 @@ class IssuesController < ApplicationController
   def destroy
     @issue.destroy
     respond_to do |format|
-      format.html { redirect_to @index_path }
+      format.html { redirect_to @index_path, notice: 'Isuse was succesfully destroyed.' }
       format.json { head :no_content }
     end
   end

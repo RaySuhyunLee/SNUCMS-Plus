@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @issue_path }
+        format.html { redirect_to @issue_path, notice: 'Comment is succesfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @issue_path }
+        format.html { redirect_to @issue_path, notice: 'Comment is sucesfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit }
@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
     @comment_id = params[:commenter]
     if @comment_id.eql? current_user.id.to_s
       @comment.destroy
-      redirect_to @issue_path
+      redirect_to @issue_path, notice: 'Comment is succesfully destroyed.'
     else
       redirect_to @issue_path, notice: "This comment wasn't created by you"
     end
