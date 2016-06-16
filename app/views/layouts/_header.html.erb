@@ -10,9 +10,11 @@
 
   <div class="right aligned column">
 
-    <button class="ui circular icon button" id="layout_user_button">
-      <i class="user large icon"></i>
-    </button>
+    <%= link_to profile_path do %>
+      <button class="ui circular icon button" id="layout_user_button">
+        <i class="user large icon"></i>
+      </button>
+    <% end %>
 
     <%= link_to root_path do %>
       <button class="ui circular icon button" id="layout_feed_button">
@@ -37,6 +39,5 @@
         <i class="sign out large icon"></i>
       </button>
     <% end %>
-
   </div>
 </div>
