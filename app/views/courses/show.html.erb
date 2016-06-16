@@ -5,16 +5,35 @@
     <% else %>
     <div class="thirteen wide column">
     <% end %>
-      <div class="ui grid">
-        <div class="thirteen wide column">
-          <div class="ui huge header"><%= @course.title %></div>
-          <div class="ui large header"><%= @course.course_num %></div>
-        </div>
-        <div class="three wide column">
-          <div class="ui button" id="subscribe-button" data-subscribe="<%= @is_subscribing %>" ><%= @subscribe_button_text %></div>
-        </div>
+      <div class="ui right floated olive button" id="subscribe-button" 
+        data-subscribe="<%= @is_subscribing %>" ><%= @subscribe_button_text %></div>
+      <div class="ui left floated">
+        <h1 class="ui header">
+          <%= @course.title %>
+          <div class="ui sub header"><%= @course.course_num %></div>
+        </h1>
       </div>
 
+      <div class="ui divider"></div>
+
+      <div class="ui relaxed list">
+        <% @course.crawl_logs.all.each do |crawl_log| %>
+          <div class="item">
+            <i class="linkify icon"></i>
+            <div class="content">
+              <a class="" href=<%= crawl_log.url %> >
+                <% text = crawl_log.url
+                if text.length > 40
+                  text = text[0..38] + '...'
+                end %>
+                <%= text %>
+              </a>
+              <i class="edit icon"></i>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      
       <div class="ui divider"></div>
 
       <div class="ui clearing segment">
