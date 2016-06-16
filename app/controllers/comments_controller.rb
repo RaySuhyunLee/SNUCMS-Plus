@@ -49,10 +49,12 @@ class CommentsController < ApplicationController
   # DELETE /(parent_type)/:(parent_id)/issues/:issue_id/comments/1
   # DELETE /(parent_type)/:(parent_id)/issues/:issue_id/comments/1.json
   def destroy
-    @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to @issue_path }
-      format.json { head :no_content }
+    @comment_id = params[:commenter]
+    if @comment_id.eql? current_user.id.to_s
+      @comment.destroy
+      redirect_to @issue_path
+    else
+      redirect_to @issue_path, notice: "This comment wasn't created by you"
     end
   end
 
