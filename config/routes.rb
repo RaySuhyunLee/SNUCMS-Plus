@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'profile/index'
+
   devise_for :users, controllers: {
     sessions: "accounts/sessions",
     registrations: "accounts/registrations"
@@ -24,6 +26,9 @@ Rails.application.routes.draw do
 
   # routing for calendar.
   get 'calendar' => 'calendar#show'
+
+  # routing for user profile
+  get 'profile' => 'profile#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
