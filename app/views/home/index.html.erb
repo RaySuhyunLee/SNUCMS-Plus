@@ -1,8 +1,8 @@
+<%= render partial: '/layouts/header' %>
+
 <div class="ui container">
   <div class="ui huge header">샤과밭</div>
-  <p>집에 가게 해주세요</p>
-  <div class="ui divider"></div>
-  
+
   <div class="ui text container">
     <div class="ui segment" id="timeline-container">
     </div>
@@ -13,11 +13,10 @@
   <%= link_to courses_path do %><button class="ui button">강좌</button><% end %>
   <%= link_to wiki_path do %><button class="ui button">위키</button><% end %>
 
-  <div class="ui divider"></div>
-  <div class="ui center aligned text container">
-    <a href="#">신고/제안</a> | <a href="#">이용 수칙</a> | <a href="http://www.snucse.org/">SNUCSE</a>
-  </div>
 </div>
+
+<%= render partial: '/layouts/footer' %>
+
 <script>
   var timeline = setTimeline("#timeline-container", "<%= home_load_recent_timeline_path %>");
 </script>

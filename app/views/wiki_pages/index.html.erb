@@ -1,3 +1,5 @@
+<%= render partial: '/layouts/header' %>
+
 <div class="ui container">
   <div class="ui huge header">샤과밭 위키:대문</div>
   <div class="ui divider"></div>
@@ -96,12 +98,9 @@
       </div>
     </div>
   </div>
-
-  <div class="ui divider"></div>
-  <div class="ui center aligned text container">
-    <a href="http://www.warning.or.kr">신고/제안</a> | <a href="#">이용 수칙</a> | <a href="http://www.snucse.org/">SNUCSE</a>
-  </div>
 </div>
+
+<%= render partial: '/layouts/footer' %>
 
 <script>
   $(".ui.sticky").sticky({ context: "#wiki_main_rail" });
