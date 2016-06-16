@@ -109,11 +109,11 @@ class IssuesController < ApplicationController
     user = current_user
     response = ''
     if is_subscribing?
-      user.issues.destroy(@issue)
+      user.subscribing_issues.destroy(@issue)
       response = 'unsubscribed'
     else
       response = 'subscribed'
-      user.issues.append(@issue)
+      user.subscribing_issues.append(@issue)
     end
 
     respond_to do |format|
@@ -160,7 +160,7 @@ class IssuesController < ApplicationController
   # GET /(parent_type)/:(parent_id)/issues/:id/subscribe
   def is_subscribing?
     user = current_user
-    return user.issues.exists? @issue.id
+    return user.subscribing_issues.exists? @issue.id
   end
 
   def set_regex
