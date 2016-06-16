@@ -61,7 +61,7 @@ class IssuesController < ApplicationController
 
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to @index_path }
+        format.html { redirect_to @index_path + "/" + @issue.parent_issue_id.to_s}
         format.json { render :show, status: :created, location: @issue }
       else
         format.html { render :new }
