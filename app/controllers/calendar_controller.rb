@@ -10,6 +10,10 @@ class CalendarController < ApplicationController
         if @user.courses.include? @parent
           @issues.append(i)
         end
+      elsif i.have_issue_type.eql? "User"
+        if @user.subscribing_issues.include? i
+          @issues.append(i)
+        end
       end
     end
   end
