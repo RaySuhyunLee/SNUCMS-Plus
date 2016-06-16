@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy, :subscribe, :update_description]
 
-  # GET /courses 
+  # GET /courses
   def index
     @courses = Course.all
   end
@@ -28,8 +28,14 @@ class CoursesController < ApplicationController
   # POST /courses
   def create
     @course = Course.new(course_params)
-    #@course.professor = Professor.find(params[:professor_id])
     @course.issue_num = 0;
+
+    wiki_name = @course.title.gsub(/(.*)\(\d+\)$/) do $1 end
+    wiki_page = WikiPage.link_page(wiki_name, @course.professor)
+
+    unless wiki_page.nil?
+      @course.course_wiki_page = wiki_page
+    end
 
     if @course.save
       redirect_to @course, notice: 'Course was successfully created.'
@@ -41,25 +47,24 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/:id
   def update
     if @course.update(course_params)
-      #@course.professor = Professor.find(params[:professor_id])
       redirect_to @course, notice: 'Course was successfully updated.'
     else
       render :edit
     end
   end
-  
+
   # DELETE /courses/:id
   def destroy
     @course.destroy
     redirect_to courses_url, notice: 'Course was successfully destroyed.'
   end
 
-  # GET /courses/:id/subscribe 
+  # GET /courses/:id/subscribe
   def subscribe
     subscribe = false
     user = current_user
     if params[:subscribe] == "true"
-      subscribe = true 
+      subscribe = true
       user.courses.append(@course)
     else
       subscribe = false
@@ -70,7 +75,7 @@ class CoursesController < ApplicationController
       format.all { render json: { subscribe: subscribe } }
     end
   end
-  
+
   # PATCH /courses/:id/description
   def update_description
     description = params[:description]

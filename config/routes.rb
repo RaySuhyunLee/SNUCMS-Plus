@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       end
       post 'update_title' => 'issues#update_title', on: :member
       post 'update_due' => 'issues#update_due', on: :member
-      get 'subscribe', on: :member 
+      get 'subscribe', on: :member
     end
     get 'subscribe', on: :member
     patch 'description' => 'courses#update_description', on: :member, as: :update_description
@@ -39,7 +39,6 @@ Rails.application.routes.draw do
   get 'wiki' => 'wiki_pages#index', as: :wiki
   post 'wikipage/render' => 'wiki_pages#render_page'
   post 'wikipage/permission' => 'wiki_pages#edit_permission'
-  post 'wikipage/link' => 'wiki_pages#link_page'
   get 'wiki/:title/new' => 'wiki_pages#new', as: :new_wiki_page
   get 'wiki/:title/empty' => 'wiki_pages#empty', as: :empty_wiki_page
   get 'wiki/:title/edit' => 'wiki_pages#edit', as: :edit_wiki_page
