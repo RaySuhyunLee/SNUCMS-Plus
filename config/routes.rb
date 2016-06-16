@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     end
     get 'subscribe', on: :member
     patch 'description' => 'courses#update_description', on: :member, as: :update_description
+    resources :crawl_logs, only: [:create, :update, :destroy]
+
   end
 
   # routing for course issues which are filtered with label.
