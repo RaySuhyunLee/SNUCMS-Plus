@@ -40,8 +40,10 @@
           <%= link_to history_wiki_page_path(@title) do %>
             <div class="ui button">역사</div>
           <% end %>
-          <%= link_to wiki_page_path(@title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } do %>
-            <div class="ui button">삭제</div>
+          <% if @page.page_type == 'General' %>
+            <%= link_to wiki_page_path(@title), method: :delete, data: { confirm: '정말로 삭제하시겠습니까?' } do %>
+              <div class="ui button">삭제</div>
+            <% end %>
           <% end %>
         </div>
       </div>
