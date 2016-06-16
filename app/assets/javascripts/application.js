@@ -19,4 +19,6 @@
 //= require datetimepicker
 //= require moment.min
 //= require fullcalendar
+//= require underscore
+//= require clndr-rails
 //= require_tree .

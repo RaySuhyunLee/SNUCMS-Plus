@@ -74,3 +74,6 @@ end
 
 # pagination plugin
 gem 'will_paginate'
+
+# calendar plugin
+gem 'clndr-rails'
