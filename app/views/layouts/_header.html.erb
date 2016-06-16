@@ -20,9 +20,11 @@
       </button>
     <% end %>
 
-    <button class="ui circular icon button" id="layout_calendar_button">
-      <i class="calendar large icon"></i>
-    </button>
+    <%= link_to calendar_path do %>
+      <button class="ui circular icon button" id="layout_calendar_button">
+        <i class="calendar large icon"></i>
+      </button>
+    <% end %>
 
     <%= link_to wiki_path do %>
       <button class="ui circular icon button" id="layout_wiki_button">
