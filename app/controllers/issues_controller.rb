@@ -14,15 +14,9 @@ class IssuesController < ApplicationController
   def index_labels
     @label = params[:label]
     @tag = Issuetag.find_by name: @label
-    @issues = []
-
-    unless @label == nil
-      @parent.issues.each do |i|
-        if i.issuetags.include?(@tag)
-          @issues.append(i)
-        end
-      end
-    end
+    @issues = @tag.issues
+       .where("have_issue_type = ? AND have_issue_id = ?", @parent_name, @parent.id) 
+    @issues_page = @issues.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /(parent_type)/:(parent_id)/issues/:id
