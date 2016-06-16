@@ -17,8 +17,4 @@
 //= require components
 //= require semantic-ui
 //= require datetimepicker
-//= require moment.min
-//= require fullcalendar
-//= require underscore
-//= require clndr-rails
 //= require_tree .

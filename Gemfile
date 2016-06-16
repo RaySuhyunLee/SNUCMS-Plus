@@ -76,4 +76,4 @@ end
 gem 'will_paginate'
 
 # calendar plugin
-gem 'clndr-rails'
+gem "simple_calendar", "~> 2.0"
