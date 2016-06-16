@@ -35,4 +35,7 @@ class DescriptionHandler {
   }
 }
 
-
+function swapVisibility(to_invisible, to_visible) {
+  $(to_invisible).hide();
+  $(to_visible).show();
+}

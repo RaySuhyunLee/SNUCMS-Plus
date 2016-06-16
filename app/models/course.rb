@@ -12,5 +12,5 @@ class Course < ActiveRecord::Base
   # user subsription
   has_and_belongs_to_many :users
 
-  has_many :crawl_logs
+  has_many :crawl_logs, dependent: :destroy
 end

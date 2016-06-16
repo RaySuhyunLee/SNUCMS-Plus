@@ -14,6 +14,8 @@ class CoursesController < ApplicationController
     else
       @subscribe_button_text = "수강"
     end
+
+    @crawl_log = CrawlLog.new
   end
 
   # GET /courses/new
