@@ -1,4 +1,5 @@
 <div class="ui container">
+  <p id="notice"><%= notice %></p>
   <% if @parent_name == "Course" %>
     <% @issue_path = course_issue_path(@parent.id, @issue.parent_issue_id) %>
   <% end %>
