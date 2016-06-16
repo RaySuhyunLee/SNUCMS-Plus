@@ -30,8 +30,7 @@ class Crawler
 
         # create issue
         issue = parent.issues.create({
-          title: '변경 사항이 있습니다.',
-          due: Time.now
+          title: '변경 사항이 있습니다.'
         })
         issue.parent_issue_id = parent.issue_num
 
