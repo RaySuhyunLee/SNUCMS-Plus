@@ -34,6 +34,8 @@
       <% @issues_page.each do |issue| %>
         <% if @parent_name == "Course" %>
           <% @issue_path = course_issue_path(@parent.id, issue.parent_issue_id) %>
+        <% elsif %>
+          <% @issue_path = profile_issue_path(issue.parent_issue_id) %>
         <% end %>
         <tr>
           <td><%= link_to issue.title, @issue_path%></td>
@@ -51,7 +53,7 @@
   <%= link_to @new_path do %>
     <div class="ui button">글쓰기</div>
   <% end %>
-  <%= link_to course_path(@parent.id) do %>
+  <%= link_to @parent_path do %>
     <div class="ui button">돌아가기</div>
   <% end %>
 </div>

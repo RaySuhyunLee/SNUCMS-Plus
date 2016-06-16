@@ -53,15 +53,11 @@ class IssuesController < ApplicationController
       end
     end
 
-    respond_to do |format|
       if @issue.save
-        format.html { redirect_to @index_path + "/" + @issue.parent_issue_id.to_s}
-        format.json { render :show, status: :created, location: @issue }
+        redirect_to @index_path + "/" + @issue.parent_issue_id.to_s
       else
-        format.html { render :new }
-        format.json { render json: @issue.errors, status: :unprocessable_entity }
+        render :new
       end
-    end
   end
 
   # POST /(parent_type)/:(parent_id)/issues/:id/update_title
@@ -125,17 +121,27 @@ class IssuesController < ApplicationController
       @parent_name = "Course"
       @index_path = course_issues_path(params[:course_id])
       @new_path = new_course_issue_path(params[:course_id])
-      @label_path = "/courses/" + @parent.id.to_s + "/labels" 
+      @label_path = "/courses/" + @parent.id.to_s + "/labels"
+      @parent_path = course_path(@parent.id)
+    elsif parent_type == "profile"
+      @parent = current_user
+      @parent_name = "User"
+      @index_path = profile_issues_path
+      @new_path = new_profile_issue_path
+      @label_path = "/profile/labels"
+      @parent_path = profile_path
     end
   end
 
   # Find issue with url parameters.
   # The parameter :id not means issue_id, but parent_issue_id.
   def set_issue
-    # freezed @edit_path = edit_course_issue_path(params[:course_id], params[:id])
     if @parent_name == "Course"
       @issue = Issue.where("have_issue_id = ? AND have_issue_type = ? AND parent_issue_id = ?", params[:course_id], "Course", params[:id]).first
       @issue_path = course_issue_path(@issue.have_issue_id, @issue.parent_issue_id)
+    elsif @parent_name == "User"
+      @issue = Issue.where("have_issue_id = ? AND have_issue_type = ? AND parent_issue_id = ?", current_user.id, "User", params[:id]).first
+      @issue_path = profile_issue_path(@issue.parent_issue_id)
     end
   end
 
@@ -143,6 +149,8 @@ class IssuesController < ApplicationController
   def set_comments
     if @parent_name == "Course"
       @comments_path = course_issue_comments_path(params[:course_id], params[:id])
+    elsif @parent_name == "User"
+      @comments_path = profile_issue_comments_path(params[:id])
     end
   end
 
@@ -166,5 +174,4 @@ class IssuesController < ApplicationController
       script: /<script>(.*)?<\/script>/m
     }
   end
-
 end
