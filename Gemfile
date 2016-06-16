@@ -44,6 +44,9 @@ gem 'rouge', '~> 1.10', '>= 1.10.1'
 # Revision management
 gem 'paper_trail'
 
+# ActiveJob adapter
+gem 'resque'
+
 # for ES6 transcompilation
 gem 'sprockets', '3.6.0'
 gem 'sprockets-es6'

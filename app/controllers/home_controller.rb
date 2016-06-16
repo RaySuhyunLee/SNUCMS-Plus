@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  include ApplicationHelper 
+  include ApplicationHelper
 
   def index
     @resource
@@ -36,15 +36,16 @@ class HomeController < ApplicationController
       .order(created_at: :desc)
       .offset(offset)
       .take([how_many, load_max].min)
-    
+
     data = prettify(issues)
 
-    respond_to do |format| 
+    respond_to do |format|
       format.all { render json: {issues: data} }
     end
   end
 
 private
+
   def prettify(issues)
     data = []
     issues.each do |issue|
