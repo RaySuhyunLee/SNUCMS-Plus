@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616060347) do
+ActiveRecord::Schema.define(version: 20160616225932) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "contents"
@@ -47,9 +47,10 @@ ActiveRecord::Schema.define(version: 20160616060347) do
   create_table "crawl_logs", force: :cascade do |t|
     t.string   "url"
     t.text     "contents"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "course_id"
+    t.boolean  "crawl",      default: false
   end
 
   add_index "crawl_logs", ["course_id"], name: "index_crawl_logs_on_course_id"
@@ -117,6 +118,7 @@ ActiveRecord::Schema.define(version: 20160616060347) do
     t.integer  "failed_attempts",        default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.integer  "issue_num"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @issue_path }
+        format.html { redirect_to @issue_path, notice: 'Comment is succesfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @issue_path }
+        format.html { redirect_to @issue_path, notice: 'Comment is sucesfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit }
@@ -49,10 +49,12 @@ class CommentsController < ApplicationController
   # DELETE /(parent_type)/:(parent_id)/issues/:issue_id/comments/1
   # DELETE /(parent_type)/:(parent_id)/issues/:issue_id/comments/1.json
   def destroy
-    @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to @issue_path }
-      format.json { head :no_content }
+    @comment_id = params[:commenter]
+    if @comment_id.eql? current_user.id.to_s
+      @comment.destroy
+      redirect_to @issue_path, notice: 'Comment is succesfully destroyed.'
+    else
+      redirect_to @issue_path, notice: "This comment wasn't created by you"
     end
   end
 
@@ -63,6 +65,9 @@ class CommentsController < ApplicationController
     if parent_type == "courses"
       @issue = Issue.where("have_issue_id = ? AND have_issue_type = ? AND parent_issue_id = ?", params[:course_id], "Course", params[:issue_id]).first
       @issue_path = course_issue_path(@issue.have_issue_id, @issue.parent_issue_id)
+    elsif parent_type == "profile"
+      @issue = Issue.where("have_issue_id = ? AND have_issue_type = ? AND parent_issue_id = ?", current_user.id, "User", params[:issue_id]).first
+      @issue_path = profile_issue_path(@issue.parent_issue_id)
     end
   end
 

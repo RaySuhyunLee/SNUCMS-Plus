@@ -5,5 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable
   has_and_belongs_to_many :courses
-  has_and_belongs_to_many :issues
+  has_and_belongs_to_many :subscribing_issues, class_name: "Issue"
+
+  # User issues
+  has_many :issues, :as => :have_issue, dependent: :destroy
 end

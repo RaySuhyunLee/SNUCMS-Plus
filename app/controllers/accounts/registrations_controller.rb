@@ -8,9 +8,14 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super do |resource|
+      resource.update_attribute(:issue_num, 0);
+    end
+  end
+
+  def success
+  end
 
   # GET /resource/edit
   # def edit
@@ -36,7 +41,7 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+protected
 
   # You can put the params you want to permit in the empty array.
   # def configure_sign_up_params
@@ -49,12 +54,14 @@ class Accounts::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    #super(resource)
+    user_created_path
+  end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_inactive_sign_up_path_for(resource)
+    #super(resource)
+    welcome_path
+  end
 end

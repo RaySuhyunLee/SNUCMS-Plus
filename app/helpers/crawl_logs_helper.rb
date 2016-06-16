@@ -1,0 +1,2 @@
+module CrawlLogsHelper
+end

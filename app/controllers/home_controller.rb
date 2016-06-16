@@ -32,7 +32,7 @@ class HomeController < ApplicationController
     how_many = Integer(params['how_many'])
     user = current_user
     load_max = 10
-    issues = user.issues
+    issues = user.subscribing_issues
       .order(created_at: :desc)
       .offset(offset)
       .take([how_many, load_max].min)

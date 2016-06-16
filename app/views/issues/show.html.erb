@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
 <div class="ui container">
-  <% if @parent_name == "Course" %>
-    <% @issue_path = course_issue_path(@parent.id, @issue.parent_issue_id) %>
+  <% unless notice == nil %>
+    <div class="ui segment", id="notice"><%= notice %></div>
   <% end %>
   <div id="issue_title">
     <div class="ui huge label">
@@ -43,8 +42,14 @@
   <div class="ui divider"></div>
   <div class="ui button" id="issue_edit_button">제목 수정</div>
   <div class="ui button" id="due_edit_button">기한 수정</div>
-  <%= link_to subscribe_course_issue_path(@parent.id, @issue.parent_issue_id) do %>
-    <button class="ui button" ><%= @subscribe_button_text %></button>
+  <% if @parent_name == "Course" %>
+    <%= link_to subscribe_course_issue_path(@parent.id, @issue.parent_issue_id) do %>
+      <button class="ui button"><%= @subscribe_button_text %></button>
+    <% end %>
+  <% elsif @parent_name == "User" %>
+    <%= link_to subscribe_profile_issue_path(@issue.parent_issue_id) do %>
+      <button class="ui button"><%= @subscribe_button_text %></button>
+    <% end %>
   <% end %>
 
   <div class="ui divider"></div>
@@ -52,6 +57,8 @@
     <% @comments.each_with_index do |comment, index| %>
       <% if @parent_name == "Course" %>
         <% @comment_path = course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id) %>
+      <% elsif %>
+        <% @comment_path = profile_issue_comment_path(@issue.parent_issue_id, comment.id) %>
       <% end %>
       <div class="comment" id="comment_<%= index %>">
         <div class="content">
@@ -75,8 +82,12 @@
           </div>
 	      <div class="actions">
             <a class="edit_button" id="comment_edit_button_<%= index %>#<%= @comment_path %>" do>수정</a>
-            <a class="delete">
-              <%= link_to '삭제', @comment_path, method: :delete, data: {confirm: 'Are you sure?' } %>
+            <a class="comment_destroy_button">
+              <% if @parent_name == "Course" %>
+                <%= link_to '삭제', course_issue_comment_path(@parent.id, @issue.parent_issue_id, comment.id, :commenter => comment.commenter), method: :delete, data: {confirm: 'Are you sure?' } %>
+              <% elsif @parent_name == "User" %>
+                <%= link_to '삭제', profile_issue_comment_path(@issue.parent_issue_id, comment.id, :commenter => comment.commenter), method: :delete, data: {confirm: 'Are you sure?' } %>
+              <% end %>
             </a>
           </div>
         </div>

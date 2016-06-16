@@ -6,10 +6,15 @@ Rails.application.routes.draw do
     registrations: "accounts/registrations"
   }
 
+  devise_scope :user do 
+    get 'welcome', to: "accounts/registrations#success", as: :welcome
+  end
+
+
   # nested routing for courses, issues and comments.
   resources :courses do
     resources :issues, only: [:index, :new, :create, :show, :update, :destroy] do
-      resources :comments, only: [:create, :destroy, :index] do
+      resources :comments, only: [:create, :destroy] do
         get 'get_contents' => 'comments#get_contents', on: :member
         post 'update_contents' => 'comments#update_contents', on: :member
       end
@@ -19,6 +24,8 @@ Rails.application.routes.draw do
     end
     get 'subscribe', on: :member
     patch 'description' => 'courses#update_description', on: :member, as: :update_description
+    resources :crawl_logs, only: [:create, :update, :destroy]
+
   end
 
   # routing for course issues which are filtered with label.
@@ -27,8 +34,23 @@ Rails.application.routes.draw do
   # routing for calendar.
   get 'calendar' => 'calendar#show'
 
-  # routing for user profile
+  # routing for user profile and it's issues
   get 'profile' => 'profile#index'
+  get 'profile/issues' => 'issues#index', as: :profile_issues
+  post 'profile/issues' => 'issues#create', as: :user_issues
+  get 'profile/issues/new' => 'issues#new', as: :new_profile_issue
+  get 'profile/issues/:id' => 'issues#show', as: :profile_issue
+  patch 'profile/issues/:id' => 'issues#update'
+  put 'profile/issues/:id' => 'issues#update'
+  delete 'profile/issues/:id' => 'issues#destroy'
+  post 'profile/issues/:id/update_title' => 'issues#update_title'
+  post 'profile/issues/:id/update_due' => 'issues#update_due'
+  get 'profile/issues/:id/subscribe' => 'issues#subscribe', as: :subscribe_profile_issue
+  get 'profile/issues/:issue_id/comments/:id/get_contents' => 'comments#get_contents'
+  post 'profile/issues/:issue_id/comments/:id/update_contents' => 'comments#update_contents'
+  post 'profile/issues/:issue_id/comments' => 'comments#create', as: :profile_issue_comments
+  delete 'profile/issues/:issue_id/comments/:id' => 'comments#destroy', as: :profile_issue_comment
+  get 'profile/labels/:label' => 'issues#index_labels'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

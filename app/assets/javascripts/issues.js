@@ -31,12 +31,15 @@ function issueTitleSave() {
   var contents = $("#issue_title_string").val();
   var path = this.id + "/update_title";
 
-  $.post(
-    path,
-    { contents : contents },
-    function(result) {
-      $("#issue_title_text").text(result);
-    });
+  if (contents === "") {
+  } else {
+    $.post(
+      path,
+      { contents : contents },
+      function(result) {
+        $("#issue_title_text").text(result);
+      });
+  }
   $("#issue_edit_button").show()
   $("#issue_title").show();
   $("#issue_title_input").hide();
