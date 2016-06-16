@@ -11,15 +11,19 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "Go", class: "ui button" %>
+      <%= f.submit "로그인", class: "ui button" %>
+      <%= link_to new_user_registration_path do %>
+        <div class="ui button">가입</div>
+      <% end %>
+      <% if devise_mapping.rememberable? -%>
+        <div class="field ui checkbox">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
     </div>
 
-    <% if devise_mapping.rememberable? -%>
-      <div class="field ui checkbox">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </div>
-    <% end -%>
+    
   <% end %>
 
   <%= link_to "비밀번호를 잊으셨나요?", new_user_password_path %>
@@ -27,5 +31,5 @@
 
 <div class="ui container">
   <h1 class="ui header">eTL은 잊으세요!</h1>
-  <h2 class="ui header">SNUCMS+가 책임지겠습니다</h2>
+  <h2 class="ui header">샤과밭이 책임지겠습니다</h2>
 </div>
