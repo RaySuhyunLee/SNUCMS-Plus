@@ -1,0 +1,54 @@
+<div class="ui two column grid container">
+  <div class="column">
+    <div class="ui huge header" id="edit_title"><%= @page.title %></div>
+  </div>
+  <div class="column">
+    <p>최근 수정 시각: <span id="edit_time"><%= @page.updated_at %></span></p>
+  </div>
+</div>
+
+<div class="ui container">
+  <div class="ui divider"></div>
+
+  <div class="ui secondary pointing menu">
+    <a class="active item" data-tab="edit_tab">편집</a>
+    <a class="item" data-tab="prev_tab">미리보기</a>
+  </div>
+
+  <%= form_for @page, url: wiki_page_path(@page.title) do |f| %>
+    <div class="ui active tab" data-tab="edit_tab">
+      <div class="inline fields">
+        <div class="field"></div>
+      </div>
+
+      <div class="ui form">
+        <div class="field">
+          <%= f.text_area :contents, required: true, rows: 40, id: 'wiki_edit_contents' %>
+        </div>
+
+        <div class="actions inline_submit_button">
+          <%= f.submit '완료', class: 'ui positive submit button', id: 'edit_tab_submit' %>
+        </div>
+        <%= link_to wiki_page_path(@page.title) do %>
+          <div class="ui button">취소</div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="ui tab" data-tab="prev_tab">
+      <div id="wiki_prev_contents"></div>
+
+      <div class="actions inline_submit_button">
+        <%= f.submit '완료', class: 'ui positive submit button', id: 'prev_tab_submit' %>
+      </div>
+      <%= link_to wiki_page_path(@page.title) do %>
+        <div class="ui button">취소</div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  $(".menu .item").tab({ "onLoad" : show_tab });
+  periodic_worker();
+</script>

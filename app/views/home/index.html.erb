@@ -1,0 +1,17 @@
+<div class="ui container">
+  <div class="ui huge header">샤과밭</div>
+
+  <div class="ui text container">
+    <div class="ui segment" id="timeline-container">
+    </div>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <%= link_to courses_path do %><button class="ui button">강좌</button><% end %>
+
+</div>
+
+<script>
+  var timeline = setTimeline("#timeline-container", "<%= home_load_recent_timeline_path %>");
+</script>

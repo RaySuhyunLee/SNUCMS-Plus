@@ -1,0 +1,43 @@
+<div class="ui equal width grid container" id="layout_header">
+  <div class="column">
+    <div class="ui big fluid category search" id="layout_header_search">
+      <div class="ui fluid transparent left icon input">
+        <i class="search icon"></i>
+        <input type="text" placeholder="Search...">
+      </div>
+    </div>
+  </div>
+
+  <div class="right aligned column">
+
+    <%= link_to profile_path do %>
+      <button class="ui circular icon button" id="layout_user_button">
+        <i class="user large icon"></i>
+      </button>
+    <% end %>
+
+    <%= link_to root_path do %>
+      <button class="ui circular icon button" id="layout_feed_button">
+        <i class="feed large icon"></i>
+      </button>
+    <% end %>
+
+    <%= link_to calendar_path do %>
+      <button class="ui circular icon button" id="layout_calendar_button">
+        <i class="calendar large icon"></i>
+      </button>
+    <% end %>
+
+    <%= link_to wiki_path do %>
+      <button class="ui circular icon button" id="layout_wiki_button">
+        <i class="book large icon"></i>
+      </button>
+    <% end %>
+
+    <%= link_to destroy_user_session_path, method: :delete do %>
+      <button class="ui circular icon button" id="layout_logout_button">
+        <i class="sign out large icon"></i>
+      </button>
+    <% end %>
+  </div>
+</div>

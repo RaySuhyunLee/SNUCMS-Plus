@@ -1,0 +1,110 @@
+<div class="ui container">
+  <div class="ui grid">
+    <% if @course.professor_id.nil? %>
+    <div class="sixteen wide column">
+    <% else %>
+    <div class="thirteen wide column">
+    <% end %>
+      <div class="ui right floated olive button" id="subscribe-button" 
+        data-subscribe="<%= @is_subscribing %>" ><%= @subscribe_button_text %></div>
+      <div class="ui left floated">
+        <h1 class="ui header">
+          <%= @course.title %>
+          <div class="ui sub header"><%= @course.course_num %></div>
+        </h1>
+      </div>
+
+      <div class="ui divider"></div>
+
+      <div class="ui relaxed list">
+        <% @course.crawl_logs.all.each do |crawl_log| %>
+          <div class="item">
+            <i class="linkify icon"></i>
+            <div class="content">
+              <a class="" href=<%= crawl_log.url %> >
+                <% text = crawl_log.url
+                if text.length > 40
+                  text = text[0..38] + '...'
+                end %>
+                <%= text %>
+              </a>
+              <i class="edit icon"></i>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="ui divider"></div>
+
+      <div class="ui clearing segment">
+        <div id="description">
+          <p>
+            <% if @course.description.nil? or @course.description.length == 0 %>
+              강의 설명을 작성해주세요.
+            <% else %>
+              <%= @course.description %>
+            <% end %>
+          </p>
+          <div class="ui right floated icon button" id="description-edit-button"><i class="edit icon"></i></div>
+        </div>
+        <div hidden class="ui form" id="description-edit-form">
+          <div class="field">
+            <textarea placeholder="강의 설명을 작성해주세요."></textarea>
+          </div>
+          <div class="ui button" id="description-save-button">저장</div>
+          <div class="ui button" id="description-cancel-button">취소</div>
+        </div>
+      </div>
+    </div>
+
+    <% unless @course.professor_id.nil? %>
+      <div class="three wide column">
+        <div class="ui fluid card">
+          <div class="image">
+            <% prof = Professor.find_by_id(@course.professor_id) %>
+            <img src="<%= prof.picture if not prof.nil? %>" />
+          </div>
+          <div class="content">
+            <% prof = Professor.find_by_id(@course.professor_id) %>
+            <a class="header"><%= prof.name if not prof.nil? %></a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <%= link_to '이슈', course_issues_path(@course.id), class: "ui button" %>
+  <%= link_to '위키', wiki_page_path(@course.course_wiki_page), class: "ui button" %>
+  <%= link_to '반달', edit_course_path(@course), class: "ui button" %>
+
+</div>
+
+<script>
+  var descriptionHandler = new DescriptionHandler('#description', '#description-edit-form', '<%= update_description_course_path %>');
+  $("#description-edit-button").on('click', function() {
+    descriptionHandler.showEditForm();
+  });
+  $("#description-save-button").on('click', function() {
+    descriptionHandler.updateDescription();
+  });
+  $("#description-cancel-button").on('click', function() {
+    descriptionHandler.closeEditForm();
+  });
+
+  $("#subscribe-button").on('click', function() {
+    var subscribe = !($(this).attr('subscribe') == "true")
+    $.get({
+      url: '<%= subscribe_course_path %>',
+      data: { subscribe : subscribe },
+      success: (data) => {
+        data = JSON.parse(data);
+        text = data.subscribe ? '드랍!' : '수강';
+        $(this).text(text);
+        $(this).attr('subscribe', data.subscribe)
+      }
+    });
+  });
+
+</script>

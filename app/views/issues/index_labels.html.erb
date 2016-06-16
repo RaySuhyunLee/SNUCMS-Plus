@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+<div class="ui container">
+  <div class="ui huge header">이슈 목록</div>
+  <div class="ui divider"></div>
+
+  <div class="ui floating dropdown labeld icon button">
+    <i class="filter icon"></i>
+    <span class="text">Tags <%= @label %></span>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <div class="ui icon search input">
+        <i class="search icon"></i>
+        <input type="text" placeholder="Search tags...">
+      </div>
+      <div class="divider"></div>
+      <div class="header">
+        <i class="tags icon"></i>
+        Tag Label
+      </div>
+      <div class="scrolling menu">
+        <a class="item ui label", href="<%= @index_path %>">All</a>
+        <% Issuetag.all.each do |it| %>
+          <% if it.name.eql? @label %>
+            <a class="item ui red label", href="<%= @label_path + "/" + it.name %>"><%= it.name %></a>          <% else %>
+            <a class="item ui label", href="<%= @label_path + "/" + it.name %>"><%= it.name %></a>
+          <% end %>
+        <% end %>
+      </div>   
+    </div>
+  </div>
+
+  <table class="ui table">
+    <tbody>
+      <% @issues.each do |issue| %>
+        <% if @parent_name == "Course" %>
+          <% @issue_path = course_issue_path(@parent.id, issue.parent_issue_id) %>
+        <% end %>
+        <tr>
+          <td><%= link_to issue.title, @issue_path%></td>
+          <td><%= issue.created_at %></td>
+          <% issue.issuetags.each do |it| %>
+            <td class="ui tag mini label"><%= it.name %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="ui divider"></div>
+  <%= link_to @new_path do %>
+    <div class="ui button">글쓰기</div>
+  <% end %>
+  <%= link_to course_path(@parent.id) do %>
+    <div class="ui button">돌아가기</div>
+  <% end %>
+</div>
+
+<script>
+  $(".dropdown").dropdown();
+</script>

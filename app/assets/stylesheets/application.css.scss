@@ -10,6 +10,29 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require datetimepicker
+ *= require simple_calendar
  *= require_tree .
  *= require_self
  */
+
+@import "semantic-ui";
+
+a:hover {
+  background: rgba(0,0,0,0);
+}
+
+a:visited {
+  color: #4183c4;
+}
+
+#layout_header {
+  border-bottom: 2em;
+  margin-bottom: 2em;
+}
+
+#layout_header_search {
+  border-bottom: 1px solid #e0e0e0;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}

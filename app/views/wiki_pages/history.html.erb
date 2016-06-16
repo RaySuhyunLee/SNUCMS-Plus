@@ -1,0 +1,37 @@
+<div class="ui two column grid container">
+  <div class="column">
+    <div class="ui huge header"><%= @page.title %> (역사)</div>
+  </div>
+</div>
+
+<div class="ui container">
+  <div class="ui divider"></div>
+
+  <div class="ui bulleted list">
+    <div class="item">
+      <%= @page.updated_at %>
+      (
+      <%= link_to '보기', wiki_page_path(title: @page.title) %>
+      ) — <b>현재</b>
+      <% unless @versions.last.nil? %>
+        — <%= @versions.last.whodunnit %>
+      <% end %>
+    </div>
+    <% @versions.reverse_each do |v| %>
+      <% page = v.reify %>
+      <% unless page.nil?  %>
+        <div class="item">
+          <%= page.updated_at %>
+          (
+          <%= link_to '보기', wiki_page_path(title: @page.title, rev: v.index) %>
+          |
+          <%= link_to '복구', revert_wiki_page_path(title: @page.title, rev: v.index) %>
+          ) — <b><%= v.index %> 판</b>
+          <% unless v.previous.nil? %>
+            — <%= v.previous.whodunnit %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

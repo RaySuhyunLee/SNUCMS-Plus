@@ -1,0 +1,59 @@
+<!--% @issue.comments.build %-->
+<%= form_for([@parent, @issue], html: {class: "ui form"}) do |f| %>
+  <% if @issue.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
+
+      <ul>
+      <% @issue.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, required: :true %>
+  </div>
+  <div class="field", id="datetime_div">
+    <%= f.label :due %><br> 
+    <%= f.text_field :due, :id => "datetimepicker" %>
+  </div>
+  
+  <div class="field">
+    <div class="ui multiple dropdown", id="select">
+      <input type="hidden" name="issuetags">
+      <i class="filter icon"></i>
+      <span  class="text">Issue Tags</span>
+      <div class="menu">
+        <div class="ui icon search input">
+          <i class="search icon"></i>
+          <input type="text" placeholder="Search tags...">
+        </div>
+        <div class="divider"></div>
+        <div class="header">
+          <i class="tags icon"></i>
+          Tag Label
+        </div>
+        <div class="scrolling menu">
+          <% Issuetag.all.each do |it| %>
+            <div class="item", data-value="<%= it.id %>">
+              <%= it.name %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%= render :partial => 'comments/form_create', :locals => {:form => f} %>
+
+  <div class="actions">
+      <%= f.submit class: "ui button" %>
+  </div>
+<% end %>
+
+<script>
+  $(document).on('ready page:load', newLoad());
+</script>
