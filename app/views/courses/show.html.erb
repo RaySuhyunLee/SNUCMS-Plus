@@ -28,17 +28,24 @@
                 end %>
                 <%= text %>
               </a>
-              <i class="edit icon" onclick='swapVisibility("#url-<%= crawl_log.id %>", "#url-form-<%= crawl_log.id %>")'></i>
+              <% if crawl_log.crawl %><i class="power icon"></i><% end %>
+              <i class="write icon" onclick='swapVisibility("#url-<%= crawl_log.id %>", "#url-form-<%= crawl_log.id %>")'></i>
               <%= link_to course_crawl_log_path(@course, crawl_log), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: "ui red" do %>
                 <i class="delete icon"></i>
               <% end %>
             </div>
           </div>
           <%= form_for(crawl_log, { url: course_crawl_log_path(@course, crawl_log), html: {hidden: true, class: "ui form", id: "url-form-#{crawl_log.id}"}} ) do |f| %>
-            <div class="field actions ui fluid action input">
+            <div class="field">
               <%= f.text_field :url %>
-              <button class="ui submit button">저장</button>
             </div>
+            <div class="field">
+              <div class="ui toggle checkbox">
+                <%= f.check_box :crawl %>
+                <label>샤과봇 크롤링</label>
+              </div>
+            </div>
+            <button class="ui submit button">저장</button>
           <% end %>
         <% end %>
       </div>
@@ -133,4 +140,5 @@
     swapVisibility('#add-link-button', '#add-link-form');
   });
 
+  $('.ui.checkbox').checkbox();
 </script>

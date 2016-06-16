@@ -33,6 +33,6 @@ class CrawlLogsController < ApplicationController
   end
 
   def crawl_log_params
-    params.require(:crawl_log).permit(:url)
+    params.require(:crawl_log).permit(:url, :crawl)
   end
 end
