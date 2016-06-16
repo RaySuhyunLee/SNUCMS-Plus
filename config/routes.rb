@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :issuetags
   devise_for :users, controllers: {
     sessions: "accounts/sessions",
     registrations: "accounts/registrations"
@@ -20,7 +19,11 @@ Rails.application.routes.draw do
     patch 'description' => 'courses#update_description', on: :member, as: :update_description
   end
 
+  # routing for course issues which are filtered with label.
   get 'courses/:course_id/labels/:label' => 'issues#index_labels'
+
+  # routing for calendar.
+  get 'calendar' => 'calendar#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

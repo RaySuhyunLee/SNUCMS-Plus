@@ -1,0 +1,15 @@
+<div class="ui container">
+  <div class="ui huge header">Calendar</div>
+  <div class="ui divider"></div>
+  <%= month_calendar events: @issues do |date, issues| %>
+    <%= date.strftime('%e') %><br>
+
+    <% issues.each do |issue| %>
+      <% if issue.have_issue_type.eql? "Course" %>
+        <a class="ui label", href="<%= course_issue_path(issue.have_issue_id, issue.parent_issue_id) %>">
+          <%= issue.title %>
+        </a>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

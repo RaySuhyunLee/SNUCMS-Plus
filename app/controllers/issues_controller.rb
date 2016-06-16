@@ -3,7 +3,7 @@ class IssuesController < ApplicationController
   before_action :set_regex, only: [:show]
   before_action :set_issue, only: [:show, :update, :destroy, :subscribe, :update_title, :update_due]
   before_action :set_comments, only: [:show, :update]
-
+  
   # GET /(parent_type)/:(parent_id)/issues
   def index
     @issues = @parent.issues.all
@@ -61,7 +61,7 @@ class IssuesController < ApplicationController
 
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to @index_path }
+        format.html { redirect_to @index_path + "/" + @issue.parent_issue_id.to_s}
         format.json { render :show, status: :created, location: @issue }
       else
         format.html { render :new }
