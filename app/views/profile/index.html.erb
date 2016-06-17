@@ -1,39 +1,59 @@
-<div class="ui container">
-  <div class="ui huge header">User profile</div>
-  <div class="ui card">
-    <div class="image">
-      <img src=<%= image_url("/assets/matthew.png") %>>
+<div class="ui grid container">
+  <div class="four wide column"> 
+    <div class="ui huge header">User profile</div>
+    <div class="ui card">
+      <div class="image">
+        <img src=<%= image_url("/assets/matthew.png") %>>
+      </div>
+      <div class="content">
+        <a class="header"><%= current_user.name %></a>
+        <div class="meta">
+          <span class="date">Joined in <%= current_user.created_at %></span>
+        </div>
+        <div class="description">
+          <span id="desc_text"><%= current_user.description %></span>
+          <a id="desc_edit"><i class="write icon"></i></a>
+        </div>
+        <div class="ui small fluid input", id="desc_input">
+          <input type="text", id="input_desc", placeholder="Descript about yourself!">
+          <a id="desc_save"><i class="checkmark icon"></i></a>
+          <a id="desc_cancle"><i class="remove icon"></i></a>
+        </div>
+      </div>
+      <div class="extra content">
+        <p>
+          <i class="university icon"></i>
+          <%= current_user.college %> <%= current_user.major %> <%= current_user.student_id %>
+        </p>
+      </div>
     </div>
-    <div class="content">
-      <a class="header"><%= current_user.name %></a>
-      <div class="meta">
-        <span class="date">Joined in <%= current_user.created_at %></span>
-      </div>
-      <div class="description">
-        <span id="desc_text"><%= current_user.description %></span>
-        <a id="desc_edit"><i class="write icon"></i></a>
-      </div>
-      <div class="ui small fluid input", id="desc_input">
-        <input type="text", id="input_desc", placeholder="Descript about yourself!">
-        <a id="desc_save"><i class="checkmark icon"></i></a>
-        <a id="desc_cancle"><i class="remove icon"></i></a>
+    <%= link_to profile_issues_path do %>
+      <div class="ui button">이슈</div>
+    <% end %>
+  </div>
+
+  <div class="twelve wide column">
+    <div class="ui huge header">
+      <i class="like icon" style="color: #FF1493;"></i>
+      <div class="content">
+        <span style="color: #FF1493;">
+          좋아요
+        </span>
+        <span class="">
+          한 이슈
+        </span>
       </div>
     </div>
-    <div class="extra content">
-      <p>
-        <i class="university icon"></i>
-        <%= current_user.college %> <%= current_user.major %> <%= current_user.student_id %>
-      </p>
+    <div class="ui segment" id="timeline-container">
     </div>
   </div>
-  <%= link_to profile_issues_path do %>
-    <div class="ui button">이슈</div>
-  <% end %>
-</div>
 
 <script>
   $(document).on('ready page:load', userDocumentLoad());
   $("#desc_edit").click(descEdit);
   $("#desc_save").click(descSave);
   $("#desc_cancle").click(descCancle);
+  
+  // FIXME currently setTimeline is in home.es6
+  setTimeline("#timeline-container", "<%= profile_load_subscription_timeline_path %>");
 </script>

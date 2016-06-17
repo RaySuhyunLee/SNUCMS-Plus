@@ -63,7 +63,7 @@ Rails.application.routes.draw do
 
   # Home routing
   get 'home/load_recent_timeline'
-  get 'home/load_subscription_timeline'
+  get 'profile/load_subscription_timeline'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
