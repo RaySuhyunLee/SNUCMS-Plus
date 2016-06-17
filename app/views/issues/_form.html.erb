@@ -12,19 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label '주제' %><br>
     <%= f.text_field :title, required: :true %>
   </div>
   <div class="field", id="datetime_div">
-    <%= f.label :due %><br> 
-    <%= f.text_field :due, :id => "datetimepicker" %>
+    <%= f.label '기한' %><br>
+    <%= f.text_field :due, id: "datetimepicker" %>
   </div>
-  
+
   <div class="field">
     <div class="ui multiple dropdown", id="select">
       <input type="hidden" name="issuetags">
       <i class="filter icon"></i>
-      <span  class="text">Issue Tags</span>
+      <span  class="text">Tags</span>
       <div class="menu">
         <div class="ui icon search input">
           <i class="search icon"></i>
@@ -48,9 +48,12 @@
 
   <%= render :partial => 'comments/form_create', :locals => {:form => f} %>
 
-  <div class="actions">
-      <%= f.submit class: "ui button" %>
+  <div class="actions inline_submit_button">
+    <%= f.submit '완료', class: 'ui positive submit button' %>
   </div>
+  <%= link_to @index_path do %>
+    <div class="ui button">취소</div>
+  <% end %>
 <% end %>
 
 <script>

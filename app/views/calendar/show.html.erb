@@ -1,16 +1,16 @@
 <div class="ui container">
-  <div class="ui huge header">Calendar</div>
+  <div class="ui huge header">공유 캘린더</div>
   <div class="ui divider"></div>
   <%= month_calendar events: @issues do |date, issues| %>
     <%= date.strftime('%e') %><br>
 
     <% issues.each do |issue| %>
       <% if issue.have_issue_type.eql? "Course" %>
-        <a class="ui blue label", href="<%= course_issue_path(issue.have_issue_id, issue.parent_issue_id) %>">
+        <a class="ui teal mini label", href="<%= course_issue_path(issue.have_issue_id, issue.parent_issue_id) %>">
           <%= issue.title %>
         </a>
       <% elsif issue.have_issue_type.eql? "User" %>
-        <a class="ui brown label", href="<%= profile_issue_path(issue.parent_issue_id) %>">
+        <a class="ui blue mini label", href="<%= profile_issue_path(issue.parent_issue_id) %>">
           <%= issue.title %>
         </a>
       <% end %>
