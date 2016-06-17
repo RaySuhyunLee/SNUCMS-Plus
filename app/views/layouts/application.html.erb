@@ -11,6 +11,9 @@
 <% unless current_user.nil? %>
   <%= render partial: '/layouts/header' %>
 <% end %>
+<script>
+  $(document).on('ready page:load', searchLoad());
+</script>
 
 <%= yield %>
 
