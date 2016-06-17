@@ -71,7 +71,12 @@
             <% if @course.description.nil? or @course.description.length == 0 %>
               강의 설명을 작성해주세요.
             <% else %>
-              <%= @course.description %>
+              <% text = render_issue_link(@course.description) %>
+              <% text = render_easy_link(text) %>
+              <% text = render_latex_math(text) %>
+              <% text = text.gsub(/\\\$/) do '$' end %>
+              <% text = escape_script_tag(text) %>
+              <%= render_markdown(text) %>
             <% end %>
           </p>
           <div class="ui right floated icon button" id="description-edit-button"><i class="edit icon"></i></div>

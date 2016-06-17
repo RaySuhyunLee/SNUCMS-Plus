@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy, :subscribe, :update_description]
+  before_action :set_regex, only: [:show]
 
   # GET /courses
   def index
@@ -103,5 +104,15 @@ class CoursesController < ApplicationController
   def is_subscribing?
     user = current_user
     return user.courses.exists? @course.id
+  end
+
+  def set_regex
+    @regex =
+    {
+      issue_link: /#(\d+)/,
+      link: /\[\[([^\]]*)\]\]/,
+      latex: /(?<!\\)\$(.*)\$/,
+      script: /<script>(.*)?<\/script>/m
+    }
   end
 end
