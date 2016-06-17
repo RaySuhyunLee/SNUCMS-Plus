@@ -8,6 +8,7 @@
 
 $user = User.create({
   name: '엄현상',
+  issue_num: '0',
   email: 'test@example.com',
   password: 'password',
   password_confirmation: 'password',
@@ -16,7 +17,17 @@ $user = User.create({
 
 $user = User.create({
   name: '이산하',
+  issue_num: '0',
   email: 'test2@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  confirmed_at: '2016-01-01 00:00:00'
+})
+
+$user = User.create({
+  name: '샤과봇',
+  issue_num: '0',
+  email: 'shagwa@example.com',
   password: 'password',
   password_confirmation: 'password',
   confirmed_at: '2016-01-01 00:00:00'
@@ -80,8 +91,10 @@ Professor.create([
 )
 
 $crawl_logs = []
-$crawl_logs.append CrawlLog.create({url: 'https://github.com'})
-$crawl_logs.append CrawlLog.create({url: 'http://this.url.is.literally.uselessly.long.com'})
+$crawl_logs.append CrawlLog.create({url: 'http://www.google.co.k'})
+$crawl_logs.append CrawlLog.create({url: 'http://soar.snu.ac.kr/course/board/ds2016'})
+$crawl_logs.append CrawlLog.create({url: 'http://mccl.snu.ac.kr/xe/index.php?mid=DataCommunications2016Spring'})
+$crawl_logs.append CrawlLog.create({url: 'http://www.nate.com'})
 
 $crawl_logs.each do |crawl_log|
   $course.crawl_logs.append(crawl_log)

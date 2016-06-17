@@ -1,0 +1,173 @@
+>>>>>>>>>>>>>> site.contents
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shagwabat</title>
+  <link rel="stylesheet" media="all" href="/assets/datetimepicker.self-d8f464118aaa2a16fc9703a633d9644c2d29e81035413e2b3f312360b39468aa.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/simple_calendar.self-b78b7349e6edb909e2f7133dc49cc7187f20cd31aad52e10ccd7903d08d040ef.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/calendar.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/comments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/course.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/courses.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/home.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/issues.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/professors.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/profile.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/rouge.self-182f78e388e9e806e00c6f630e2e435e9316bbfe0b051d05494d48d603921da0.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/scaffolds.self-3ee09496f4ae8905333e91a8f5232ffb701c0dd80e8453ec175aa0d21881a581.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/wiki_pages.self-da81598aca58f1bcb49a70b1b3d8c79137c5172150c5df2538aff2288db19555.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/application.self-28ef68cea252f1cd62748ecb2d14b6df81f3d80d285f637ce52b872e2a6115ce.css?body=1" data-turbolinks-track="true">
+  <script src="/assets/jquery/jquery.self-129d502feca6efc755ec29c19a27cd220b0a9cecbbf9dea951e47b24b0b1aec7.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/jquery.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react.self-fede65fd9a4acabec5ef1256b80983a6e6e8a68dec5eca279f6923ca213f7228.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_mount.self-69e74f4eea1a8726d3c4365387f2e671fc1f3a85977e4a0fb29649a19e78a49e.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_turbolinks.self-194cee0be75f9bf71a5e74a3261fd0923879561f3797642f7c00c8c89378fdb9.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_turbolinks_classic.self-763df8fa4c0b0551840f5244b265843641523ad3bf7bb308d20801ac5cde2acb.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_turbolinks_classic_deprecated.self-f93fc4217cec084020eaf90b0425c454ba18d4ee1a054f254f5dba461eaab1a4.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_native.self-69da92af440ae3f522e7294876ed2bae234447ee564d1619c9f69d53e1020a8a.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_event_setup.self-7f4f5dc5b4aa79c2fdd84fc6283f7615df9d55ecb52a0707f37d649094555735.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs.self-d088784b7ecb87f1ea17e6f982fa968ffefcc07b79de6ecc548fc00242868da6.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/components.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/semantic-ui.self-c4b86a25a9fea8720b4a624f8cf658cfa1390a3eced38429f0060cd880fa04b8.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/datetimepicker/jquery.datetimepicker.full.min.self-902a08c7d924ec34946c0eb2ce248818ad0eea9c8359b9d50af976cedbd92a27.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/datetimepicker.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/calendar.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/courses.self-ba2c950d071be3a422b2f3a1549c759edcceb1486b1acc038cbace7864e59506.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/home.self-2aa85ac52d1f3844ab8ec26e5ace48894a10bd08da2e5100f17809e37e5628bc.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/infinity.min.self-7a62bbb4365d8952ba62539b1c8c63a8e2c1ba8da6e5d34b7087bd8cb8cd17f0.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/issues.self-d49b1b85cce8b72cb17a0628a503736873188fae1a910e2f54de370519421248.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/profile.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/wiki_pages.self-4f2ffd4a50be7a3159e7afb99de3b30e2a7c42454a0c19251299796ee5a69c1a.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/application.self-10ad0916cf31256fe71785e8dc9cc297a96b1cdf7b74aeb61711199b9a3d003f.js?body=1" data-turbolinks-track="true"></script>
+  <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="UwaOLd269Dw7rxMt7k1u/v46PsWFYdNyKLbq+P0R+dN3Rxs0LIE+C2ZFAztq1rQXUN2KDVkxkpJW+hozmrsOEw==">
+</head>
+<body>
+  <p class="notice"></p>
+  <p class="alert"></p>
+
+
+<div class="ui container">
+
+  <form class="ui form" id="new_user" action="/users/sign_in" accept-charset="UTF-8" method="post">
+<input name="utf8" type="hidden" value="&#10003;"><input type="hidden" name="authenticity_token" value="mw4kkUWgQ0MRY6KrmU2z5zzDPgpZUKLe2G9hJp6UN0i/T7GItJuJdEyJsr0d1mkOkiSKwoUA4z6mI5Ht+T7AiA==">
+    <div class="field">
+      <input autofocus="autofocus" placeholder="email" type="email" value="" name="user[email]" id="user_email">
+    </div>
+
+    <div class="field">
+      <input autocomplete="off" placeholder="password" type="password" name="user[password]" id="user_password">
+    </div>
+
+    <div class="actions">
+      <input type="submit" name="commit" value="&euml;&iexcl;&#156;&ecirc;&middot;&cedil;&igrave;&#157;&cedil;" class="ui button">
+      <a href="/users/sign_up">
+        <div class="ui button">&ecirc;&deg;&#128;&igrave;&#158;&#133;</div>
+</a>        <div class="field ui checkbox">
+          <input name="user[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
+          <label for="user_remember_me">Remember me</label>
+        </div>
+    </div>
+
+    
+</form>
+  <a href="/users/password/new">&euml;&sup1;&#132;&euml;&deg;&#128;&euml;&sup2;&#136;&iacute;&#152;&cedil;&euml;&yen;&frac14; &igrave;&#158;&#138;&igrave;&#156;&frac14;&igrave;&#133;&uml;&euml;&#130;&#152;&igrave;&#154;&#148;?</a>
+</div>
+
+<div class="ui container">
+  <h1 class="ui header">eTL&igrave;&#157;&#128; &igrave;&#158;&#138;&igrave;&#156;&frac14;&igrave;&#132;&cedil;&igrave;&#154;&#148;!</h1>
+  <h2 class="ui header">&igrave;&#131;&curren;&ecirc;&sup3;&frac14;&euml;&deg;&shy;&igrave;&#157;&acute; &igrave;&plusmn;&#133;&igrave;&#158;&#132;&igrave;&sect;&#128;&ecirc;&sup2;&nbsp;&igrave;&#138;&micro;&euml;&#139;&#136;&euml;&#139;&curren;</h2>
+</div>
+
+
+
+</body>
+</html>
+<<<<<<<<<<<<<< page
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shagwabat</title>
+  <link rel="stylesheet" media="all" href="/assets/datetimepicker.self-d8f464118aaa2a16fc9703a633d9644c2d29e81035413e2b3f312360b39468aa.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/simple_calendar.self-b78b7349e6edb909e2f7133dc49cc7187f20cd31aad52e10ccd7903d08d040ef.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/calendar.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/comments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/course.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/courses.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/home.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/issues.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/professors.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/profile.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/rouge.self-182f78e388e9e806e00c6f630e2e435e9316bbfe0b051d05494d48d603921da0.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/scaffolds.self-3ee09496f4ae8905333e91a8f5232ffb701c0dd80e8453ec175aa0d21881a581.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/wiki_pages.self-da81598aca58f1bcb49a70b1b3d8c79137c5172150c5df2538aff2288db19555.css?body=1" data-turbolinks-track="true">
+<link rel="stylesheet" media="all" href="/assets/application.self-28ef68cea252f1cd62748ecb2d14b6df81f3d80d285f637ce52b872e2a6115ce.css?body=1" data-turbolinks-track="true">
+  <script src="/assets/jquery/jquery.self-129d502feca6efc755ec29c19a27cd220b0a9cecbbf9dea951e47b24b0b1aec7.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/jquery.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react.self-fede65fd9a4acabec5ef1256b80983a6e6e8a68dec5eca279f6923ca213f7228.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_mount.self-69e74f4eea1a8726d3c4365387f2e671fc1f3a85977e4a0fb29649a19e78a49e.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_turbolinks.self-194cee0be75f9bf71a5e74a3261fd0923879561f3797642f7c00c8c89378fdb9.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_turbolinks_classic.self-763df8fa4c0b0551840f5244b265843641523ad3bf7bb308d20801ac5cde2acb.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_turbolinks_classic_deprecated.self-f93fc4217cec084020eaf90b0425c454ba18d4ee1a054f254f5dba461eaab1a4.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_native.self-69da92af440ae3f522e7294876ed2bae234447ee564d1619c9f69d53e1020a8a.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs_event_setup.self-7f4f5dc5b4aa79c2fdd84fc6283f7615df9d55ecb52a0707f37d649094555735.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/react_ujs.self-d088784b7ecb87f1ea17e6f982fa968ffefcc07b79de6ecc548fc00242868da6.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/components.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/semantic-ui.self-c4b86a25a9fea8720b4a624f8cf658cfa1390a3eced38429f0060cd880fa04b8.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/datetimepicker/jquery.datetimepicker.full.min.self-902a08c7d924ec34946c0eb2ce248818ad0eea9c8359b9d50af976cedbd92a27.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/datetimepicker.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/calendar.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/courses.self-ba2c950d071be3a422b2f3a1549c759edcceb1486b1acc038cbace7864e59506.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/home.self-2aa85ac52d1f3844ab8ec26e5ace48894a10bd08da2e5100f17809e37e5628bc.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/infinity.min.self-7a62bbb4365d8952ba62539b1c8c63a8e2c1ba8da6e5d34b7087bd8cb8cd17f0.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/issues.self-d49b1b85cce8b72cb17a0628a503736873188fae1a910e2f54de370519421248.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/profile.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/wiki_pages.self-4f2ffd4a50be7a3159e7afb99de3b30e2a7c42454a0c19251299796ee5a69c1a.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/application.self-10ad0916cf31256fe71785e8dc9cc297a96b1cdf7b74aeb61711199b9a3d003f.js?body=1" data-turbolinks-track="true"></script>
+  <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="ipYX8S94+upKrU3TPmmbiymqA23k/iYkOxsg0qqjzLjZ/xY/wZKqz84H9ejnBHJq91XntMt1oxYT3yETjWh2iw==">
+</head>
+<body>
+  <p class="notice"></p>
+  <p class="alert"></p>
+
+
+<div class="ui container">
+
+  <form class="ui form" id="new_user" action="/users/sign_in" accept-charset="UTF-8" method="post">
+<input name="utf8" type="hidden" value="&#10003;"><input type="hidden" name="authenticity_token" value="1NUFI0RZtJFVKyKojynhAELLi86/DFxc6q93AkQ0SU2HvATtqrPktNGBmpNWRAjhnDRvF5CH2W7Ca3bDY//zfg==">
+    <div class="field">
+      <input autofocus="autofocus" placeholder="email" type="email" value="" name="user[email]" id="user_email">
+    </div>
+
+    <div class="field">
+      <input autocomplete="off" placeholder="password" type="password" name="user[password]" id="user_password">
+    </div>
+
+    <div class="actions">
+      <input type="submit" name="commit" value="&euml;&iexcl;&#156;&ecirc;&middot;&cedil;&igrave;&#157;&cedil;" class="ui button">
+      <a href="/users/sign_up">
+        <div class="ui button">&ecirc;&deg;&#128;&igrave;&#158;&#133;</div>
+</a>        <div class="field ui checkbox">
+          <input name="user[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
+          <label for="user_remember_me">Remember me</label>
+        </div>
+    </div>
+
+    
+</form>
+  <a href="/users/password/new">&euml;&sup1;&#132;&euml;&deg;&#128;&euml;&sup2;&#136;&iacute;&#152;&cedil;&euml;&yen;&frac14; &igrave;&#158;&#138;&igrave;&#156;&frac14;&igrave;&#133;&uml;&euml;&#130;&#152;&igrave;&#154;&#148;?</a>
+</div>
+
+<div class="ui container">
+  <h1 class="ui header">eTL&igrave;&#157;&#128; &igrave;&#158;&#138;&igrave;&#156;&frac14;&igrave;&#132;&cedil;&igrave;&#154;&#148;!</h1>
+  <h2 class="ui header">&igrave;&#131;&curren;&ecirc;&sup3;&frac14;&euml;&deg;&shy;&igrave;&#157;&acute; &igrave;&plusmn;&#133;&igrave;&#158;&#132;&igrave;&sect;&#128;&ecirc;&sup2;&nbsp;&igrave;&#138;&micro;&euml;&#139;&#136;&euml;&#139;&curren;</h2>
+</div>
+
+
+
+</body>
+</html>
+getaddrinfo: Name or service not known
