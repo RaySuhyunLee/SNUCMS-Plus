@@ -80,12 +80,13 @@ class CoursesController < ApplicationController
 
   # PATCH /courses/:id/description
   def update_description
-    description = params[:description]
+    description = params[:course][:description]
 
     success = @course.update({description: description})
 
     respond_to do |format|
-      format.all { render json: {success: success, description: description} }
+      format.html { redirect_to @course }
+      format.json { render json: {success: success, description: description} }
     end
   end
 
