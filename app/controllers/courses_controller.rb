@@ -100,6 +100,11 @@ class CoursesController < ApplicationController
     end
   end
 
+  def extend
+    prev_course = Course.find(params[:id])
+    @new_course = Course.new(
+  end
+
   private
   # Find course with url parameters.
   def set_course

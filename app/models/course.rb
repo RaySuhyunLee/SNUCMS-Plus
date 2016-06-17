@@ -7,7 +7,7 @@ class Course < ActiveRecord::Base
 
   # past_course linking
   has_one :next_course, :class_name => "Course", :foreign_key => "past_course_id"
-  belongs_to :past_course, :class_name => "Course"
+  belongs_to :past_course, :class_name => "Course", :foreign_key => "past_course_id"
 
   # user subsription
   has_and_belongs_to_many :users
