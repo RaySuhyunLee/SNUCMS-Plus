@@ -12,7 +12,8 @@ $user = User.create({
   email: 'test@example.com',
   password: 'password',
   password_confirmation: 'password',
-  confirmed_at: '2016-01-01 00:00:00'
+  confirmed_at: '2016-01-01 00:00:00',
+  issue_num: '0'
 })
 
 $user = User.create({
@@ -21,7 +22,8 @@ $user = User.create({
   email: 'test2@example.com',
   password: 'password',
   password_confirmation: 'password',
-  confirmed_at: '2016-01-01 00:00:00'
+  confirmed_at: '2016-01-01 00:00:00',
+  issue_num: '0'
 })
 
 $user = User.create({
