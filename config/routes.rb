@@ -34,8 +34,11 @@ Rails.application.routes.draw do
   # routing for calendar.
   get 'calendar' => 'calendar#show'
 
-  # routing for user profile and it's issues
+  # routing for user profile
   get 'profile' => 'profile#index'
+  post 'profile/update_desc' => 'profile#update_desc'
+
+  # routing for user issues
   get 'profile/issues' => 'issues#index', as: :profile_issues
   post 'profile/issues' => 'issues#create', as: :user_issues
   get 'profile/issues/new' => 'issues#new', as: :new_profile_issue
