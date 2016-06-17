@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   end
 
+  get 'subscribing/courses' => 'courses#subscribing_courses', as: "subscribing_courses"
+
   # routing for course issues which are filtered with label.
   get 'courses/:course_id/labels/:label' => 'issues#index_labels'
 

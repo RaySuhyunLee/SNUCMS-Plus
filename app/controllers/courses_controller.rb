@@ -78,6 +78,15 @@ class CoursesController < ApplicationController
       format.all { render json: { subscribe: subscribe } }
     end
   end
+  
+  # GET /courses/subscribing
+  def subscribing_courses
+    user = current_user
+    courses = user.courses
+    respond_to do |format|
+      format.all { render json: { courses: courses } }
+    end
+  end
 
   # PATCH /courses/:id/description
   def update_description
