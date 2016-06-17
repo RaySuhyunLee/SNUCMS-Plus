@@ -25,10 +25,11 @@ Rails.application.routes.draw do
     get 'subscribe', on: :member
     patch 'description' => 'courses#update_description', on: :member, as: :update_description
     resources :crawl_logs, only: [:create, :update, :destroy]
-
+    get 'extend_new', on: :member, as: :extend_new
   end
 
   get 'subscribing/courses' => 'courses#subscribing_courses', as: "subscribing_courses"
+  post 'courses/extend_create', as: :extend_create_course
 
   # routing for course issues which are filtered with label.
   get 'courses/:course_id/labels/:label' => 'issues#index_labels'

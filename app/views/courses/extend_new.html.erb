@@ -1,0 +1,32 @@
+<div class="ui text container">
+  <h1> 강의 상속하기</h1>
+  <%= form_for(@course, { url: extend_create_course_path, html: {class: "ui form"}}) do |f| %>
+    <% if @course.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+        <% @course.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="required field">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="required field">
+      <%= f.label "강좌 번호" %><br>
+      <%= f.text_field :course_num %>
+    </div>
+
+    <%= f.hidden_field :past_course_id %>
+
+    <div class="actions">
+      <%= f.submit class: "ui button" %>
+      <%= link_to "취소", @course, class: "ui button" %>
+    </div>
+
+  <% end %>
+
+</div>
