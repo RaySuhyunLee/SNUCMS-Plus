@@ -71,18 +71,23 @@
             <% if @course.description.nil? or @course.description.length == 0 %>
               강의 설명을 작성해주세요.
             <% else %>
-              <%= @course.description %>
+              <% text = render_issue_link(@course.description) %>
+              <% text = render_easy_link(text) %>
+              <% text = render_latex_math(text) %>
+              <% text = text.gsub(/\\\$/) do '$' end %>
+              <% text = escape_script_tag(text) %>
+              <%= render_markdown(text) %>
             <% end %>
           </p>
           <div class="ui right floated icon button" id="description-edit-button"><i class="edit icon"></i></div>
         </div>
-        <div hidden class="ui form" id="description-edit-form">
+        <%= form_for @course, {url: update_description_course_path, html: {hidden: true, class: "ui form", id:"description-edit-form"}} do |f| %>
           <div class="field">
-            <textarea placeholder="강의 설명을 작성해주세요."></textarea>
+            <%= f.text_area :description, placeholder: "강의 설명을 작성해주세요." %>
           </div>
-          <div class="ui button" id="description-save-button">저장</div>
+          <%= f.submit '저장', class: "ui button", id: "description-save-button" %>
           <div class="ui button" id="description-cancel-button">취소</div>
-        </div>
+        <% end %>
       </div>
     </div>
 
@@ -111,12 +116,9 @@
 </div>
 
 <script>
-  var descriptionHandler = new DescriptionHandler('#description', '#description-edit-form', '<%= update_description_course_path %>');
+  var descriptionHandler = new DescriptionHandler('#description', '#description-edit-form', '');
   $("#description-edit-button").on('click', function() {
     descriptionHandler.showEditForm();
-  });
-  $("#description-save-button").on('click', function() {
-    descriptionHandler.updateDescription();
   });
   $("#description-cancel-button").on('click', function() {
     descriptionHandler.closeEditForm();
