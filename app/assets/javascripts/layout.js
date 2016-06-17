@@ -4,7 +4,12 @@ function searchLoad() {
     .search({
       type : 'category',
       apiSettings: {
-        url: '/courses/search.json?query={query}'
+        action: 'search',
+        url: '/courses/search/?query={query}',
+        method: 'get'
+      },
+      fields: {
+        results : 'courses'
       },
       minCharacters : 2
     });
