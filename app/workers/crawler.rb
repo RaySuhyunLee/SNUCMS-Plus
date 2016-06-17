@@ -4,7 +4,11 @@ class Crawler
   include Sidekiq::Worker
 
   def self.perform
-    CrawlLog.all.each do |site|
+    sites = CrawlLog.all.select do |log|
+      log if log.crawl
+    end
+
+    sites.each do |site|
       puts site.url
       begin
         page = get_page(site.url)
