@@ -100,6 +100,26 @@ class CoursesController < ApplicationController
     end
   end
 
+  def extend_new
+    prev_course = Course.find(params[:id])
+    @course = prev_course.dup
+    @course.past_course_id = prev_course.id
+  end
+
+  def extend_create
+    past_course_id = params[:course][:past_course_id]
+    puts("***********")
+    puts(past_course_id)
+    prev_course = Course.find(past_course_id)
+    @course = prev_course.dup
+    @course.course_num = course_params[:course_num]
+    @course.title = course_params[:title]
+    @course.past_course_id = prev_course.id
+    @course.save
+    
+    redirect_to @course
+  end
+
   private
   # Find course with url parameters.
   def set_course

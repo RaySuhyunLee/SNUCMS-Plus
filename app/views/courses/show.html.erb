@@ -5,6 +5,7 @@
     <% else %>
     <div class="thirteen wide column">
     <% end %>
+      <%= link_to '새 학기', extend_new_course_path, class: "ui right floated purple button" %>
       <div class="ui right floated olive button" id="subscribe-button" 
         data-subscribe="<%= @is_subscribing %>" ><%= @subscribe_button_text %></div>
       <div class="ui left floated">
