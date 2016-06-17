@@ -1,4 +1,5 @@
 class IssuesController < ApplicationController
+  include ApplicationHelper
   before_action :set_parent
   before_action :set_regex, only: [:show]
   before_action :set_issue, only: [:show, :update, :destroy, :subscribe, :update_title, :update_due]
@@ -6,7 +7,7 @@ class IssuesController < ApplicationController
 
   # GET /(parent_type)/:(parent_id)/issues
   def index
-    @issues = @parent.issues.all
+    @issues = @parent.issues.all.order(parent_issue_id: :desc)
     @issues_page = @issues.paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -16,6 +17,7 @@ class IssuesController < ApplicationController
     @tag = Issuetag.find_by name: @label
     @issues = @tag.issues
        .where("have_issue_type = ? AND have_issue_id = ?", @parent_name, @parent.id)
+    @issues = @issues.order(parent_issue_id: :desc)
     @issues_page = @issues.paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -25,9 +27,9 @@ class IssuesController < ApplicationController
       @comments = @issue.comments.all
     end
     if is_subscribing?
-      @subscribe_button_text = "un좋아요"
+      @subscribe_button_text = "취소"
     else
-      @subscribe_button_text = "좋아요"
+      @subscribe_button_text = "구독"
     end
   end
 
@@ -69,7 +71,7 @@ class IssuesController < ApplicationController
   # POST /(parent_type)/:(parent_id)/issues/:id/update_due
   def update_due
     @issue.update_attribute(:due, params[:due])
-    render plain: @issue.due
+    render plain: prettify_date(@issue.due)
   end
 
   # PATCH/PUT /(parent_type)/:(parent_id)/issues/:id

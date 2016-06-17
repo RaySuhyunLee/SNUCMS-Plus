@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'profile/index'
 
   devise_for :users, controllers: {
     sessions: "accounts/sessions",
@@ -25,8 +24,14 @@ Rails.application.routes.draw do
     get 'subscribe', on: :member
     patch 'description' => 'courses#update_description', on: :member, as: :update_description
     resources :crawl_logs, only: [:create, :update, :destroy]
-
+    get 'extend_new', on: :member, as: :extend_new
+    
+    # routing for search
+    get 'search' => 'search#search', :on => :collection
   end
+
+  get 'subscribing/courses' => 'courses#subscribing_courses', as: "subscribing_courses"
+  post 'courses/extend_create', as: :extend_create_course
 
   # routing for course issues which are filtered with label.
   get 'courses/:course_id/labels/:label' => 'issues#index_labels'
@@ -55,6 +60,7 @@ Rails.application.routes.draw do
   delete 'profile/issues/:issue_id/comments/:id' => 'comments#destroy', as: :profile_issue_comment
   get 'profile/labels/:label' => 'issues#index_labels'
 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -63,7 +69,7 @@ Rails.application.routes.draw do
 
   # Home routing
   get 'home/load_recent_timeline'
-  get 'home/load_subscription_timeline'
+  get 'profile/load_subscription_timeline'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

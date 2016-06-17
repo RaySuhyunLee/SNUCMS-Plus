@@ -8,31 +8,14 @@ class HomeController < ApplicationController
   def load_recent_timeline
     offset = Integer(params['offset'])
     how_many = Integer(params['how_many'])
+    course_ids = params['course_ids']
     user = current_user
     load_max = 10
-    course_ids = []
-    user.courses.find_each do |course|
-      course_ids.append(course.id)
-    end
+    #course_ids.each do |course_id|
+    #  course_id = 
+    #end
     issues = Issue
-      .where({have_issue_type: "Course", have_issue_id: course_ids})
-      .order(created_at: :desc)
-      .offset(offset)
-      .take([how_many, load_max].min)
-
-    data = prettify(issues)
-
-    respond_to do |format|
-      format.all { render json: {issues: data} }
-    end
-  end
-
-  def load_subscription_timeline
-    offset = Integer(params['offset'])
-    how_many = Integer(params['how_many'])
-    user = current_user
-    load_max = 10
-    issues = user.subscribing_issues
+      .where({have_issue_type: "Course", have_issue_id: course_ids })
       .order(created_at: :desc)
       .offset(offset)
       .take([how_many, load_max].min)

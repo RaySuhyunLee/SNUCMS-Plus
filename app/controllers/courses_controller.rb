@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy, :subscribe, :update_description]
+  before_action :set_regex, only: [:show]
 
   # GET /courses
   def index
@@ -77,16 +78,46 @@ class CoursesController < ApplicationController
       format.all { render json: { subscribe: subscribe } }
     end
   end
+  
+  # GET /courses/subscribing
+  def subscribing_courses
+    user = current_user
+    courses = user.courses
+    respond_to do |format|
+      format.all { render json: { courses: courses } }
+    end
+  end
 
   # PATCH /courses/:id/description
   def update_description
-    description = params[:description]
+    description = params[:course][:description]
 
     success = @course.update({description: description})
 
     respond_to do |format|
-      format.all { render json: {success: success, description: description} }
+      format.html { redirect_to @course }
+      format.json { render json: {success: success, description: description} }
     end
+  end
+
+  def extend_new
+    prev_course = Course.find(params[:id])
+    @course = prev_course.dup
+    @course.past_course_id = prev_course.id
+  end
+
+  def extend_create
+    past_course_id = params[:course][:past_course_id]
+    puts("***********")
+    puts(past_course_id)
+    prev_course = Course.find(past_course_id)
+    @course = prev_course.dup
+    @course.course_num = course_params[:course_num]
+    @course.title = course_params[:title]
+    @course.past_course_id = prev_course.id
+    @course.save
+    
+    redirect_to @course
   end
 
   private
@@ -102,5 +133,15 @@ class CoursesController < ApplicationController
   def is_subscribing?
     user = current_user
     return user.courses.exists? @course.id
+  end
+
+  def set_regex
+    @regex =
+    {
+      issue_link: /#(\d+)/,
+      link: /\[\[([^\]]*)\]\]/,
+      latex: /(?<!\\)\$(.*)\$/,
+      script: /<script>(.*)?<\/script>/m
+    }
   end
 end

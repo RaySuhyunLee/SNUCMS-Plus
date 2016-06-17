@@ -13,5 +13,6 @@
 </div>
 
 <script>
-  var timeline = setTimeline("#timeline-container", "<%= home_load_recent_timeline_path %>");
+  var timeline = new initHome;
+  timeline.setTimeline("#timeline-container", "<%= subscribing_courses_path %>", "<%= home_load_recent_timeline_path %>")
 </script>
