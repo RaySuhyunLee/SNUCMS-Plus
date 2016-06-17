@@ -7,9 +7,6 @@ function searchLoad() {
         url: '/courses/search/?query={query}',
         method: 'get'
       },
-      fields: {
-        results : 'courses'
-      },
       minCharacters : 2
     });
 }
