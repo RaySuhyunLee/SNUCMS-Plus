@@ -1,12 +1,14 @@
 <p id="notice"><%= notice %></p>
 <div class="ui container">
-  <div class="ui huge header">이슈 목록</div>
+  <div class="ui large header">
+    <%= link_to @parent.title, course_path(@parent) %>
+    > 이슈 목록
+  </div>
   <div class="ui divider"></div>
 
-  <div class="ui floating dropdown labeld icon button">
+  <div class="ui floating dropdown labeld basic icon button">
     <i class="filter icon"></i>
-    <span class="text">Tags <%= @label %></span>
-    <i class="dropdown icon"></i>
+    <span class="text"><%= @label %></span>
     <div class="menu">
       <div class="ui icon search input">
         <i class="search icon"></i>
@@ -25,7 +27,7 @@
             <a class="item ui label", href="<%= @label_path + "/" + it.name %>"><%= it.name %></a>
           <% end %>
         <% end %>
-      </div>   
+      </div>
     </div>
   </div>
 
