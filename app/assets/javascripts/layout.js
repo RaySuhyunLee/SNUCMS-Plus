@@ -2,7 +2,6 @@
 function searchLoad() {
   $("#layout_header_search")
     .search({
-      type : 'category',
       apiSettings: {
         action: 'search',
         url: '/courses/search/?query={query}',
