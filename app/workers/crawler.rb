@@ -33,9 +33,7 @@ class Crawler
         parent.update_attribute(:issue_num, parent.issue_num + 1)
 
         # create issue
-        issue = parent.issues.create({
-          title: '변경 사항이 있습니다.'
-        })
+        issue = parent.issues.create({ title: '변경 사항이 있습니다.' })
         issue.parent_issue_id = parent.issue_num
 
         # append Notice tag to issue
@@ -44,8 +42,11 @@ class Crawler
           issue.issuetags.append(issuetag)
         end
 
+        comment = issue.comments.new(commenter: '샤과봇', contents: site.url + ' 에서 변경 사항을 확인하세요.')
+
         site.save
         issue.save
+        comment.save
       end
     end
   end
