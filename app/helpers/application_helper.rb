@@ -128,4 +128,12 @@ module ApplicationHelper
     end
   end
 
+  def prettify_date(time)
+    if time.nil?
+      ''
+    else
+      time.month.to_s + '월 ' + time.day.to_s + '일 ' + time.hour.to_s + ':' + time.min.to_s
+    end
+  end
+
 end

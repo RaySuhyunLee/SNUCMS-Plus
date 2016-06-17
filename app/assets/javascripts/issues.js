@@ -65,16 +65,16 @@ function dueSave() {
     path,
     { due : due },
     function(result) {
-      if (result == "") {
-        $("#issue_due").text("Issue due: none");
+      if (result === "") {
+        $("#issue_due").text("");
       } else {
-        $("#issue_due").text("Issue due: " + result);
+        $("#issue_due").text("기한: " + result);
       }
     });
   $("#due_input").hide()
 }
 
-// Comment edit 
+// Comment edit
 function commentEdit() {
   id = this.id;
   id_split1 = id.split("#");
@@ -85,7 +85,7 @@ function commentEdit() {
   $.get(
     comment_path,
     function(result) {
-      $("#edit_text_"+idx).text(result); 
+      $("#edit_text_"+idx).text(result);
     });
   $("#comment_"+idx).hide();
   $("#comment_edit_"+idx).show();
@@ -101,7 +101,7 @@ function commentSave() {
   edited_text = $("#edit_text_"+idx).val();
 
   $.post(comment_path, { contents : edited_text });
-  $("#comment_"+idx).show();  
+  $("#comment_"+idx).show();
   $("#comment_text_"+idx).load(location.href + " #comment_text_" + idx + ">*","");
   $("#comment_edit_"+idx).hide();
 }
@@ -111,7 +111,7 @@ function commentCancle() {
   id = this.id;
   id_split = id.split("_");
   idx = id_split[2];
-  $("#comment_"+idx).show();  
+  $("#comment_"+idx).show();
   $("#comment_edit_"+idx).hide();
 }
 
