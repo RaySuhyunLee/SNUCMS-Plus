@@ -7,8 +7,8 @@ module IssuesHelper
           '[#' + $1 + ' ' + @linked_issue.title + '](' + course_issue_path(@parent.id, $1) + ')'
         elsif @parent_name == "User"
           '[#' + $1 + ' ' + @linked_issue.title + '](' + profile_issue_path($1) + ')'
-        end 
-      else 
+        end
+      else
         '#' + $1
       end
     end
