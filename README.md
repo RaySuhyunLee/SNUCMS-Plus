@@ -28,6 +28,8 @@ $ git push 어쩌구 저쩌구
 
 ## 실행
 ```bash
+$ git clone https://github.com/RaySuhyunLee/SNUCMS-Plus.git
+$ cd SNUCMS-Plus
 $ bundle install
 $ bundle exec rake db:migrate
 $ rails s
