@@ -29,9 +29,14 @@ module ApplicationHelper
   class HTML < Redcarpet::Render::HTML
     def block_code(code, language)
       formatter = Rouge::Formatters::HTML.new(FORMATTER_OPTIONS)
-      lexer = Rouge::Lexer.find(language || 'text').new
+      lexer_class = Rouge::Lexer.find(language || 'text')
+      if lexer_class.nil?
+        code
+      else
+        lexer = lexer_class.new
+        formatter.format(lexer.lex(code))
+      end
 
-      formatter.format(lexer.lex(code))
     end
 
     def table(header, body)
