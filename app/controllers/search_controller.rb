@@ -9,8 +9,12 @@ class SearchController < ApplicationController
       @results.append ({ title: c.title, url: '/courses/' + c.id.to_s, description: "Course" })
     end
 
-    @wiki_pages.each do |w|
-      @results.append ({ title: w.title, url: '/wiki/' + w.title, description: "Wiki page" })
+    if @wiki_pages.length == 0 
+      @results.append ({ title: "#{params[:query]}", url: '/wiki/' + "#{params[:query]}" + '/empty', description: "Empty wiki page"})
+    else
+      @wiki_pages.each do |w|
+        @results.append ({ title: w.title, url: '/wiki/' + w.title, description: "Wiki page" })
+      end
     end
 
     render :json => { "results": @results }
