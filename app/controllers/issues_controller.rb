@@ -56,7 +56,12 @@ class IssuesController < ApplicationController
     end
 
     if @issue.save
-      redirect_to @index_path + "/" + @issue.parent_issue_id.to_s, notice: 'Issue was succesfully created.'
+      if @parent_name == "Course"
+        redirect_to subscribe_course_issue_path(@parent.id, @issue.parent_issue_id)
+      elsif @parent_name == "User"
+        redirect_to subscribe_profile_issue_path(@issue.parent_issue_id)
+      end
+      # redirect_to @index_path + "/" + @issue.parent_issue_id.to_s, notice: 'Issue was succesfully created.'
     else
       render :new
     end
