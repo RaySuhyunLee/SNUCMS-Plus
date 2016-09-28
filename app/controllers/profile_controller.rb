@@ -41,7 +41,7 @@ private
         parent_url = course_path(issue.have_issue_id)
       elsif issue.have_issue_type.eql? 'User'
         parent = current_user.name
-        issue_url = profile_issue_path(issue.have_issue_id)
+        issue_url = profile_issue_path(issue.parent_issue_id)
         parent_url = profile_path()
       end
 
