@@ -30,7 +30,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'unicorn'
 #
 # User Authentication
-gem 'devise'
+gem 'devise', '~> 4.1.1'
 
 # Semantic ui assets
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
